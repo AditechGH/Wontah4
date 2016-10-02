@@ -1,0 +1,45 @@
+<h2 class="h2">Customize your profile</h2>
+<p class="lead text-muted">
+    Add a photo to show your unique personality and style.
+</p>
+<div class="col-sm-12" id="crop-section" style="display:none;">
+    <div ng-jcrop="obj.src" ng-jcrop-config-name="upload" selection="obj.selection" thumbnail="obj.thumbnail"></div>
+    <button class="btn btn-success" ng-click="SaveCrop();" ng-disabled="isProcessing">
+        <span ng-show="loading"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+        <span ng-hide="loading">save thumbnail</span>
+    </button>
+    <div style="display:none;">
+        <table>
+            <tbody>
+            <tr>
+                <td><strong>x</strong>: <span ng-bind="obj.selection[0]"></span></td>
+                <td><strong>y</strong>: <span ng-bind="obj.selection[1]"></span></td>
+                <td><strong>x2</strong>: <span ng-bind="obj.selection[2]"></span></td>
+                <td><strong>y2</strong>: <span ng-bind="obj.selection[3]"></span></td>
+                <td><strong>w</strong>: <span ng-bind="obj.selection[4]"></span></td>
+                <td><strong>h</strong>: <span ng-bind="obj.selection[5]"></span></td>
+            </tr>
+            </tbody>
+        </table>
+        <label><input type="checkbox" checked ng-model="obj.thumbnail" /> Thumbnail</label>
+    </div>
+</div>
+<div id="uploader-section">
+    <div class="wt-image-container">
+        <img src="user/{{luname}}/{{lavatar}}" height="200px" width="200px" class="thumbnails" />
+    </div>
+    <div class="wt-upload-btn">
+        <upload-button
+                class="btn btn-primary fileinput-button wt-avatar-upload-btn upload-avatar"
+                url="/uploadApi/upload?type=profile"
+                param="file"
+                accept="acceptTypes"
+                force-iframe-upload="forceIframeUpload"
+                data="uploadData"
+                on-upload="onUpload(files)"
+                on-success="onGlobalSuccess(response)"
+                on-error="onError(response)"
+                on-complete="onComplete(response)"
+        >Change profile picture</upload-button>
+    </div>
+</div>

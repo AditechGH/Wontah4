@@ -1,0 +1,66 @@
+<span class="wt-web">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="wt-center-content">
+                <h2 class="h2">Change Password</h2><hr/>
+            </div>
+            <form name='cpassForm' class='pForm' id='cpassForm' novalidate ng-submit='ChangePass(cpass)'>
+                <div class="form-group" ng-class="{error: cpassForm.oldpass.$invalid}">
+                    <label for='oldpass'>Old Password</label>
+                    <input valid-pass type='password' name='oldpass' id='oldpass' ng-model='cpass.oldpass' placeholder="Old password" required/>
+                </div>
+            <span class="changePass" ng-show="cpassForm.oldpass.$valid">
+                <div class="form-group" ng-class="{error: cpassForm.newpass1.$invalid}">
+                    <label for='newpass1'>New Password</label>
+                    <span  ng-show="cpassForm.newpass1.$dirty && cpassForm.newpass1.$invalid && !cpassForm.newpass1.$focused" class="suggest sug-danger"> Enter new password.</span>
+                    <span ng-show="cpassForm.newpass1.$error.minlength && !cpassForm.newpass1.$focused" class="suggest sug-danger">Password is too short.</span>
+                    <input cu-focus ng-minlength="6" type='password' name='newpass1' id='newpass1' ng-model='cpass.newpass1' placeholder="New password" required/>
+                </div>
+                <div class="form-group" ng-class="{error: cpassForm.newpass2.$invalid}">
+                    <label for='newpass2'>New Password (again)</label>
+                    <input cu-focus type='password' name='newpass2' id='newpass2' password-match="cpass.newpass1" ng-model='cpass.newpass2' placeholder="New password (again)" required/>
+                    <span  ng-show="cpassForm.newpass2.$dirty && cpassForm.newpass2.$error.passwordNoMatch && !cpassForm.newpass2.$error.required  && !cpassForm.newpass2.$focused" class="suggest sug-danger"> Password do not match.</span>
+                </div>
+                <div class="form-group">
+                    <button type='submit' name="cpassBtn" class="btn btn-primary" ng-disabled="cpassForm.$invalid || isProcessing">
+                        <span ng-show="passloading"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                        <span ng-hide="passloading">Submit</span>
+                    </button>
+                </div>
+            </span>
+            </form>
+        </div>
+    </div>
+</span>
+<span class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Change Password</span>
+    </div>
+    <form name='cpassForm' class='pForm' id='cpassForm' novalidate ng-submit='ChangePass(cpass)'>
+        <md-input-container class="md-block">
+            <label>Old Password</label>
+            <input valid-pass type='password' name='oldpass' id='oldpass' ng-model='cpass.oldpass' required/>
+        </md-input-container>
+        <span class="changePass" ng-show="cpassForm.oldpass.$valid">
+            <md-input-container class="md-block">
+                <label>New Password</label>
+                <input cu-focus ng-minlength="6" type='password' name='newpass1' id='newpass1' ng-model='cpass.newpass1' required/>
+                <div ng-messages="" role="alert">
+                    <div ng-show="cpassForm.newpass1.$dirty && cpassForm.newpass1.$invalid && !cpassForm.newpass1.$focused" class="wt-mob-error-msg">Enter new password.</div>
+                    <div ng-show="cpassForm.newpass1.$error.minlength && !cpassForm.newpass1.$focused" class="wt-mob-error-msg">Password is too short.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>New Password (again)</label>
+                <input cu-focus type='password' name='newpass2' id='newpass2' password-match="cpass.newpass1" ng-model='cpass.newpass2' required/>
+                <div ng-messages="" role="alert">
+                    <div ng-show="cpassForm.newpass2.$dirty && cpassForm.newpass2.$error.passwordNoMatch && !cpassForm.newpass2.$error.required  && !cpassForm.newpass2.$focused" class="wt-mob-error-msg">Password do not match.</div>
+                </div>
+            </md-input-container>
+            <button type='submit' name="cpassBtn" class="md-button md-raised mob-btn-block mob-primary" ng-disabled="cpassForm.$invalid || isProcessing">
+                <span ng-show="passloading"><md-progress-circular md-mode="indeterminate"></md-progress-circular></span>
+                <span ng-hide="passloading">Submit</span>
+            </button>
+        </span>
+    </form>
+</span>

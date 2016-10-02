@@ -1,0 +1,48 @@
+<div class="row wt-web">
+    <div ng-if='friends.length > 0' class="col-sm-12">
+        <div ng-repeat="f in friends.frnds">
+            <div class="col-sm-6">
+                <div class="wt-row media">
+                    <a class="media-left" href="/u/{{f.username}}"><img class="img-circle" height="70" width="70" ng-src='user/{{f.username}}/{{f.avatar}}' alt='{{f.username}}' /></a>
+                    <div class="media-body">
+                        <span class="media-heading"><a href="/u/{{f.username}}">{{f.firstname}} {{f.lastname}} ({{f.username}})</a></span>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12" ng-if='friends.length > 0'>
+        <span ng-click="getMorefriends();" class="loadmore">
+            <span ng-show="load" class="ion ion-load-c wt-spin fa fa-spin"></span>
+            <span ng-hide="load">Load more</span>
+        </span>
+    </div>
+
+    <div ng-if='friends.length === 0' class="col-sm-12">
+        <div ng-hide="luname === username" class="text-center text-info">{{username}} have no friends at the moment</div>
+        <div ng-show="luname === username" class="text-center text-info">You have no friends at the moment</div>
+    </div>
+</div>
+<span class="wt-mobile">
+    <md-list ng-if='friends.length > 0'  flex>
+        <md-list-item class="md-2-line" ng-repeat="f in friends.frnds"  ui-sref="u({username: '{{f.username}}'})">
+            <img ng-src='/user/{{f.username}}/{{f.avatar}}' alt='{{f.username}}' class="md-avatar" />
+            <div class="md-list-item-text" layout="column">
+                <h3>{{f.username}}</h3>
+                <p>{{f.firstname}} {{f.lastname}} </p>
+            </div>
+        </md-list-item>
+        <md-divider ng-if="!$last"></md-divider>
+    </md-list>
+    <div class="col-sm-12" ng-if='friends.length > 0'>
+        <span ng-click="getMorefriends();" class="loadmore">
+            <span ng-show="load" class="ion ion-load-c wt-spin fa fa-spin"></span>
+            <span ng-hide="load">Load more</span>
+        </span>
+    </div>
+    <div ng-if='friends.length === 0' class="col-sm-12">
+        <div ng-hide="luname === username" class="text-center text-info">{{username}} have no friends at the moment</div>
+        <div ng-show="luname === username" class="text-center text-info">You have no friends at the moment</div>
+    </div>
+</span>

@@ -1,0 +1,64 @@
+<md-dialog ng-controller="makePostController" aria-label="edit taah"  ng-cloak>
+    <form name="etaahForm" class="taahForm animate-form" id="etaahFrom" role="form" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools mob-primary">
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>
+                </md-button>
+                <span flex></span>
+                <h4>Edit Taah</h4>
+                <span flex></span>
+                <md-button class="md-icon-button"></md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content >
+            <div class="md-dialog-content">
+                <div class="wt-post-alert">
+                    Edit this taah to suite your desire.
+                </div>
+                <md-input-container class="md-block">
+                    <label>Title</label>
+                    <input id='etaahtitle' name="taahtitle" ng-model="title" placeholder="Title" class="form-control" cu-focus/>
+                    <div ng-messages="" role="alert">
+                        <div ng-show="etaahForm.taahtitle.$focused" class="wt-mob-error-msg wt-mob-suc-msg">This does not have to be the same as the name, but it can be. Spacing does matter,The title can be edited later if you want to tweak it or change it.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label for="etaahdesc">Description</label>
+                    <textarea id='etaahdesc' name="taahdesc" ng-model="description" cu-focus></textarea>
+                    <div ng-messages="" role="alert">
+                        <div ng-show="etaahForm.taahdesc.$focused" class="wt-mob-error-msg wt-mob-suc-msg">Describe what your taah is all about. It’s viewable to the public and informs people about your taah</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Type:</label>
+                    <md-select id='etaahtype' name="taahtype" ng-model="type" cu-focus>
+                        <md-option value="pu">Public</md-option>
+                        <md-option value="re">Restricted</md-option>
+                        <md-option value="pr">Private</md-option>
+                    </md-select>
+                    <div ng-messages="" role="alert">
+                        <div ng-show="etaahForm.taahtype.$focused" class="wt-mob-error-msg wt-mob-suc-msg">Public: open to all, Restricted:you decide who can post, private:By invitation only</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Content Option:
+                    </label><br/><br/>
+                    <md-radio-group ng-model="coption">
+                        <md-radio-button style="display: inline" value="a" class="md-primary">Any type</md-radio-button>
+                        <md-radio-button style="display: inline" value="l" class="md-primary"> Links only </md-radio-button>
+                        <md-radio-button style="display: inline" value="t" class="md-primary"> Text only </md-radio-button>
+                    </md-radio-group>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button class="md-raised mob-primary" ng-click="EditTaah(title,description,type,coption)" ng-disabled="isProcessing" id="etaahBtn">
+                <span ng-hide="taahloading">Update</span>
+                <span ng-show="taahloading"><md-progress-circular md-mode="indeterminate"></md-progress-circular></span>
+            </md-button>
+            <span id='status'></span>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+

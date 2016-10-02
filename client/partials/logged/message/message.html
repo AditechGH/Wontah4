@@ -1,0 +1,141 @@
+<span class="wt-web">
+    <div id="wt-main-inbox-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-2">
+                    <div>
+                        <h3>Inbox</h3>
+                    </div>
+                    <div>
+                        <button data-reveal-id="SendPrMsg"  ng-click="inboxShowToggle();" class="btn btn-primary wt-indi-sub">
+                            compose
+                        </button>
+                        <br/>
+                    </div>
+                    <div ng-class="{'wt-inbox-active': $state.includes('pm.received')}" class="wt-clickable" ui-sref="pm.received">
+                        <b>Inbox <span ng-show="unreadCnt > '0'">({{unreadCnt}})</span></b>
+                    </div>
+                    <div ng-class="{'wt-inbox-active': $state.includes('pm.sent')}" class="wt-clickable" ui-sref="pm.sent">
+                        <b>Sent</b>
+                    </div>
+                    <div ng-class="{'wt-inbox-active': $state.includes('pm.notifications')}" class="wt-clickable" ui-sref="pm.notifications">
+                        <b>Notifications</b>
+                    </div>
+                    <!--            <div ng-class="{'wt-inbox-active': $state.includes('pm.friendsfeeds')}" class="wt-clickable" ui-sref="pm.friendsfeeds">
+                                    <b>Friends Submissions</b>
+                                </div>-->
+                </div>
+                <div class="col-md-7 wt-vr">
+                    <div class="wt-animate-nested-inbox-view" ui-view></div>
+                </div>
+                <div class="col-md-3 well">
+                    <span ng-include="'partials/templates/msub.tpl.html'"></span>
+                </div>
+            </div>
+        </div>
+        <div id="SendPrMsg" class="small reveal-modal" ng-class="{'xlarge': fullscreen}" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+            <div class="modal-header wt-center-content"><b class="lead">New Message</b></div>
+            <form>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="toWho">To:</label>
+                        <input name="toWho" required type="text" autocomplete="off" autofocus class="form-control" id="toWho" ng-model="to" typeahead="option as option.username for option in p.options | filter:$viewValue | limitTo:10" />
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject:</label>
+                        <textarea maxlength="100" name="subject" required class="form-control" ng-model="subject" id="subject"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Message:</label>
+                        <text-angular
+                                ta-toolbar="[['h1','h2','h3','p','pre','bold','italics','underline','ul','ol','justifyLeft','justifyCenter','justifyRight']]"
+                                name="htmlcontent"
+                                ng-model="htmlcontent"
+                                ta-target-toolbars='toolbar'
+                                ta-toolbar-class="btn-toolbar"
+                                ta-toolbar-group-class="btn-group"
+                                ta-toolbar-button-class="btn btn-default"
+                                ta-toolbar-button-active-class="active"></text-angular>
+                        <textarea id="messagebox" style="display:none;" ng-model="htmlcontent"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer wt-center-content">
+                    <button ng-disabled="isProcessing" type="submit" ng-click="SaveinboxMessage(subject,to.username)" class="btn btn-primary">
+                        <span ng-show="pmload"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                        <span ng-hide="pmload">Send</span>
+                    </button>
+            <span class="wt-text-rich-button" tooltip="Enrich text" tooltip-placement="bottom" ng-click="showTextBar();">
+                <i class="fa fa-italic fa-2x"></i>
+            </span>
+                </div>
+            </form>
+            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+            <a ng-click="FullScreenToggle()" class="wt-expand"><i class="ion ion-arrow-expand" ng-class="{'ion ion-arrow-shrink': fullscreen}"></i></a>
+        </div>
+    </div>
+</span>
+<span class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Messages</span>
+    </div>
+    <div class="scrollable">
+        <div class="inbox scrollable-content section">
+            <div class="lists">
+                <ul class="tabs">
+                    <li>
+                        <div class="col-xs-12">
+                            <div class="col-xs-6">
+                                <md-button ng-click="messageModal($event);" class="md-button md-raised mob-primary mob-btn-block">compose</md-button>
+                            </div>
+                            <div class="col-xs-6">
+                                <md-button ng-hide="isOpenRight()" ng-click="toggleRight()" class="md-button md-raised mob-btn-block"><i class="ion ion-android-more-horizontal"></i></md-button>
+                            </div>
+                        </div>
+                    </li>
+                    <hr id="newhr"/>
+                </ul>
+                <div class="wt-animate-nested-inbox-view" ui-view></div>
+            </div>
+            <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+                <md-toolbar class="md-theme-light mob-primary">
+                    <div class="md-toolbar-tools">
+                        <md-button class="md-icon-button" ng-click="close()">
+                            <md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>
+                        </md-button>
+                        <span flex></span>
+                        <h4>{{luname}}</h4>
+                        <span flex></span>
+                        <md-button class="md-icon-button">
+                            <!--<md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>-->
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <md-content  ng-controller="filterController" layout-padding>
+                    <form>
+                        <div class="mdl-cell flex-xs-100 flex-sm-100 flex-100 shadow" flex="100" flex-xs="100" flex-xs="100" style="background: white">
+                            <div class="lists">
+                                <ul class="tabs">
+                                    <li>
+                                        <a ng-click="close()" class="md-button md-ink-ripple" ui-sref="pm.received">
+                                            <i class="ion ion-email"></i><span> Inbox</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="close()" class="md-button md-ink-ripple" ui-sref="pm.sent">
+                                            <i class="ion ion-paper-airplane"></i><span> Sent</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="close()" class="md-button md-ink-ripple" ui-sref="pm.notifications">
+                                            <i class="ion ion-android-notifications"></i><span> Notification</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </md-content>
+            </md-sidenav>
+        </div>
+    </div>
+</span>

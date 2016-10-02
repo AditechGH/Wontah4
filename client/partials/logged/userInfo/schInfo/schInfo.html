@@ -1,0 +1,11 @@
+<span ng-if="desktop" class="wt-web">
+    <div class="row">
+        <div class="col-md-12" ng-include="'partials/logged/userInfo/schInfo/schInfo.desktop.html'"></div>
+    </div>
+</span>
+<span ng-if="mobile" class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Education background ( step 2/5 )</span>
+    </div>
+    <div class="scrollable" ng-include="'partials/logged/userInfo/schInfo/schInfo.mobile.html'"></div>
+</span>

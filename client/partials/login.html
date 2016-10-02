@@ -1,0 +1,110 @@
+<span class="wt-web">
+   <br/><br/><br/><br/>
+    <div id="login-page" class="main">
+        <section class="content">
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="login-content">
+                        <div class="login-form" ng-hide="isLoggedIn()">
+                            <div id="login-form-content">
+
+                                <h2>Sign in to Wontah</h2>
+
+                                <div class="sign-up-services">
+                                    <p>Sign in with a valid email / username</p>
+                                    <blockquote>
+                                        <a  id="signUpGitHub" tooltip="Wontah Mobile" tooltip-placement="bottom" >
+                                            <span>Go Mobile</span>
+                                        </a>
+                                        <a id="signUpBitBucket" tooltip="Learn more about wontah" tooltip-placement='bottom' >
+                                            <span>Learn More</span>
+                                        </a>
+                                    </blockquote>
+                                </div>
+                                <form role="form" id="formLoginPage" name='loginForm' class="form loginForm" ng-submit="LoginUser(login)">
+                                    <div ng-class="{error: loginForm.email.$invalid}">
+                                        <input type="text" name="email" class="email" id="email" ng-model="login.email" data-html="true" placeholder="Username or email" required popover="Enter Username or Email" popover-trigger="mouseenter"/>
+                                        <span ng-show="loginForm.email.$dirty && loginForm.email.$invalid && !loginForm.email.$focused" class="help-inline">Username / email Required</span>
+                                    </div>
+                                    <div>
+                                        <input type="password" name="password" id="password-1" ng-model="login.password" data-html="true" placeholder="Password" required popover="Enter Password" popover-trigger="mouseenter"/>
+                                        <span  ng-show="loginForm.password.$dirty && loginForm.password.$invalid && !loginForm.password.$focused" class="help-inline"> Enter Password.</span>
+                                    </div><br/>
+                                    <button type="submit" id="btnLoginPage" ng-disabled="loginForm.$invalid || isProcessing">
+                                        <span ng-show="loading"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                                        <span ng-hide="loading">Sign in</span>
+                                    </button>
+                                    <!--<div class="cbhack">-->
+                                    <!--<label class="myCheckbox">-->
+                                    <!--<input type="checkbox" name="inpCheckLogin" id="inpCheckLogin" class="inpCheckLogin" data-html="true" checked="checked"/>-->
+                                    <!--<span></span>-->
+                                    <!--</label>-->
+                                    <!--<label for="inpCheckLogin" class="real">Keep me signed in</label>-->
+                                    <!--</div>-->
+                                </form>
+                            </div>
+                            <p class="login-forgot-activation">
+                                <a ui-sref="forgetpass">Forgot password?</a>
+                                - <a ui-sref="resend_activation">Didn't receive activation email?</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</span>
+<span class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Sign in</span>
+    </div>
+    <div class="scrollable">
+        <div class="scrollable-content section">
+            <form role="form" novalidate id="LoginMobilePage" name='MobileLoginForm' class="farm Mobile-login-form" ng-submit="LoginUser(login)">
+                <fieldset>
+                    <legend class="wt-center-content">Sign in to Wontah</legend>
+                    <md-input-container class="md-block">
+                        <label>Email or username</label>
+                        <input type="text" name="email" id="email" ng-model="login.email" data-html="true" required />
+                        <div ng-messages="MobileLoginForm.email.$error" role="alert">
+                            <div ng-show="MobileLoginForm.email.$dirty && MobileLoginForm.email.$invalid" class="wt-mob-error-msg">Username / email Required</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Password</label>
+                        <input type="password" name="password" class="password" id="password-11" ng-model="login.password" data-html="true" required/>
+                        <div ng-messages="MobileLoginForm.password.$error" role="alert">
+                            <div ng-show="MobileLoginForm.password.$dirty && MobileLoginForm.password.$invalid" class="wt-mob-error-msg"> Enter Password.</div>
+                        </div>
+                    </md-input-container>
+                </fieldset>
+                <md-button class="md-button md-raised mob-primary mob-btn-block" type="submit" id="btnLoginPage" ng-disabled="loginForm.$invalid || isProcessing">
+                    <span ng-show="loading"><md-progress-circular md-mode="indeterminate"></md-progress-circular></span>
+                    <span ng-hide="loading">Sign in</span>
+                </md-button>
+                <p class="wt-mob-login-forgot-activation wt-center-content">
+                    <a ui-sref="forgetpass">Forgot password?</a><br/>
+                    <a ui-sref="resend_activation">Didn't receive activation email?</a>
+                </p>
+            </form>
+
+        </div>
+    </div>
+</span>
+<script>
+    $(window).ready(function(){
+        $('#password-1').hideShowPassword({
+            innerToggle: true,
+            touchSupport: Modernizr.touch
+        });
+    });
+</script>
+<script>
+    $(window).ready(function(){
+        $('#password-11').hideShowPassword({
+            innerToggle: true,
+            touchSupport: Modernizr.touch
+        });
+    });
+</script>

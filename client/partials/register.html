@@ -1,0 +1,123 @@
+<span class="wt-web">
+    <div class="row" id="sign-up">
+        <div class="alert alert-danger wt-alert" ng-show="failToRegister">
+            Registration unsuccessful
+        </div>
+        <div class="col-sm-6">
+            <div class="sign-up-left">
+                <div class="sign-up-form" ng-switch on="click">
+                    <div id="sign-up-form-content" class="animate-switch" ng-switch-default>
+                        <h2>Sign up for Wontah (free)</h2>
+
+                        <div class="sign-up-services">
+                            <p>Sign up with a valid email address</p>
+                            <blockquote>
+                                <a  id="signUpGitHub" tooltip="Wontah Mobile" tooltip-placement="bottom" >
+                                    <span>Go Mobile</span>
+                                </a>
+                                <a id="signUpBitBucket"  tooltip="Learn more about wontah" tooltip-placement='bottom' >
+                                    <span>Learn More</span>
+                                </a>
+                            </blockquote>
+                        </div>
+
+                        <form class="form signupForm animate-form" role="form" name="signupForm" novalidate ng-submit="RegisterUser(register)">
+                            <div  ng-class="{error: signupForm.username.$invalid}">
+                                <input type="text" name="username" id="username" ng-model="register.username" placeholder="Desired username" ng-minlength="3" ng-maxlength="16" unique-username cu-focus remove-unwanted required popover="Enter desired Username" popover-trigger="mouseenter"/>
+                                <span ng-show="signupForm.username.$dirty && signupForm.username.$invalid && !signupForm.username.$error.minlength && !signupForm.username.$error.maxlength && !signupForm.username.$focused" class="suggest sug-danger">Name Required</span>
+                                <span ng-show="signupForm.username.$error.minlength && !signupForm.username.$focused" class="suggest sug-danger">Username is too short.</span>
+                                <span ng-show="signupForm.username.$error.maxlength && !signupForm.username.$focused" class="suggest sug-danger">Username is too long.</span>
+                                <span ng-show="signupForm.username.$error.uniqueUsername && !signupForm.username.$focused" class="suggest sug-danger">name exists</span>
+                            </div>
+                            <div ng-class="{error: signupForm.email.$invalid}">
+                                <input type="email" name="email" id="email" ng-model="register.email" placeholder="Your email" required unique-email cu-focus remove-unwanted popover="Enter a valid Email Address" popover-trigger="mouseenter"/>
+                                <span ng-show="signupForm.email.$dirty && signupForm.email.$invalid && !signupForm.email.$error.email && !signupForm.email.$focused" class="suggest">Email Required</span>
+                                <span ng-show="signupForm.email.$error.email && !signupForm.email.$focused" class="suggest sug-danger">Email is not valid</span>
+                                <span ng-show="signupForm.email.$error.uniqueEmail && !signupForm.email.$focused" class="suggest sug-danger">This Email is already in our system.</span>
+                            </div>
+                            <div ng-class="{error: signupForm.password.$invalid}">
+                                <input type="password" name="password" id="password" ng-minlength="6" ng-model="register.password" placeholder="Choose a password" required popover="Choose Password" popover-trigger="mouseenter">
+                                <span  ng-show="signupForm.password.$dirty && signupForm.password.$invalid && !signupForm.password.$focused" class="suggest sug-danger"> Enter Password.</span>
+                                <span ng-show="signupForm.password.$error.minlength && !signupForm.password.$focused" class="suggest sug-danger">Password is too short.</span>
+                            </div>
+                            <div ng-class="{error: signupForm.password2.$invalid}">
+                                <input type="password" name="password2" id="password2" cu-focus password-match="register.password" ng-model="register.password2" placeholder="Your password, once more" required popover="Enter Password again (it must match the one above)" popover-trigger="mouseenter">
+                                <span  ng-show="signupForm.password2.$dirty && signupForm.password2.$error.required  && !signupForm.password2.$focused" class="suggest sug-danger"> Enter password again.</span>
+                                <span  ng-show="signupForm.password2.$dirty && signupForm.password2.$error.passwordNoMatch && !signupForm.password2.$error.required  && !signupForm.password2.$focused" class="suggest sug-danger"> Password do not match.</span>
+                            </div>
+                            <button type="submit" id="signupBtn" ng-disabled="signupForm.$invalid || isProcessing">
+                                <span ng-show="loading"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                                <span ng-hide="loading">Create your account</span>
+                            </button>
+                        </form>
+                        <p class="terms">
+                            By signing up you agree to our
+                            <a ui-sref="terms-of-service">General</a> and
+                            <a ui-sref="privacy-policy">Privacy Terms</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer ng-include="'partials/templates/footer.html'"></footer>
+</span>
+<span class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Sign up</span>
+    </div>
+    <div class="scrollable">
+        <div class="scrollable-content section" ng-switch on="click">
+            <form role="form" novalidate id="signupForm" name='signupForm' class="farm animate-switch" novalidate ng-submit="RegisterUser(register)" ng-switch-default>
+                <fieldset>
+                    <legend class="wt-center-content">Sign up for Wontah (free)</legend>
+                    <md-input-container class="md-block">
+                        <label>Username</label>
+                        <input type="text" name="uname" id="uname" ng-model="register.username" ng-minlength="3" ng-maxlength="16" unique-username remove-unwanted required />
+                        <div ng-messages="signupForm.uname.$error" role="alert">
+                            <div class="wt-mob-error-msg" ng-show="signupForm.uname.$dirty && !signupForm.uname.$error.uniqueUsername && signupForm.uname.$invalid && !signupForm.uname.$error.minlength && !signupForm.uname.$error.maxlength">Username required!</div>
+                            <div class="wt-mob-error-msg" ng-show="signupForm.uname.$error.minlength">Username is too short.</div>
+                            <div class="wt-mob-error-msg" ng-show="signupForm.uname.$error.maxlength">Username is too long.</div>
+                            <div class="wt-mob-error-msg" ng-show="signupForm.uname.$error.uniqueUsername">{{register.username}} is taken</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Email Address</label>
+                        <input type="email" name="email2" id="email2" ng-model="register.email" required unique-email remove-unwanted/>
+                        <div ng-messages="signupForm.email2.$error" role="alert">
+                            <div class="wt-mob-error-msg" ng-show="signupForm.email2.$dirty && signupForm.email2.$invalid && !signupForm.email2.$error.email && !signupForm.email2.$error.uniqueEmail">Email required!</div>
+                            <div class="wt-mob-error-msg" ng-show="signupForm.email2.$error.email" >Email is not valid</div>
+                            <div class="wt-mob-error-msg" ng-show="signupForm.email2.$error.uniqueEmail">This email is already in our system</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Password</label>
+                        <input type="password" name="pass1" id="pass1" ng-minlength="6" ng-model="register.password" required>
+                        <div ng-messages="signupForm.pass1.$error" role="alert">
+                            <div class="wt-mob-error-msg"  ng-show="signupForm.pass1.$dirty && !signupForm.pass1.$error.minlength && signupForm.pass1.$invalid">Password required!</div>
+                            <div class="wt-mob-error-msg" ng-show="signupForm.pass1.$error.minlength">Password is too short.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Repeat Password</label>
+                        <input type="password" name="pass2" id="pass2" password-match="register.password" ng-model="register.password2"  required>
+                        <div ng-messages="signupForm.pass2.$error" role="alert">
+                            <div class="wt-mob-error-msg"  ng-show="signupForm.pass2.$dirty && signupForm.pass2.$error.required">Enter password again.</div>
+                            <div class="wt-mob-error-msg"  ng-show="signupForm.pass2.$dirty && signupForm.pass2.$error.passwordNoMatch && !signupForm.pass2.$error.required">Password do not match.</div>
+                        </div>
+                    </md-input-container>
+                </fieldset>
+                <md-button flex="100" class="md-primary md-raised mob-primary mob-btn-block" type="submit" id="signupBtn" ng-disabled="signupForm.$invalid || isProcessing">
+                    <span ng-show="loading"><md-progress-circular md-mode="indeterminate"></md-progress-circular></span>
+                    <span ng-hide="loading">Create your account</span>
+                </md-button>
+                <p class="wt-mob-login-forgot-activation wt-center-content">
+                    By signing up you agree to our
+                    <a ui-sref="terms-of-service">General</a> and
+                    <a ui-sref="privacy-policy">Privacy Terms</a>
+                </p>
+            </form>
+        </div>
+        </div>
+    </div>
+</span>

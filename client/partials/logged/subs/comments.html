@@ -1,0 +1,228 @@
+<span class="wt-web">
+    <script type="text/ng-template" id="nested-comments">
+        <div ng-class="{'timeline-badge-not-inverted' : c.author === luname}" class="timeline-badge primary">
+            <a ng-if="!c.anonymous" href="/u/{{c.author}}"><img class="img-circle" width="30px" height="30px" src="/user/{{c.author}}/{{c.avatar}}"></a>
+            <a ng-if="c.anonymous"><img class="img-circle" width="30px" height="30px" src="/img/anony.png"></a>
+        </div>
+        <div class="timeline-panel">
+        <span id="wt-comment-body_{{c.id}}">
+            <div class="media-body">
+                <span class="wt-comments-post" ng-if="c.ptype==='mrep' || c.ptype==='srep'" class="media-heading">
+                    {{c.data}}
+                </span>
+                <div class="timeline-heading">
+                    <span class="submitby">
+                        replied {{c.postdate}}<a ng-if="!c.anonymous" href="/u/{{c.author}}"> by {{c.author}} </a>
+                        <a ng-if="c.author === luname" tooltip="Delete this comment and its sub comments" tooltip-placement='bottom' ng-click="removecomment(c.id,$index,'a')"> remove</a>
+                    </span>
+                </div>
+                <div class="timeline-body">
+                    <div class="timeline-footer" style="display: none;" id="subrep_{{c.id}}" class="col-md-12 animate-show">
+                        <div class="col-md-6">
+                            <form class="mainReplyForm" id="subReplyForm_{{c.id}}" novalidate="true" role="form" name="subReplyForm_{{c.id}}">
+                                <div class="form-group">
+                                    <textarea id="replytext_{{c.id}}" class="form-control" name="mreply_{{c.id}}" ng-model="sreply.text" placeholder="submit a reply" required="" ></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="myCheckbox">
+                                        <input type="checkbox" ng-model="sreply.anonymous" name="anonymous_{{c.id}}" class="anonymous" data-html="true"/>
+                                        <span></span>
+                                    </label>
+                                    <label for="anonymous">Anonymous </label>
+                                    <button id="mreplyBtn_{{c.id}}" type="submit" class="btn-sm btn-primary" ng-click="makeSubPost( sreply,c.id)" ng-disabled="subReplyForm_{{c.id}}.$invalid || isProcessing">
+                                        <span ng-show="srloading"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                                        <span ng-hide="srloading">Save</span>
+                                    </button>
+                                    <button id="dissmissBtn_{{c.id}}" type="submit" class="btn-sm btn-danger" ng-click="dismissForm(c.id)">
+                                        <span ng-hide="mrloading">Cancel</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div></div>
+                    </div>
+                    <ul ng-if="c.childs != '[]'">
+                        <li ng-repeat="c in c.childs" class="timeline-inverted wt-animate-this" ng-include="'nested-comments'"></li>
+                    </ul>
+                </div>
+            </div>
+        </span>
+        </div>
+    </script>
+    <div class="row wt-row">
+        <div class="col-md-12">
+            <div class="col-md-9 wt-big-col">
+                <ul class="timeline">
+                    <li class="timeline-inverted">
+                        <div class="timeline-badge primary">
+                            <a ng-class="{'votedup' : userVoted && voteStatus}" ng-click="upVotePost(id,'a')"><i class="ion ion-arrow-up-a"></i></a>
+                            <span ng-class="{'voteddown' : userVoted && !voteStatus , 'votedup': userVoted && voteStatus}" class="wt-number" title="">{{up - down}}</span>
+                            <a ng-class="{'voteddown' : userVoted && !voteStatus}" ng-click="downVotePost(id,'a')"><i class="ion ion-arrow-down-a"></i></a>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-header">
+                                <div class="media">
+                                    <a ng-if="thumb !== ''|| thumb" class="media-left">
+                                        <img class="" tooltip="{{thumb}}" tooltip-placement='up' src="{{thumb}}" alt="img" width="100px" height="100px" />
+                                    </a>
+                                    <a ng-if="anonymous && thumb === ''" class="media-left">
+                                        <img class="img-circle" tooltip="Anonymous" tooltip-placement='bottom' src="img/anony.png" alt="Anonymous" width="70px" height="70px" />
+                                    </a>
+                                    <a ng-if="!anonymous && thumb === ''" class="media-left" href="/u/{{author}}">
+                                        <img class="img-circle" tooltip="{{author}}" tooltip-placement='bottom' src="user/{{author}}/{{avatar}}" alt="{{author}}" width="70px" height="70px" />
+                                    </a>
+                                    <div ng-if="ptype==='link'" class="media-body">
+                                        <a class="wt-post-title" target="_blank" href="{{link}}">{{title}}</a>
+                                        <span class="wt-post-url">({{ link | hostnameFromUrl }})</span>
+                                    </div>
+                                    <div ng-if="ptype==='text'" class="media-body">
+                                        <a class="wt-post-title" ng-click="showdata()" >{{title}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="timeline-heading">
+                            <span class="submitby">
+                                submitted {{postdate}} <a ng-if="!anonymous" href="/u/{{author}}"> by {{author}}</a>
+                                on <a href="/t/{{taah}}">{{taah}}</a>
+                            </span>
+                            </div>
+                            <div class="timeline-body">
+                                <ul>
+                                    <li>
+                                        <a ng-if="comments < 1" href="/comments/{{id}}">no comment</a>
+                                        <a ng-if="comments === 1" href="/comments/{{id}}">{{comments}} comment</a>
+                                        <a ng-if="comments > 1" href="/comments/{{id}}">{{comments}} comments</a>
+                                    </li>
+                                    <li>
+                                        <a ng-if="!saved" ng-click="SavePost(id,'a')">save</a>
+                                        <a ng-if="saved" ng-click="unSavePost(id,'a')">unsave</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <hr/>
+                <div class="animate-show" ng-if="ptype==='text'" ng-show="isdata">
+                    {{data}}
+                </div>
+                <div class="row col-md-12">
+                    <ul ng-if="hasreplies" class="ctimeline">
+                        <li ng-repeat="c in cposts" ng-class="{'timeline-inverted' : c.author !== luname}"  class="wt-animate-this" ng-include="'nested-comments'"></li>
+                    </ul>
+                    <ul class="timeline wt-center-content" ng-if="!hasreplies">
+                        <li>No comments</li>
+                    </ul>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-8">
+                        <form class="mainReplyForm" novalidate="true" role="form" name="mainReplyForm" ng-submit="mainReply(reply);">
+                            <div ng-class="{error: reply.anonymous.$invalid}" class="form-group">
+                                <textarea id="replytext" class="form-control" name="mreply" ng-model="reply.text" placeholder="submit a reply" required="" ></textarea>
+                            </div>
+                            <div ng-class="{error: reply.anonymous.$invalid}" class="form-group col-md-8">
+                                <label class="myCheckbox">
+                                    <input type="checkbox" id="anonymous" ng-model="reply.anonymous" name="anonymous" class="anonymous" data-html="true"/>
+                                    <span></span>
+                                </label>
+                                <label for="anonymous">Anonymous </label>
+                                <button id="mreplyBtn" type="submit" class="btn btn-primary" ng-disabled="mainReplyForm.$invalid || isProcessing">
+                                    <span ng-show="mrload"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                                    <span ng-hide="mrload">Drop reply</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="col-md-3"><div class="well" ng-include="'partials/templates/msub.tpl.html'"></div></div>
+        </div>
+    </div>
+</span>
+<span ng-if="mobile" class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Commments</span>
+    </div>
+    <div class="scrollable">
+        <div class="scrollable-content section">
+            <div>
+                <small class="mob-header" style="width:100%;word-break:keep-all;">
+                    <a href="/t/{{taah}}">{{taah}}</a>
+                    <a ng-if="ptype==='link'">. ({{ link | hostnameFromUrl }})</a>
+                    <a>. {{postdate}}</a>
+                    <span ng-if="!anonymous"><a href="/u/{{author}}">. {{author}}</a></span>
+                </small>
+                <div class="mob-sub-header">
+                    <span ng-if="ptype==='link'">
+                        <a class="" target="_blank" href="{{link}}">{{title}}</a>
+                    </span>
+                    <span ng-if="ptype==='text'">
+                        <a class="" ng-click="showContent($event,up)" >{{title}}</a>
+                        <p ng-click="showContent($event,up)">
+                            {{data | cut:true:400:' ...'}}
+                        </p>
+                    </span>
+                </div>
+                <a ng-if="ptype==='link' && thumb !== ''" target="_blank" href="{{link}}" ng-show="thumb">
+                    <img class="md-card-image" ng-src="{{thumb}}" alt="{{title}}"/>
+                </a>
+                <a class="mob-no-thumb" ng-if="ptype==='link' && thumb === ''" target="_blank" href="{{link}}" ng-hide="thumb">
+                    <p flex>{{ link | hostnameFromUrl }}</p>
+                </a>
+                <md-card-actions layout="row" layout-align="start center">
+                    <a class="md-icon-button" ng-if="comments < 1" href="/comments/{{id}}">0 <i class="ion ion-ios-chatbubble"></i></a>
+                    <a class="md-icon-button" ng-if="comments === 1" href="/comments/{{id}}">{{comments}} <i class="ion ion-ios-chatbubble"></i></a>
+                    <a class="md-icon-button" ng-if="comments > 1" href="/comments/{{id}}">{{comments}} <i class="ion ion-ios-chatbubble"></i></a>
+                    <md-card-icon-actions>
+                        <md-menu ng-show="isLoggedIn()" md-position-mode="target" >
+                            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                                <i class="ion ion-ios-more"></i>
+                            </md-button>
+                            <md-menu-content width="2">
+                                <md-menu-item>
+                                    <md-button ng-if="!saved" ng-click="SavePost(id,what)"><div layout="row" flex><p flex>save</p></div></md-button>
+                                    <md-button ng-if="saved" ng-click="unSavePost(id,what)"><div layout="row" flex><p flex>unsave</p></div></md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                    </md-card-icon-actions>
+                    <span flex></span>
+                    <small class="mob-vote">
+                        <span ng-class="{'voteddown' :userVoted && !voteStatus , 'votedup': userVoted && voteStatus}" class="mob-number" title="" id="">{{up - down}}</span>
+                        <a ng-class="{'votedup' : userVoted && voteStatus}" ng-click="upVotePost(id ,'a')" class="md-icon-button mob-number">
+                            <i class="ion ion-arrow-up-a"></i>
+                        </a>
+                        <a ng-class="{'voteddown' : userVoted && !voteStatus}" ng-click="downVotePost(id, 'a')" class="md-icon-button mob-number">
+                            <i class="ion ion-arrow-down-a"></i>
+                        </a>
+                    </small>
+                </md-card-actions>
+            </div>
+            <md-divider></md-divider>
+            <md-list flex>
+                <md-list-item ng-repeat="c in cposts" class="md-2-line">
+                    <md-divider ng-if="!last"></md-divider>
+                    <img ng-if="!c.anonymous" ng-src='/user/{{c.author}}/{{c.avatar}}' alt='{{c.username}}' class="md-avatar" />
+                    <img ng-if="c.anonymous" src="/img/anony.png" alt='{{c.username}}' class="md-avatar" />
+                    <div class="md-list-item-text" layout="column">
+                        <h3><span ng-if="!c.anonymous">{{c.author}}</span> <a ng-if="c.author === luname" tooltip="Delete this comment and its sub comments" tooltip-placement='bottom' ng-click="removecomment(c.id,$index,'a')"> remove</a></h3>
+                        <p>{{c.data}} </p>
+                    </div>
+                </md-list-item>
+            </md-list>
+            <form class="mainReplyForm" novalidate="true" role="form" name="mainReplyForm" ng-submit="mainReply(reply);">
+                <md-input-container class="md-block">
+                    <textarea name="mreply" ng-model="reply.text" placeholder="submit a reply" required="" ></textarea>
+                </md-input-container>
+                <md-checkbox ng-model="reply.anonymous" name="anonymous" aria-label="Anonymous">
+                    Anonymous:
+                </md-checkbox>
+                <md-button id="mreplyBtn" type="submit" class="md-raised mob-primary mob-btn-block" ng-disabled="mainReplyForm.$invalid || isProcessing">
+                    <span ng-show="mrload"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                    <span ng-hide="mrload">Drop reply</span>
+                </md-button>
+            </form>
+        </div>
+    </div>
+</span>

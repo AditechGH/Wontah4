@@ -1,0 +1,65 @@
+<md-dialog ng-controller="coverController"  aria-label="cover photos"  ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools mob-primary">
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>
+                </md-button>
+                <span flex></span>
+                <h4>Upload Your Cover Images</h4>
+                <span flex></span>
+                <md-button ng-hide="isOpenRight()" ng-click="toggleRight()" class="md-icon-button">
+                    <md-icon class="ion ion-android-more-vertical" aria-label="More"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <p>
+                use your pc for now. thank you
+            </p>
+        </md-dialog-content>
+        <!--<md-dialog-content>-->
+            <!--<div class="md-dialog-content">-->
+                <!--<div class="simple-cropper-images">-->
+                    <!--<div id="cover1" class="cropme cover" style="max-width: 557px;max-height:250px;width:100%;height:auto;"></div>-->
+                    <!--<div id="cover2" class="cropme cover" style="max-width: 557px;max-height:250px;width:100%;height:auto;"></div>-->
+                    <!--<div id="cover3" class="cropme cover" style="max-width: 557px;max-height:250px;width:100%;height:auto;"></div>-->
+                    <!--<div id="cover4" class="cropme cover" style="max-width: 557px;max-height:250px;width:100%;height:auto;"></div>-->
+                    <!--<div class="clear"></div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</md-dialog-content>-->
+        <md-dialog-actions layout="row">
+            <md-button class="md-raised mob-primary mob-btn-block" ng-click="saveCoverImgs()">
+                <span class="glyphicon glyphicon-ok"></span> Save
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+    <md-toolbar class="md-theme-light mob-primary">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" ng-click="close()">
+                <md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>
+            </md-button>
+            <span flex></span>
+            <h4>Choose a transition</h4>
+            <span flex></span>
+            <md-button class="md-icon-button"></md-button>
+        </div>
+    </md-toolbar>
+    <md-content ng-controller="coverController" layout-padding>
+        <md-select ng-model="move" ng-change="saveTrans(move)">
+            <md-option ng-repeat="item in model.transitions" ng-value="item">{{item.name}}</md-option>
+        </md-select>
+        <div ng-repeat="cimg in cimages">
+            <img ng-src="/user/{{u.username}}/cover/{{cimg}}" class="wt-canvass" alt="{{cimg}}" height="100px"/>
+            <a aria-label="Remove" ng-click="removeImage(cimg)" tooltip="remove image" tooltip-placement="right" class="wt-delete">&#215;</a>
+        </div>
+    </md-content>
+</md-sidenav>
+<script>
+    $('.cropme').simpleCropper();
+    var conW = window.innerWidth;
+    $('.cover').css("height",(30.97893432 * conW) / 69.02106568);
+</script>

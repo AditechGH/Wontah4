@@ -1,0 +1,80 @@
+<span class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Update your basic information</span>
+    </div>
+        <md-input-container class="md-block">
+            <label>First name (required)</label>
+            <input type="text" id="firstname1" ng-model="lfname"  name="firstname1"/>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Last name (required)</label>
+            <input id="lastname1" ng-model="llname" name="lastname1" />
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Contact (optional)</label>
+            <input ng-model="lcontact" id="contact1" name="contact1"/>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Website (optional)</label>
+            <input class="form-control" ng-model="lweb" id="website1" name="website1"/>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>who is {{ luname }} (optional)</label>
+            <textarea ng-model="lbio" id="bio1" name="bio1"></textarea>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label class="text-muted">Your gender status {{gender}}:</label><br/><br/>
+            <md-radio-group ng-model="g">
+                <md-radio-button style="display: inline" value="m" class="md-primary">Male</md-radio-button>
+                <md-radio-button style="display: inline" value="f" class="md-primary"> Female </md-radio-button>
+            </md-radio-group>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <button class="md-button md-raised mob-primary mob-btn-block" ng-click="SubmitPform1(lfname,llname,lcontact,lweb,lbio,g)" type="submit" ng-disabled="isProcessing">
+                <span ng-show="loading"><md-progress-circular md-mode="indeterminate"></md-progress-circular></span>
+                <span ng-hide="loading">Submit</span>
+            </button>
+        </md-input-container>
+</span>
+<span class="wt-web">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-8 wt-center-content">
+                <div class="">
+                    <h2 class="h2">Update your basic information</h2>
+                    <hr/>
+                    <form role="form" name="pForm" class="pForm"  novalidate>
+                        <div class="form-group">
+                            <input class="form-control" id="firstname" value="{{lfname}}" name="firstname" placeholder="First name (required)"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" id="lastname" value="{{llname}}" name="lastname" placeholder="Last name (required)"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" id="contact" value="{{lcontact}}" name="contact" placeholder="Contact (optional)"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" id="website" value="{{lweb}}" name="website" placeholder="Website (optional)"/>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="bio" name="bio" placeholder="who is {{ luname }} (optional)">{{lbio}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-muted">Your gender status {{gender}}:</label><br/>
+                            <input type="radio" id="gender1" class="form-inline" name="gender" ng-model="user.gender" ng-required="!user.gender" value="m"/>
+                            <label  for="gender1" ><span></span>Male</label>
+                            <input type="radio" id="gender2" class="form-inline" name="gender" ng-model="user.gender" ng-required="!user.gender" value="f"/>
+                            <label  for="gender2" ><span></span>Female</label>
+                        </div>
+                        <div class="form-group">
+                            <button ng-click="SubmitPform(user.gender)" type="submit" ng-disabled="isProcessing">
+                                <span ng-show="loading"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                                <span ng-hide="loading">Submit</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</span>

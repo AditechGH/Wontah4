@@ -1,0 +1,63 @@
+<div ng-controller="makePostController" id="CreateTaah" class="medium reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="h2 modal-title wt-center-content">Create taah</h2>
+            <hr/>
+            <div class="col-sm-8">
+                <div class="wt-post-alert">
+                    This is where that brilliant idea of yours comes into play.
+                    In this field, the name should have no spaces between words. Case size does matter,
+                    so capitalize the letters you want to appear capitalized.
+                </div>
+                <form name="taahForm" class="taahForm animate-form" id="taahFrom" role="form" novalidate="true" ng-submit="CreateTaah(taahForm.$valid,taah);">
+                    <div ng-class="{error: taahForm.taahname.$invalid}" class="form-group">
+                        <label for="taahname">Name</label><br/>
+                        <div ng-show="taahForm.taahname.$focused" class="suggest">You cannot change the name – ever. So triple-check that it’s right before hitting “create.”</div>
+                        <div ng-show="taahForm.taahname.$error.minlength && !taahForm.taahname.$focused" class="suggest sug-danger">Name is too short.</div>
+                        <div ng-show="taahForm.taahname.$dirty && taahForm.taahname.$invalid && !taahForm.taahname.$error.minlength && !taahForm.taahname.$focused" class="suggest sug-danger">Name Required</div>
+                        <div ng-show="taahForm.taahname.$error.uniqueTaahname && !taahForm.taahname.$focused" class="suggest sug-danger">name exists</div>
+                        <input id='taahname' name="taahname" ng-model="taah.taahname" placeholder="Name" class="form-control" ng-minlength="3" remove-unwanted unique-taahname cu-focus required/>
+                    </div>
+                    <div ng-class="{error: taahForm.taahtitle.$invalid}" class="form-group">
+                        <label for="taahtitle">Title</label><br/>
+                        <div ng-show="taahForm.taahtitle.$dirty && taahForm.taahtitle.$invalid && !taahForm.taahtitle.$focused" class="suggest sug-danger">Title Required</div>
+                        <div ng-show="taahForm.taahtitle.$focused" class="suggest">This does not have to be the same as the name, but it can be. Spacing does matter,The title can be edited later if you want to tweak it or change it.</div>
+                        <input id='taahtitle' name="taahtitle" ng-model="taah.taahtitle" placeholder="Title" class="form-control" cu-focus required/>
+                    </div>
+                    <div ng-class="{error: taahForm.taahdesc.$invalid}" class="form-group">
+                        <label for="taahdesc">Description</label><br/>
+                        <div ng-show="taahForm.taahdesc.$focused" class="suggest">Describe what your taah is all about. It’s viewable to the public and informs people about your taah</div>
+                        <textarea id='taahdesc' name="taahdesc" ng-model="taah.taahdesc" placeholder="Description" class="form-control" cu-focus></textarea>
+                    </div>
+                    <div ng-class="{error: taahForm.taahtype.$invalid}" class="form-group">
+                        <label for="taahtype">Type</label><br/>
+                        <div ng-show="taahForm.taahtype.$focused" class="suggest">Public: open to all, Restricted:you decide who can post, private:By invitation only</div>
+                        <select id='taahtype' name="taahtype" ng-model="taah.taahtype"  class="form-control" cu-focus>
+                            <option value="pu">Public</option>
+                            <option value="re">Restricted</option>
+                            <option value="pr">Private</option>
+                        </select>
+                    </div>
+                    <div ng-class="{error: taahForm.coption.$invalid}" class="form-group">
+                        <label>Content Option:</label><br/>
+                        <div class="wt-pull">
+                            <input type="radio" id="coption1" class="form-inline" name="coption" ng-model="taah.coption" ng-required="!taah.coption" value="a"/>
+                            <label  for="coption1" ><span></span>Any type</label>
+                            <input type="radio" id="coption2" class="form-inline" name="coption" ng-model="taah.coption" ng-required="!taah.coption" value="l"/>
+                            <label  for="coption2" ><span></span>Links only</label>
+                            <input type="radio" id="coption3" class="form-inline" name="coption" ng-model="taah.coption" ng-required="!taah.coption" value="t"/>
+                            <label  for="coption3" ><span></span>Text only</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" name="taahBtn" id="taaBtn" ng-disabled="taahForm.$invalid || isProcessing">
+                            <span ng-hide="taahloading">Create</span>
+                            <span><i ng-show="taahloading" class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>

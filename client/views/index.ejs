@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html id="ng-app" lang="en" ng-app="wontApp">
+    <head>
+        <meta id="page-data"
+              data-user-id="0200516773"
+              data-user-email="wontah5170@gmail.com"
+              data-user-username="Aditech"
+              data-user-premium="false"
+              data-user-first-name="Alhassan"
+              data-user-last-name="Adinan"
+              data-user-full-name="Alhassan Adinan"
+              data-user-created="0"
+              data-user-active=""
+              data-user-region=""
+              data-user-version="0.0.1"
+              data-user-no-newsletter=""
+              data-user-subscription-on-signup=""
+              data-user-alpha=""
+              data-user-beta=""
+              data-api-url="http://wontah.com"
+              data-page-name=""
+              data-page-title="Wontah  - The gateway to awesome Interneting"
+              data-page-properties={}
+              data-login-source=""
+              data-segmentio-key=""
+              data-treasure-data-key=""
+              data-treasure-data-db="wontah"
+              data-optimizely-project-id=""
+        >
+        <meta charset="UTF-8">
+        <base href="/"></base>
+        <title>wontah - The gateway to awesome interneting</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
+        <meta name="description" content="">
+        <meta name="keywords" content="" />
+        <meta name="author" content="">
+        <link rel="shortcut icon" type="image/x-icon" href="img/wontah1.png" />
+        <link rel="icon" type="image/x-icon" href="img/wontah1.png" />
+        <meta property="og:url" content="http://wontah.com" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Wontah" />
+        <meta property="og:description" content="The gateway to awesome interneting" />
+        <meta property="og:image" content="http://wontah.com/img/wontah1.png" />
+        <link href="" rel="publisher" />
+        <link rel="stylesheet" type="text/css" id="sheet" href="libs/css/vendor-desktop.min.css"/>
+        <link rel="stylesheet" type="text/css" href="libs/css/vendor.min.css"/>
+        <noscript><link rel="stylesheet" type="text/css" href="libs/css/jquery.fileupload-noscript.css"/></noscript>
+        <link rel="stylesheet" type="text/css" href="custom/css/main.min.css"/>
+        <script type="text/javascript" src="libs/css/modernizr.js"></script>
+        <style>.ng-cloak{display: none;}</style>
+    </head>
+    <body ng-controller="mainController">
+            <refresh-browser></refresh-browser>
+            <div class="wt-web">
+                <contribution-box></contribution-box>
+                <span ng-if="desktop" ng-include="'partials/nav.html'"></span>
+                <div ng-cloak>
+                    <div ng-if="desktop" class="animate-view" ui-view></div>
+                </div>
+            </div>
+            <span ui-prevent-touchmove-defaults>
+                <left-bar ng-if="mobile" style="display:none;" ui-track-as-search-param='true' class="sidebar sidebar-left wt-mobile"></left-bar>
+                <right-bar ng-if="mobile" style="display:none;" class="sidebar sidebar-right wt-mobile"></right-bar>
+                <div ng-if="mobile" class="app wt-mobile" ui-swipe-right='Ui.turnOn("uiSidebarLeft")' ui-swipe-left='Ui.turnOff("uiSidebarLeft")'>
+                    <nav-mobile ng-if="mobile"></nav-mobile>
+                    <div class='app-body'>
+                        <div class='app-content'>
+                            <div ng-if="mobile" class="" ui-view></div>
+                        </div>
+                    </div>
+                </div>
+            </span>
+            <div class="wt-mobile" ui-yield-to="modals"></div>
+            <script type="text/javascript" src="libs/scripts/vendor.min.js"></script>
+            <script type="text/javascript" src="custom/scripts/main.min.js"></script>
+    </body>
+</html>

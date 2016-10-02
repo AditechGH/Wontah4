@@ -1,0 +1,59 @@
+<md-card>
+    <small class="mob-header" style="width:100%;word-break:keep-all;">
+        <a href="/t/{{up.taah}}">{{up.taah}}</a>
+        <a ng-if="up.ptype==='link'">. ({{ up.link | hostnameFromUrl }})</a>
+        <a>. {{up.postdate}}</a>
+        <span ng-if="!up.anonymous"><a href="/u/{{up.author}}">. {{up.author}}</a></span>
+        <span ng-if="up.author === luname">
+            <a ng-click="removepost(up.id,$index,up.what)">. <i class="ion ion-trash-b"></i></a>
+        </span>
+    </small>
+    <div class="mob-sub-header">
+        <span ng-if="up.ptype==='link'">
+            <a class="" target="_blank" href="{{up.link}}">{{up.title}}</a>
+        </span>
+        <span ng-if="up.ptype==='text'">
+            <a class="" ng-click="showContent($event,up)" >{{up.title}}</a>
+            <p ng-click="showContent($event,up)">
+              {{up.data | cut:true:400:' ...'}}
+            </p>
+        </span>
+    </div>
+    <a ng-if="up.ptype==='link' && up.thumb !== ''" target="_blank" href="{{up.link}}" ng-show="up.thumb">
+        <img class="md-card-image" ng-src="{{up.thumb}}" alt="{{up.title}}"/>
+    </a>
+    <a class="mob-no-thumb" ng-if="up.ptype==='link' && up.thumb === ''" target="_blank" href="{{up.link}}" ng-hide="up.thumb">
+        <p flex>{{ up.link | hostnameFromUrl }}</p>
+    </a>
+    <md-card-actions layout="row" layout-align="start center">
+        <a class="md-icon-button" ng-if="up.comments < 1" href="/comments/{{up.id}}">0 <i class="ion ion-ios-chatbubble"></i></a>
+        <a class="md-icon-button" ng-if="up.comments === 1" href="/comments/{{up.id}}">{{up.comments}} <i class="ion ion-ios-chatbubble"></i></a>
+        <a class="md-icon-button" ng-if="up.comments > 1" href="/comments/{{up.id}}">{{up.comments}} <i class="ion ion-ios-chatbubble"></i></a>
+        <md-card-icon-actions>
+            <md-menu ng-show="isLoggedIn()" md-position-mode="target" >
+                <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                    <i class="ion ion-ios-more"></i>
+                </md-button>
+                <md-menu-content width="2">
+                    <md-menu-item>
+                        <md-button ng-if="!up.saved" ng-click="SavePost(up.id,up.what)"><div layout="row" flex><p flex>save</p></div></md-button>
+                        <md-button ng-if="up.saved" ng-click="unSavePost(up.id,up.what)"><div layout="row" flex><p flex>unsave</p></div></md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="HidePost(up.id,up.what)"><div layout="row" flex><p flex>hide</p></div></md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </md-card-icon-actions>
+        <span flex></span>
+        <small class="mob-vote">
+            <span ng-class="{'voteddown' : up.userVoted && !up.voteStatus , 'votedup': up.userVoted && up.voteStatus}" class="mob-number" title="" id="">{{up.up - up.down}}</span>
+            <a ng-class="{'votedup' : up.userVoted && up.voteStatus}" ng-click="upVotePost(up.id, $index,up.what)" class="md-icon-button mob-number">
+                <i class="ion ion-arrow-up-a"></i>
+            </a>
+            <a ng-class="{'voteddown' : up.userVoted && !up.voteStatus}" ng-click="downVotePost(up.id, $index,up.what)" class="md-icon-button mob-number">
+                <i class="ion ion-arrow-down-a"></i>
+            </a>
+        </small>
+    </md-card-actions>
+</md-card>

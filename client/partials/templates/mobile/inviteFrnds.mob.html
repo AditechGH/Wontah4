@@ -1,0 +1,59 @@
+<md-dialog ng-controller="InviteController"  aria-label="invite"  ng-cloak>
+    <form>
+        <md-toolbar ng-show="!showSearch">
+            <div class="md-toolbar-tools mob-primary">
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>
+                </md-button>
+                <span flex></span>
+                <h4>Invite Friends</h4>
+                <span flex></span>
+                <md-button ng-click="showSearch = !showSearch" class="md-icon-button">
+                    <md-icon class="ion ion-android-search" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-toolbar class="md-hue-1" ng-show="showSearch">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" ng-click="showSearch = !showSearch" aria-label="Back">
+                    <md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>
+                </md-button>
+                <md-input-container md-theme="input" flex>
+                    <label>&nbsp;</label>
+                    <input name="filterFriends" placeholder="search friends" ng-model="filterFriends">
+                </md-input-container>
+                <md-button ng-click="showSearch = !showSearch" class="md-icon-button">
+                    <md-icon class="ion ion-android-search" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content >
+            <div class="md-dialog-content">
+                <div ng-show="inviteLoading" class="text-muted">
+                    <span>Loading...</span>
+                </div>
+                <md-list ng-if='friends.length > 0'>
+                    <md-list-item ng-repeat="f in friends.frnds| filter:filterFriends" ui-sref="u({username: '{{f.username}}'})">
+                        <img ng-src='/user/{{f.username}}/{{f.avatar}}' alt='{{f.username}}' class="md-avatar" />
+                        <p>{{f.firstname}} {{f.lastname}}</p>
+                        <md-checkbox ng-checked="selection.indexOf(f.username) > -1"
+                                    ng-value="f.username" ng-click="toggleSelection(f.username)" class="md-secondary" ></md-checkbox>
+                    </md-list-item>
+                </md-list>
+                <div class="col-xs-12" ng-if='friends.length > 0'>
+                        <span ng-click="loadMorefriends();" class="loadmore">
+                            <span ng-show="load" class="ion ion-load-c wt-spin fa fa-spin"></span>
+                            <span ng-hide="load">Load more</span>
+                        </span>
+                </div>
+                <div ng-if="friends.length === 0">
+                    <span class="text-info">You have no friends to invite</span>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button class="md-raised mob-btn-block" ng-click="InviteNow();">Invite</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+

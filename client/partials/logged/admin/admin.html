@@ -1,0 +1,85 @@
+<div class="row wt-row">
+    <h2 class="h2">Admin ({{luname}})</h2>
+    <div class="col-md-12">
+        <div class="col-md-3">
+            <b>Total: {{allusers.total}}</b>
+        </div>
+        <div class="col-md-3">
+            <b>Add Admin: <input type="text" class="form-control" placeholder="add an admin"  ng-model="admin" typeahead="option as option.username for option in p.options | filter:$viewValue | limitTo:10"></b>
+            <button class="btn btn-primary" ng-click="AddAdmin(admin)">Add</button>
+        </div>
+        <div class="col-md-3">
+            <b>Search: <input type="text" class="form-control" placeholder="Search members" ng-model="filterMembers"></b>
+        </div>
+        <div class="col-md-3">
+            <a data-reveal-id="viewSuggestions">View suggestions ({{suggestions.size}})</a>
+        </div>
+    </div>
+    <hr/>
+    <table>
+        <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Username</th>
+            <th>Full Name</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Ip Address</th>
+            <th>Signup Date</th>
+            <th>Last login</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="u in allusers.members|filter:filterMembers|startFrom:(currentPage - 1) * pageSize | limitTo: pageSize">
+            <th>{{u.num}}</th>
+            <td ng-if="u.level === 'a'"><button data-reveal-id="editAdmin" ng-click="EditMe(u);" class="btn-sm btn-primary">Edit</button></td>
+            <td ng-if="u.level === 'a'"><button ng-click="DeleteMember(u.id,u.username)" class="btn-sm btn-danger">Delete</button></td>
+            <td colspan="2" ng-if="u.level === 'd'"><button ng-click="RemoveAdmin(u.id,u.username,$index)" class="btn-sm btn-danger">Remove as admin</button></td>
+            <td><img src="/user/{{u.username }}/{{u.avatar }}" class="avatar" width="40px" height="40px" /></td>
+            <td><a href="/u/{{u.username}}">{{u.username}}</a></td>
+            <td>{{u.firstname}} {{u.lastname}}</td>
+            <td>{{u.gender}}</td>
+            <td>{{u.email}}</td>
+            <td>{{u.ip}}</td>
+            <td>{{u.signup}}</td>
+            <td>{{u.lastlogin}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <pagination total-items="allusers.members.length" ng-model="currentPage" items-per-page="pageSize"></pagination>
+    <!--<div id="editAdmin" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">-->
+        <!--<h2 class="h2">Edit user ({{us.username}})</h2>-->
+    <!--</div>-->
+    <div id="viewSuggestions" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        <h2 class="h2"></h2>
+        <div class="wt-dpt-container">
+            <table ng-if="suggestions.data.length > 0">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Username</th>
+                    <th>Full Name</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="s in suggestions.data">
+                    <td><button ng-click="DeleteSug(s._id,$index)" class="btn-sm btn-danger">Delete</button></td>
+                    <td><a href="/u/{{s.username}}">{{s.username}}</a></td>
+                    <td>{{s.name}}</td>
+                    <td>{{s.message}}</td>
+                    <td>{{s.time}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
+</div>
+<script>
+
+</script>

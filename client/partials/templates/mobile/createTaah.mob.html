@@ -1,0 +1,85 @@
+<md-dialog ng-controller="makePostController" aria-label="Make a new Submission"  ng-cloak>
+    <form name="taahForm" class="taahForm animate-form" id="taahFrom" role="form" ng-submit="CreateTaah(taahForm.$valid,taah);" novalidate="true">
+        <md-toolbar>
+            <div class="md-toolbar-tools mob-primary">
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>
+                </md-button>
+                <span flex></span>
+                <h4>Create taah</h4>
+                <span flex></span>
+                <md-button class="md-icon-button">
+                    <!--<md-icon class="ion ion-close" aria-label="Close dialog"></md-icon>-->
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div flex="100" layout="column">
+                    <md-content>
+                        <div class="wt-post-alert">
+                            This is where that brilliant idea of yours comes into play.
+                            In this field, the name should have no spaces between words. Case size does matter,
+                            so capitalize the letters you want to appear capitalized.
+                        </div>
+                            <md-input-container class="md-block">
+                                <label>Name</label>
+                                <input id='taahname' name="taahname" ng-model="taah.taahname" ng-minlength="3" remove-unwanted unique-taahname cu-focus required/>
+                                <div ng-messages="" role="alert">
+                                    <div ng-show="taahForm.taahname.$focused" class="wt-mob-error-msg wt-mob-suc-msg">You cannot change the name – ever. So triple-check that it’s right before hitting “create.”</div>
+                                    <div ng-show="taahForm.taahname.$error.minlength && !taahForm.taahname.$focused" class="wt-mob-error-msg">Name is too short.</div>
+                                    <div ng-show="taahForm.taahname.$dirty && taahForm.taahname.$invalid && !taahForm.taahname.$error.minlength && !taahForm.taahname.$focused" class="wt-mob-error-msg">Name Required</div>
+                                    <div ng-show="taahForm.taahname.$error.uniqueTaahname && !taahForm.taahname.$focused" class="wt-mob-error-msg">name exists</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Title</label>
+                                <input id='taahtitle' name="taahtitle" ng-model="taah.taahtitle" cu-focus required/>
+                                <div ng-messages="" role="alert">
+                                    <div ng-show="taahForm.taahtitle.$dirty && taahForm.taahtitle.$invalid && !taahForm.taahtitle.$focused" class="wt-mob-error-msg">Title Required</div>
+                                    <div ng-show="taahForm.taahtitle.$focused" class="wt-mob-error-msg wt-mob-suc-msg">This does not have to be the same as the name, but it can be. Spacing does matter,The title can be edited later if you want to tweak it or change it.</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Description</label>
+                                <textarea id='taahdesc' name="taahdesc" ng-model="taah.taahdesc" cu-focus></textarea>
+                                <div ng-messages="" role="alert">
+                                    <div ng-show="taahForm.taahdesc.$focused" class="wt-mob-error-msg wt-mob-suc-msg">Describe what your taah is all about. It’s viewable to the public and informs people about your taah</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Type</label>
+                                <md-select  id='taahtype' name="taahtype" ng-model="taah.taahtype" cu-focus>
+                                    <md-option value="pu">Public</md-option>
+                                    <md-option value="re">Restricted</md-option>
+                                    <md-option value="pr">Private</md-option>
+                                </md-select>
+                                <div ng-messages="" role="alert">
+                                    <div ng-show="taahForm.taahtype.$focused" class="wt-mob-error-msg wt-mob-suc-msg">Public: open to all, Restricted:you decide who can post, private:By invitation only</div>
+                                </div>
+                            </md-input-container>
+                            <div class="row wt-row">
+                                <label class="text-muted">Content Option:</label><br/>
+                                <md-radio-group name="coption" ng-model="taah.coption" ng-required="!taah.coption">
+                                    <md-radio-button style="display: inline" value="a" class="md-primary">Any type</md-radio-button>
+                                    <md-radio-button style="display: inline" value="l" class="md-primary"> Links only </md-radio-button>
+                                    <md-radio-button style="display: inline" value="t" class="md-primary"> Text only </md-radio-button>
+                                </md-radio-group>
+                            </div>
+                            <div class="form-group">
+
+                            </div>
+                    </md-content>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <button class="md-button md-raised mob-primary mob-btn-block" type="submit" id="taaBtn" ng-disabled="taahForm.$invalid || isProcessing">
+                <span ng-hide="taahloading">Create</span>
+                <span ng-show="taahloading"><md-progress-circular md-mode="indeterminate"></md-progress-circular></span>
+            </button>
+            <span flex></span>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+

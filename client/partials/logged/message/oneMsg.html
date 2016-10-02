@@ -1,0 +1,106 @@
+<span class="wt-web">
+    <br/>
+    <div class="row">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                from <span ng-if="sender !== 'TeamWontah'" class="lead"><b><a href="/u/{{sender}}">{{sender}}</a></b></span>
+                <span ng-if="sender === 'TeamWontah'" class="lead"><b><a>{{sender}}</a></b></span><br>
+                <span class="text-muted">to <a href="/u/{{receiver}}">{{receiver}}</a></span>
+            </div>
+            <div class="col-md-6">
+                <span>{{senttime}}</span>
+                <button ng-click="deleteMessage()" tooltip="delete this entire message" tooltip-placement="bottom" class="btn-sm btn-danger">Delete</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h4 style="border-bottom: 1px solid #CCCCCC" class="h3">{{subject}}</h4>
+                <span ng-bind-html="message"></span>
+            </div>
+        </div>
+        <hr/>
+        <div class="wt-animate-this col-md-12" ng-repeat="r in replies">
+            <div class="col-md-12 submitby">
+                reply from <span class="text-muted"><a href="/u/{{r.sender}}">{{r.sender}}</a></span>
+                 <span>{{r.senttime}}</span> <span tooltip="delete this reply" tooltip-placement="bottom"  ng-if="r.sender === luname"> | <a ng-click="deleteReply(r.id,$index)">Delete</a></span>
+            </div>
+            <div class="col-md-12">
+                <span ng-bind-html="r.message"></span>
+                <hr/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" ng-if="sender !== 'TeamWontah'">
+        <form class="mainReplyForm" novalidate="true" role="form" name="ReplyForm" ng-submit="ReplyMsg(text);">
+            <div ng-class="{error: ReplyForm.reply.$invalid}" class="form-group">
+                <textarea id="replytext" class="form-control" name="reply" ng-model="text" placeholder="reply" required="" ></textarea>
+            </div>
+            <button id="replyBtn" type="submit" class="btn btn-primary" ng-disabled="ReplyForm.$invalid">
+                <span ng-show="rloading"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                <span ng-hide="rloading">Reply</span>
+            </button>
+        </form>
+    </div>
+</div>
+</span>
+<span class="wt-mobile">
+    <md-content>
+        <md-list>
+            <md-list-item class="md-3-line">
+                <div class="md-list-item-text">
+                    <p>
+                        <span>
+                          from <span ng-if="sender !== 'TeamWontah'" class="lead"><a href="/u/{{sender}}">{{sender}}</a></span>
+                        <span ng-if="sender === 'TeamWontah'" class="lead"><a>{{sender}}</a></span>
+                        <span class="text-muted"> to <a href="/u/{{receiver}}">{{receiver}}</a></span>
+                        </span>
+                        <span flex></span>
+                        <span>
+                            <md-button ng-click="deleteMessage()" class="md-icon-button">
+                            <md-tooltip md-direction="top" md-visible="tooltipVisible">delete this entire message</md-tooltip>
+                            <span class="ion ion-android-delete"></span>
+                            </md-button>
+                        </span>
+                    </p>
+                    <small><em>{{senttime}}</em></small>
+                    <h3>{{subject}}</h3>
+                </div>
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+        <md-content>
+            <span ng-bind-html="message"></span>
+        </md-content>
+        <md-divider></md-divider>
+        <md-content>
+            <md-list>
+                <md-list-item id="{{m.id}}" class="md-2-line" ng-repeat="r in replies">
+                    <div class="md-list-item-text">
+                        <small>
+                            reply from <a href="/u/{{r.sender}}">{{r.sender}}</a>
+                            <span>{{r.senttime}}</span>
+                            <md-button ng-if="r.sender === luname" ng-click="deleteReply(r.id,$index)" class="md-icon-button">
+                                <md-tooltip md-visible="tooltipVisible">delete this reply</md-tooltip>
+                                <span class="ion ion-android-delete"></span>
+                            </md-button>
+                        </small>
+                        <p><span ng-bind-html="r.message"></span></p>
+                    </div>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-content>
+        <md-content ng-if="sender !== 'TeamWontah'">
+            <form class="mainReplyForm" novalidate="true" role="form" name="ReplyForm" ng-submit="ReplyMsg(text);">
+                <md-input-container style="width:100%" ng-class="{error: ReplyForm.reply.$invalid}">
+                    <label for="replytext">Reply</label>
+                    <textarea id="replytext" name="reply" ng-model="text" required="" ></textarea>
+                </md-input-container>
+                <md-button id="replyBtn" type="submit" class="md-button md-raised mob-btn-block mob-primary" ng-disabled="ReplyForm.$invalid">
+                    <span ng-show="rloading"><md-progress-circular md-mode="indeterminate"></md-progress-circular></span>
+                    <span ng-hide="rloading">Reply</span>
+                </md-button>
+            </form>
+        </md-content>
+</span>

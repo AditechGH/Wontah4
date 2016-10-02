@@ -1,0 +1,48 @@
+<div class="col-sm-12">
+    <h2 class="h2 modal-title wt-center-content">Edit taah</h2>
+    <hr/>
+    <div class="col-sm-8">
+        <div class="wt-post-alert">
+            Edit this taah to suite your desire.
+        </div>
+        <form name="etaahForm" class="taahForm animate-form" id="etaahFrom" role="form" novalidate>
+            <div ng-class="{error: etaahForm.taahtitle.$invalid}" class="form-group">
+                <label for="etaahtitle">Title</label><br/>
+                <div ng-show="etaahForm.taahtitle.$focused" class="suggest">This does not have to be the same as the name, but it can be. Spacing does matter,The title can be edited later if you want to tweak it or change it.</div>
+                <input id='etaahtitle' name="taahtitle" ng-model="title" placeholder="Title" class="form-control" cu-focus/>
+            </div>
+            <div ng-class="{error: etaahForm.taahdesc.$invalid}" class="form-group">
+                <label for="etaahdesc">Description</label><br/>
+                <div ng-show="etaahForm.taahdesc.$focused" class="suggest">Describe what your taah is all about. It’s viewable to the public and informs people about your taah</div>
+                <textarea id='etaahdesc' name="taahdesc"  ng-model="description" placeholder="Description" class="form-control" cu-focus></textarea>
+            </div>
+            <div ng-class="{error: etaahForm.taahtype.$invalid}" class="form-group">
+                <label for="etaahtype">Type</label><br/><br/>
+                <div ng-show="etaahForm.taahtype.$focused" class="suggest">Public: open to all, Restricted:you decide who can post, private:By invitation only</div>
+                <select id='etaahtype' name="taahtype" ng-model="type"  class="form-control" cu-focus>
+                    <option value="pu">Public</option>
+                    <option value="re">Restricted</option>
+                    <option value="pr">Private</option>
+                </select>
+            </div>
+            <div ng-class="{error: etaahForm.coption.$invalid}" class="form-group">
+                <label>Content Option:</label><br/>
+                <div class="wt-pull">
+                    <input type="radio" id="ecoption1" class="form-inline" name="ecoption" ng-model="coption" ng-required="!ecoption" value="a"/>
+                    <label  for="ecoption1" ><span></span>Any type</label>
+                    <input type="radio" id="ecoption2" class="form-inline" name="ecoption" ng-model="coption" ng-required="!ecoption" value="l"/>
+                    <label  for="ecoption2" ><span></span>Links only</label>
+                    <input type="radio" id="ecoption3" class="form-inline" name="ecoption" ng-model="coption" ng-required="!ecoption" value="t"/>
+                    <label  for="ecoption3" ><span></span>Text only</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" ng-click="EditTaah(title,description,type,coption)" ng-disabled="isProcessing" name="etaahBtn" id="etaahBtn">
+                    <span ng-hide="taahloading">Update</span>
+                    <span><i ng-show="taahloading" class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                </button>
+                <span id='status'></span>
+            </div>
+        </form>
+    </div>
+</div>

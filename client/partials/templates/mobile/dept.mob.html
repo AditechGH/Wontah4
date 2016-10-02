@@ -1,0 +1,43 @@
+<md-dialog aria-label="Department"  ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools mob-primary">
+                <h4>Which department(s) do you belong to?</h4>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="ion ion-close" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div layout="row" layout-wrap>
+                    <div flex="100" layout="column">
+                        <div>
+                            <fieldset class="demo-fieldset" >
+                                <legend class="demo-legend">Choose one or more of the departments below</legend>
+                                <span class="text-center" ng-if="dloading">
+                                     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                </span>
+                                <div layout="row" layout-wrap flex>
+                                    <div class="demo-select-all-checkboxes" flex="100" ng-repeat="dept in depts">
+                                        <md-checkbox ng-checked="selection.indexOf(dept) > -1" ng-click="toggleSelection(dept)">
+                                            {{dept.name}}
+                                        </md-checkbox>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="hide()">
+                ok
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+

@@ -1,0 +1,110 @@
+<div ng-hide="isStudent" class="wt-center-content">
+    <p>
+        Are you a student of the University of Ghana?
+        <button ng-click="StudentofUg()" class="btn-sm btn-success">Yes</button>
+        <button ng-click="NotStudentofUg();" class="btn-sm btn-warning">No</button>
+    </p>
+    <div class="wt-center-content">
+        <button ng-click="NotStudent();" class="btn-sm btn-danger">I'm not a student</button>
+    </div>
+</div>
+<div>
+    <div ng-show="isStudent && !isStudentOfUg" class="animate-show wt-center-content">
+        <div class="col-md-12 wt-not-ug-student">
+            <div class="form-group col-md-6 col-md-offset-3">
+                <form name="pForm">
+                    <div class="form-group" ng-class="{error: pForm.firstname.$invalid}">
+                        <div ng-show="pForm.schoolname.$focused" class="suggest suggest-mobile">Enter the name of your noble institution</div>
+                        <input cu-focus class="form-control" ng-model="schoolname" name="schoolname" placeholder="Specify institution (optional)"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <button ng-click="StudentofUg()" class="btn-sm btn-success">I'm  a student of UG.</button>
+            <button ng-click="NotStudent();" class="btn-sm btn-danger">I'm not a student</button>
+            <div>
+                <button ng-click="SubmitNotUgStudent(schoolname)" class="btn btn-primary">proceed</button>
+            </div>
+        </div>
+    </div>
+    <div ng-show="isStudent && isStudentOfUg" class="animate-show">
+        <div class="wt-chose-dept col-sm-6">
+            <h2 class="h2">Which department(s) do you belong to?</h2>
+            <p class="lead text-muted">
+                Choose one or more of the departments below
+            </p>
+            <div class="row">
+                <div class='wt-dpt-container'>
+                    <div ng-repeat="dept in depts" class="wt-container">
+                        <p class="lead wt-check-list">
+                            <label class="myCheckbox">
+                                <input id="{{dept}}" type="checkbox" value="{{dept.name}}"
+                                       ng-checked="selection.indexOf(dept) > -1"
+                                       ng-click="toggleSelection(dept)"/>
+                                <span></span>
+                            </label>
+                            <label for="{{dept}}" class="real">{{dept.name}}</label>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wt-chose-hall-mobile col-sm-5 wt-center-content">
+            <div class="row">
+                <h3 class="h3 wt-hall-h3-mobile">
+                    Choose your level and hall of residence
+                </h3>
+                <form class="container" name="schForm">
+                    <div class="row form-group">
+                        <label for="hall" class="text-muted">Residential Status (hall)</label>
+                        <select name="hall" id="hall" ng-model="sub.hall" ng-options="h.name for h in halls"></select>
+                    </div>
+                    <div class="row wt-row">
+                        <label class="text-muted">Select Level</label><br/>
+                        <div class="wt-cprofile-container">
+                            <div class="wt-level-grid">
+                                <input type="radio" id="100" class="form-inline" name="level" ng-model="sub.level"  value="100"/>
+                                <label  for="100" ><span></span>100</label>
+                            </div>
+                            <div class="wt-level-grid">
+                                <input type="radio" id="200" class="form-inline" name="level" ng-model="sub.level"  value="200"/>
+                                <label  for="200" ><span></span>200</label>
+                            </div>
+                            <div class="wt-level-grid">
+                                <input type="radio" id="300" class="form-inline" name="level" ng-model="sub.level"  value="300"/>
+                                <label  for="300" ><span></span>300</label>
+                            </div>
+                            <div class="wt-level-grid">
+                                <input type="radio" id="400" class="form-inline" name="level" ng-model="sub.level"  value="400"/>
+                                <label  for="400" ><span></span>400</label>
+                            </div>
+                            <div class="wt-level-grid">
+                                <input type="radio" id="500" class="form-inline" name="level" ng-model="sub.level"  value="500"/>
+                                <label  for="500" ><span></span>500</label>
+                            </div>
+                            <div class="wt-level-grid">
+                                <input type="radio" id="600" class="form-inline" name="level" ng-model="sub.level"  value="600"/>
+                                <label  for="600" ><span></span>600</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group wt-center-content">
+                        <button ng-click="NotStudentofUg();" class="btn-sm btn-success">I'm a student of a different institution</button>
+                        <button ng-click="NotStudent();" class="btn-sm btn-danger">I'm not a student</button>
+                        <div>
+                            <button type="submit" ng-click="SubmitUgStudent(sub,'desktop');" class="btn-primary btn">Next</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.wt-dpt-container').enscroll({
+        verticalTrackClass: 'track',
+        verticalHandleClass: 'handle',
+        minScrollbarLength: 28
+    });
+</script>

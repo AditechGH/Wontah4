@@ -1,0 +1,70 @@
+<span class="wt-web">
+    <div class="row">
+        <div class="col-md-12">
+            <table ng-if="newmsg === '1'" class="F" cellspacing="0" width="100%">
+                <tbody>
+                <div class="text-muted wt-center-content">
+                    <h2 class="h2">Sent messages</h2>
+                </div>
+                <hr/>
+                <tr ng-repeat="m in msg" id="{{m.id}}" class="yO" tabindex="-1" ng-click="MsgBody(m.id,m.sender)">
+                    <td class="PF xY"></td>
+
+                    <td class="yX xY">
+                        <span ng-if="m.hasreplies">
+                            <span ng-if="m.sender === luname">
+                                me , <span>{{m.receiver}}</span>
+                            </span>
+                            <span ng-if="m.sender !== luname">
+                                <span>{{m.sender}}</span> , me
+                            </span>
+                            <span ng-if="m.numReplies > 0">({{m.numReplies + 1}})</span>
+                        </span>
+                        <span ng-if="!m.hasreplies">to {{m.receiver}}</span>
+                    </td>
+                    <td class="xY"></td>
+                    <td class="xY a4w" tabindex="-1">
+                        {{m.subject | cut:true:40:' ...'}}
+                    </td>
+                    <td class="yF xY">
+                    </td>
+                    <td class="xW xY">
+                        {{m.senttime}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="wt-center-content">
+                <span ng-if="newmsg === '0'" class="text-info">No sent messages</span>
+            </div>
+        </div>
+    </div>
+</span>
+<span class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Sent</span>
+    </div>
+    <md-content>
+        <md-list>
+            <md-list-item ng-repeat="m in msg" id="{{m.id}}" class="md-3-line" ng-click="MsgBody(m.id,m.sender)">
+                <div class="md-list-item-text">
+                    <h4>
+                        <span ng-if="m.hasreplies">
+                            <span ng-if="m.sender === luname">
+                                me , <span>{{m.receiver}}</span>
+                            </span>
+                            <span ng-if="m.sender !== luname">
+                                <span>{{m.sender}}</span> , me
+                            </span>
+                            <span ng-if="m.numReplies > 0">({{m.numReplies + 1}})</span>
+                        </span>
+                        <span ng-if="!m.hasreplies">to {{m.receiver}}</span>
+                    </h4>
+                    <p>{{m.subject | cut:true:40:' ...'}}</p>
+                    <small class="">{{m.senttime}}</small>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</span>

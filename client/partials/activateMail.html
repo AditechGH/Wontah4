@@ -1,0 +1,103 @@
+<span class="wt-web">
+    <br/><br/><br/>
+    <div id="resend-activation-email-page" class="main">
+        <section class="content">
+            <div class="resend-activation-email-content">
+                <div class="row" id="resend-activation-email-form">
+                    <div class="col-sm-12">
+                        <div class="form" ng-switch on='click'>
+                            <div id="form-content" class="animate-switch" ng-switch-default>
+                                <h2>Resend your activation email</h2>
+                                <hr />
+                                <p>
+                                    Use the form below to resend the email to activate your Wontah account,
+                                    if you didn't receive it within 5 minutes after signing up for Wontah.
+                                </p>
+                                <p class="tip">
+                                    Tip: check your spam folder
+                                </p>
+                                <form role="form" name='activationForm' id="activationForm" class="form activationForm" ng-submit="ResendActivation(activation)">
+                                    <div class="{error: activationForm.email.$invalid}">
+                                        <input type="text" ng-model="activation.email" name="email" id="email" placeholder="Email address" required valid-credential cu-focus remove-unwanted popover="Email Address" popover-trigger="mouseenter"/>
+                                        <span ng-show="activationForm.email.$dirty && activationForm.email.$invalid && !activationForm.email.$focused" class="help-inline">Enter an email address</span>
+                                        <span ng-show="activationForm.email.$error.validCredential && !activationForm.email.$pristine && !activationForm.email.$focused" class="help-inline">You did not signup with '{{activation.email}}'</span>
+                                    </div>
+                                    <button type="submit" ng-disabled="activationForm.$invalid || isProcessing" id="resendActivationEmailBtn">
+                                        <span ng-show="loading"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                                        <span ng-hide="loading">Resend my activation email</span>
+                                    </button>
+                                </form>
+                            </div>
+                            <div id="almostDone" class="animate-switch" ng-switch-when="message">
+                                <div class="resend-message">
+                                    <p>We've resent the activation email to:</p>
+                                    <p class="activationEmailAddress"></p>
+                                    <p>Click the link in the email to activate  your account, and be part of the family!.</p>
+                                </div>
+                                <hr />
+                                <div class="resend">
+                                    <p>Still didn't receive the email?</p>
+                                    <p><a ui-sref="resend_activation" ng-click="Goback()" class="resendActivationLnk">Send the activation email again</a></p>
+                                </div>
+                                <p class="tip">
+                                    Tip: check your spam folder
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</span>
+<span class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Resend email</span>
+    </div>
+    <div class="scrollable">
+        <div class="scrollable-content section" ng-switch on="click">
+            <form role="form" novalidate id="MAForm" name='MAForm' class="farm animate-switch" ng-submit="ResendActivation(activation)" ng-switch-default>
+                <fieldset>
+                    <legend class="wt-center-content">Resend your Activation email</legend>
+                    <p class="wt-center-content">
+                        Use the form below to resend the email to activate your Wontah account,
+                        if you didn't receive it within 5 minutes after signing up for Wontah.
+                    </p>
+                    <p class="tip wt-center-content">
+                        Tip: check your spam folder
+                    </p>
+                    <md-input-container class="md-block">
+                        <label>Email Address</label>
+                        <input type="text" ng-model="activation.email" name="email" id="email" valid-credential cu-focus remove-unwanted/>
+                        <div ng-messages="MobileLoginForm.email.$error" role="alert">
+                            <small ng-show="MAForm.email.$error.validCredential && !MAForm.email.$pristine && !MAForm.email.$focused" class="wt-mob-error-msg">You did not signup with '{{activation.email}}'</small>
+                        </div>
+                    </md-input-container>
+                </fieldset>
+                <md-button class="md-button md-raised mob-primary mob-btn-block" type="submit" ng-disabled="activationForm.$invalid || isProcessing" id="resendActivationEmailBtn">
+                    <span ng-show="loading"><md-progress-circular md-mode="indeterminate"></md-progress-circular></span>
+                    <span ng-hide="loading">Resend my activation email</span>
+                </md-button>
+                <p class="wt-mob-login-forgot-activation wt-center-content">
+                    <a ui-sref="forgetpass">Forgot password?</a>
+                </p>
+            </form>
+            <div id="almostDone" class="animate-switch" ng-switch-when="message">
+                <div class="resend-message wt-center-content">
+                    <p>We've resent the activation email to your account</p>
+                    <p class="activationEmailAddress"></p>
+                    <p>Click the link in the email to activate  your account, and be part of the family!.</p>
+                </div>
+                <hr />
+                <div class="resend wt-center-content">
+                    <p>Still didn't receive the email?</p>
+                    <p><a ui-sref="resend_activation" ng-click="Goback()" class="resendActivationLnk">Send the activation email again</a></p>
+                </div>
+                <p class="tip wt-center-content">
+                    Tip: check your spam folder
+                </p>
+        </div>
+    </div>
+    </div>
+</span>

@@ -1,0 +1,55 @@
+{
+  "name": "wontah",
+  "version": "0.0.1",
+  "description": "the gateway to awesome interneting",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Aditech",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "latest",
+    "binpath": "^0.2.2",
+    "body-parser": "^1.14.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^1.1.0",
+    "connect-multiparty": "^2.0.0",
+    "dateformat": "^1.0.12",
+    "decay": "^1.0.9",
+    "easyimage": "^2.1.0",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "express-jwt": "^3.3.0",
+    "express-session": "latest",
+    "fs-extra": "^0.26.4",
+    "gm": "^1.22.0",
+    "ipware": "0.0.7",
+    "jsonwebtoken": "^5.5.4",
+    "method-override": "^2.3.5",
+    "mkdirp": "0.5.1",
+    "mongoose": "latest",
+    "morgan": "^1.6.1",
+    "multer": "^1.1.0",
+    "multiparty": "4.1.2",
+    "node-metainspector": "^1.2.0",
+    "nodemailer": "^0.7.1",
+    "oembed-auto": "0.0.3",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "php-express": "0.0.2",
+    "rimraf": "2.5.0",
+    "time-ago": "^0.1.0",
+    "underscore": "^1.8.3"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-ng-annotate": "^2.0.2"
+  }
+}

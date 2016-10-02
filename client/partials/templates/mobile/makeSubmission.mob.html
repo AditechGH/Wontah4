@@ -1,0 +1,135 @@
+<md-dialog ng-controller="makePostController" aria-label="Make a new Submission"  ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools mob-primary">
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>
+                </md-button>
+                <span flex></span>
+                <h4>Make a new Submission</h4>
+                <span flex></span>
+                <md-button class="md-icon-button">
+                    <!--<md-icon class="ion ion-android-more-vertical" aria-label="Close dialog"></md-icon>-->
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div layout="row" layout-wrap>
+                    <div flex="100" layout="column">
+                        <md-tabs md-dynamic-height md-border-bottom>
+                            <md-tab label="Text">
+                                <md-content>
+                                    <div class="wt-post-alert">
+                                        You are submitting a text-based post. Speak your mind. A title is required,
+                                        but expanding further in the text field is not.
+                                    </div>
+                                    <form name="postForm" class="makepost" role="form"  novalidate>
+                                        <md-input-container class="md-block">
+                                            <label>Title</label>
+                                            <textarea cu-focus id="ptitle" name="title"  ng-model="makepost.title" required="required"></textarea>
+                                            <div ng-messages="" role="alert">
+                                                <div ng-show="postForm.title.$focused" class="wt-mob-error-msg wt-mob-suc-msg">A good title attracts more readers</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-block">
+                                            <label>Text (optional)</label>
+                                            <textarea cu-focus id="textinput" name="textinput" ng-model="makepost.textinput"></textarea>
+                                            <div ng-messages="" role="alert">
+                                                <div ng-show="postForm.textinput.$focused" class="wt-mob-error-msg wt-mob-suc-msg">Add content</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-block">
+                                            <label>Choose a taah</label>
+                                            <input cu-focus id="tahinput" name="tahinput" ng-model="makelink.tahinput"/>
+                                            <div ng-messages="postForm.textinput.$error" role="alert">
+                                                <div ng-show="postForm.tahinput.$focused" class="wt-mob-error-msg wt-mob-suc-msg">Make sure your submission is placed in the correct taah</div>
+                                            </div>
+                                            <div>
+                                                <span>Your subscribed taahs</span><br/>
+                                                 <span ng-if="taahs.length > 0">
+                                                    <span ng-repeat="s in taahs">
+                                                        <a ng-click=populateTah(s.name) class="wt-post-tah">{{s.name}}</a>
+                                                    </span>
+                                                 </span>
+                                                 <span ng-if="taahs.length === 0">
+                                                     <span>You've no subscriptions yet</span>
+                                                 </span>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container>
+                                            <md-checkbox ng-model="makepost.anonymous" name="anonymous1" aria-label="Anonymous">
+                                                Anonymous
+                                            </md-checkbox>
+                                        </md-input-container>
+                                        <md-button ng-click="SubmitPost(makepost,'main')" class="md-button md-raised mob-primary mob-btn-block" id="newProductBtn1" ng-disabled="makelink.$invalid || isProcessing">
+                                            <span ng-show="ploading"><md-progress-circular md-mode="indeterminate"></md-progress-circular></span>
+                                            <span ng-hide="ploading">Drop it</span>
+                                        </md-button>
+                                    </form>
+                                </md-content>
+                            </md-tab>
+                            <md-tab label="Link">
+                                <md-content>
+                                    <div class="wt-post-alert">
+                                        You are submitting a link. The key to a successful submission is
+                                        interesting content and a descriptive title.
+                                    </div>
+                                    <form name="linkForm" class="makelink" role="form"  novalidate>
+                                        <md-input-container class="md-block">
+                                            <label>Title</label>
+                                            <textarea cu-focus id="ltitle" name="title"  ng-model="makelink.title" required="required" ></textarea>
+                                            <div ng-messages="" role="alert">
+                                                <div ng-show="postForm.title.$focused" class="wt-mob-error-msg wt-mob-suc-msg">A good title attracts more readers</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-block">
+                                            <label>Link (required)</label>
+                                            <input cu-focus type="url" id='linkinput' name="linkinput" ng-model="makelink.linkinput" placeholder="starts with http:// or https://" required="required"/>
+                                            <div ng-messages="" role="alert">
+                                                <div ng-show="postForm.title.$focused" class="wt-mob-error-msg wt-mob-suc-msg">Copy and paste links</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-block">
+                                            <label>Choose a taah</label>
+                                            <input cu-focus id="linktah" name="linktah" ng-model="makelink.linktah" />
+                                            <div ng-messages="postForm.textinput.$error" role="alert">
+                                                <div ng-show="postForm.tahinput.$focused" class="wt-mob-error-msg wt-mob-suc-msg">Make sure your submission is placed in the correct taah</div>
+                                            </div>
+                                            <div>
+                                                <span>Your subscribed taahs</span><br/>
+                                                 <span ng-if="taahs.length > 0">
+                                                    <span ng-repeat="s in taahs">
+                                                        <a ng-click=populateLTah(s.name) class="wt-post-tah">{{s.name}}</a>
+                                                    </span>
+                                                 </span>
+                                                 <span ng-if="taahs.length === 0">
+                                                     <span>You've no subscriptions yet</span>
+                                                 </span>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container>
+                                            <md-checkbox ng-model="makelink.anonymous" name="anonymous2" aria-label="Anonymous">
+                                                Anonymous
+                                            </md-checkbox>
+                                        </md-input-container>
+                                        <div>
+                                            <md-button ng-click="SubmitLink(makelink,'main')" class="md-button md-raised mob-btn-block mob-primary" id="newProductBtn" ng-disabled="makelink.$invalid || isProcessing">
+                                                <span ng-show="lloading"><md-progress-circular md-mode="intermediate"></md-progress-circular></span>
+                                                <span ng-hide="lloading">Drop it</span>
+                                            </md-button>
+                                        </div>
+                                    </form>
+                                </md-content>
+                            </md-tab>
+                        </md-tabs>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+

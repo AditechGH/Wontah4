@@ -1,0 +1,73 @@
+<md-content class="wt-feeds">
+    <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="Hot" ng-click="getAllHott()">
+            <span  ng-show="load" class="text-muted">loading...</span>
+            <md-content ng-if="hot.length > 0 && !isError" ng-repeat="up in hot" ng-hide="up.anonymous && (luname !== username)" id="hpost_{{up.id}}" ng-include="'partials/templates/mobile/getallsub.mob.html'"></md-content>
+            <span ng-if="hot.length > 0 && !isError" ng-click="loadmore('hot');" class="loadmore">
+                <span ng-show="mload" class="ion ion-load-c wt-spin fa fa-spin"></span>
+                <span ng-hide="mload">load more</span>
+            </span>
+            <md-content ng-hide="load" ng-if="hot.length === 0 || isError">
+                <li class="text-muted">There seems to be no content here</li>
+            </md-content>
+        </md-tab>
+        <md-tab label="New" ng-click="getAllNewt()">
+            <md-content>
+                <span  ng-show="load" class="text-muted">loading...</span>
+                <md-content ng-if="new.length > 0 && !isError" ng-repeat="up in new" ng-hide="up.anonymous && (luname !== username)" id="npost_{{up.id}}" ng-include="'partials/templates/mobile/getallsub.mob.html'"></md-content>
+                <span ng-if="new.length > 0 && !isError" ng-click="loadmore('new');" class="loadmore">
+                    <span ng-show="mload" class="ion ion-load-c wt-spin fa fa-spin"></span>
+                    <span ng-hide="mload">load more</span>
+                </span>
+                <md-content ng-hide="load" ng-if="new.length === 0 || isError">
+                    <li class="text-muted">There seems to be no content here</li>
+                </md-content>
+            </md-content>
+        </md-tab>
+        <md-tab label="Controversial" ng-click="getAllCont('24h')">
+            <md-content>
+                <span  ng-show="load" class="text-muted">loading...</span>
+                <md-input-container class="md-block">
+                    <select name="postedtime" class="wt-sort-select" id="postedtime"  ng-model="postedtime" ng-options="p.name for p in postedtimes" ng-change="getAllCont(postedtime)">
+                    </select>
+                </md-input-container>
+                <md-content ng-if="con.length > 0 && !isError" ng-repeat="up in con" ng-hide="up.anonymous && (luname !== username)" id="cpost_{{up.id}}" ng-include="'partials/templates/mobile/getallsub.mob.html'"></md-content>
+                <span ng-if="con.length > 0 && !isError" ng-click="loadmore('con');" class="loadmore">
+                    <span ng-show="mload" class="ion ion-load-c wt-spin fa fa-spin"></span>
+                    <span ng-hide="mload">load more</span>
+                </span>
+                <md-content ng-hide="load" ng-if="con.length === 0 || isError">
+                    <li class="text-muted">There seems to be no content here</li>
+                </md-content>
+            </md-content>
+        </md-tab>
+        <md-tab label="Top" ng-click="getAllTopt('24h')">
+            <md-content>
+                <span  ng-show="load" class="text-muted">loading...</span>
+                <md-input-container class="md-block">
+                    <select name="postedtime2" class="wt-sort-select" id="postedtime2"  ng-model="postedtime2" ng-options="p.name for p in postedtimes" ng-change="getAllTopt(postedtime2)">
+                    </select>
+                </md-input-container>
+                <md-content ng-if="top.length > 0 && !isError" ng-repeat="up in top" ng-hide="up.anonymous && (luname !== username)" id=tpost_{{up.id}}" ng-include="'partials/templates/mobile/getallsub.mob.html'"></md-content>
+                <span ng-if="top.length > 0 && !isError" ng-click="loadmore('top');" class="loadmore">
+                    <span ng-show="mload" class="ion ion-load-c wt-spin fa fa-spin"></span>
+                    <span ng-hide="mload">load more</span>
+                </span>
+                <md-content ng-hide="load" ng-if="top.length === 0 || isError">
+                    <li class="text-muted">There seems to be no content here</li>
+                </md-content>
+            </md-content>
+        </md-tab>
+        <md-tab ng-if="(luname === username) && profile" label="saved posts" ng-click="getAllsavedt()">
+            <span  ng-show="load" class="text-muted">loading...</span>
+            <md-content ng-if="save.length > 0 && !isError" ng-repeat="up in save" ng-hide="up.anonymous && (luname !== username)" id=spost_{{up.id}}" ng-include="'partials/templates/mobile/getallsub.mob.html'"></md-content>
+                <span ng-if="save.length > 0 && !isError" ng-click="loadmore('save');" class="loadmore">
+                    <span ng-show="mload" class="ion ion-load-c wt-spin fa fa-spin"></span>
+                    <span ng-hide="mload">load more</span>
+                </span>
+            <md-content ng-hide="load" ng-if="save.length === 0 || isError">
+                <li class="text-muted">There seems to be no content here</li>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</md-content>

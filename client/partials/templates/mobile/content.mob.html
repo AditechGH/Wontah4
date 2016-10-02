@@ -1,0 +1,62 @@
+<md-dialog aria-label="{{content.title}}"  ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools mob-primary">
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>
+                </md-button>
+                <span flex></span>
+                <h4>{{content.title}}</h4>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <!--<md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>-->
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div layout="row" layout-wrap>
+                    <div flex="100" layout="column">
+                        <small class="mob-header" style="width:100%;word-break:keep-all;">
+                            <a href="/t/{{content.taah}}">{{content.taah}}</a>
+                            <a>. {{content.postdate}}</a>
+                            <span ng-if="!content.anonymous"><a href="/u/{{content.author}}">. {{content.author}}</a></span>
+                        </small>
+                        <div class="mob-sub-header">
+                            <span ng-if="content.ptype==='text'">
+                                <p>
+                                    {{content.data}}
+                                </p>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <a ng-click="cancel();" ng-if="content.comments < 1" href="/comments/{{content.id}}">0 <i class="ion ion-ios-chatbubble"></i></a>
+            <a ng-click="cancel();" ng-if="content.comments === 1" href="/comments/{{content.id}}">{{content.comments}} <i class="ion ion-ios-chatbubble"></i></a>
+            <a ng-click="cancel();" ng-if="content.comments > 1" href="/comments/{{content.id}}">{{content.comments}} <i class="ion ion-ios-chatbubble"></i></a>
+            <md-menu ng-show="isLoggedIn()" md-position-mode="target" >
+                <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                    <i class="ion ion-ios-more"></i>
+                </md-button>
+                <md-menu-content width="2" >
+                    <md-menu-item>
+                        <md-button ng-if="!content.saved" ng-click="SavePost1(content.id,content.what)"><div layout="row" flex><p flex>save</p></div></md-button>
+                        <md-button ng-if="content.saved" ng-click="unSavePost1(content.id,content.what)"><div layout="row" flex><p flex>unsave</p></div></md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+            <span flex></span>
+            <small class="mob-vote">
+                <span ng-class="{'voteddown' : content.userVoted && !content.voteStatus , 'votedup': content.userVoted && content.voteStatus}" class="mob-number" title="" id="">{{content.up - content.down}}</span>
+                <a ng-class="{'votedup' : content.userVoted && content.voteStatus}" ng-click="upVotePost1(content.id, $index,content.what)" class="md-icon-button mob-number">
+                    <i class="ion ion-arrow-up-a"></i>
+                </a>
+                <a ng-class="{'voteddown' : content.userVoted && !content.voteStatus}" ng-click="downVotePost1(content.id, $index,content.what)" class="md-icon-button mob-number">
+                    <i class="ion ion-arrow-down-a"></i>
+                </a>
+            </small>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,39 @@
+<div class="col-sm-8">
+    <h2 class="h2">Suggestions just for you</h2>
+        <button ui-sref="comprofile.avatar" class="btn-sm btn-primary">Next</button>
+    <br/>
+    <div class="row" id="mainBody">
+        <div class="col-sm-12 wt-row">
+            <div class="col-sm-9">
+                <p class="text-muted lead">
+                    Suggested friends
+                </p>
+            </div>
+            <div class="col-sm-3">
+                <button type="button" class="btn-sm btn-primary" ng-click="requestAll()">Request All <i class="fa fa-user-plus"></i></button>
+            </div>
+        </div>
+        <hr/>
+        <div class="col-sm-12 wt-row" ng-repeat-start="sugFrnd in sugFrnds">
+            <div class="col-sm-9">
+                <div class="media">
+                    <a class="media-left"><img class="img-circle" src="/user/{{sugFrnd.username}}/{{sugFrnd.avatar}}" width="60px" height="60px" alt="{{sugFrnd.username}}"/></a>
+                    <div class="media-body">
+                        <div class="media-heading"><b>{{sugFrnd.firstname}} {{sugFrnd.lastname}}</b> ({{sugFrnd.username}})</div>
+                            <span class="text-muted">
+                                {{sugFrnd.bio}}
+                            </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <button type="button" id="{{sugFrnd.username}}_btn" class="btn-sm btn-primary pull-left" ng-click="addFriend(sugFrnd.username);">
+                    <span id="{{sugFrnd.username}}_btns">Request <i class="fa fa-user-plus"></i></span>
+                </button>
+            </div>
+        </div>
+        <hr ng-repeat-end/>
+    </div>
+</div>
+<div class="col-sm-4">
+</div>

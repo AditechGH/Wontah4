@@ -1,0 +1,17 @@
+<span class="wt-web">
+    <div class="row" ng-controller="AppCtrl" >
+        <div class="col-md-12" ng-include="'partials/logged/settings/avatar/avatar.desktop.html'" ng-controller="AdvancedMarkupCtrl"></div>
+    </div>
+</span>
+<span class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Update profile picture</span>
+    </div>
+    <div ng-controller="AppCtrl">
+        <div ng-controller="AdvancedMarkupCtrl" ng-include="'partials/logged/settings/avatar/avatar.mobile.html'" ></div>
+    </div>
+</span>
+<style>
+    .ng-jcrop-image-wrapper { display: inline-block; }
+    .ng-jcrop-thumbnail-wrapper { display: inline-block; }
+</style>

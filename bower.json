@@ -1,0 +1,25 @@
+{
+  "name": "wontah",
+  "version": "0.0.1",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "description": "the gateway to awesome interneting",
+  "main": "server.js",
+  "authors": [
+    "Aditech"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "dependencies": {
+    "angular": "",
+    "bootstrap": "",
+    "angular-material": "",
+    "animate.css": ""
+  }
+}

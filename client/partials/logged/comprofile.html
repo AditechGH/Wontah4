@@ -1,0 +1,152 @@
+<span ng-if="desktop" class="wt-web">
+    <div ng-switch on="click">
+        <div class="animate-switch" ng-switch-default>
+            <div class="row">
+                <div class="container jumbotron">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <h2 class="h2">We're glad you're here, {{luname}}</h2>
+                            <p class="text-muted">
+                                Wontah is a constantly updating stream of the coolest,
+                                most important news, media, sports, TV, conversations and
+                                more... all curated into a list of what matters best in your world.
+                            </p>
+                            <p class="text-muted">
+                                Fill out the rest of the steps and we'll help you set up.
+                            </p>
+                            <p>
+                                <a ng-click="clickme()" class="btn btn-primary"><i class="fa fa-chevron-right fa-3x">Let's do this!</i></a>
+                            </p>
+                        </div>
+                        <div class="col-sm-6 wt-get-welcome-imgs">
+                            <div class="row wt-row">
+                                <div class="col-sm-12">
+                                    <img src="/img/1.jpg" class="pull-right wt-flex-congrats">
+                                </div>
+                            </div>
+                            <div class="row wt-row">
+                                <div class="col-sm-12">
+                                    <img src="/img/2.jpg" class="pull-left wt-flex-congrats">
+                                </div>
+                            </div>
+                            <div class="row wt-row">
+                                <div class="col-sm-12">
+                                    <img src="/img/3.jpg" class="pull-right wt-flex-congrats">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="animate-switch" ng-switch-when="steps" id='comp' ng-show="isLoggedIn()">
+            <div class="row">
+                <div class="container">
+                    <div class="wt-cprofile-container">
+                        <div class="wt-cprofile-grid">
+                            <li class="wt-tab" ng-class="{'wt-tab-active': $state.includes('comprofile.pInfo')}"><a></a></li>
+                        </div>
+                        <div class="wt-cprofile-grid">
+                            <li class="wt-tab" ng-class="{'wt-tab-active': $state.includes('comprofile.schInfo')}"><a></a></li>
+                        </div>
+                        <div class="wt-cprofile-grid">
+                            <li class="wt-tab"  ng-class="{'wt-tab-active': $state.includes('comprofile.frndSug')}"><a></a></li>
+                        </div>
+                        <div class="wt-cprofile-grid">
+                            <li class="wt-tab" ng-class="{'wt-tab-active': $state.includes('comprofile.avatar')}"><a></a></li>
+                        </div>
+                        <div class="wt-cprofile-grid">
+                            <li class="wt-tab" ng-class="{'wt-tab-active': $state.includes('comprofile.invite')}"><a></a></li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container jumbotron">
+                <!--<a ng-click="Goback()" >other</a>-->
+                <div class="wt-animate-nested-view" ui-view></div>
+            </div>
+        </div>
+        <div class="animate-switch wt-middle wt-web" ng-switch-when="complete">
+            <h2>Congratulations {{ currentUser().username }}</h2>
+        <span ng-show="processing" class="animate-show">
+            <h4>Your Information is being processed</h4>
+            <i class="fa fa-4x ion ion-load-d  fa-spin wt-spin"></i>
+        </span>
+        <span ng-hide="processing" class="animate-show">
+            <h4 class="h4">Everything is now setup</h4>
+            <span><button class="btn btn-default" ng-click="completeHome()" ui-sref="homepage">Proceed</button></span>
+        </span>
+        </div>
+    </div>
+</span>
+<span ng-if="mobile" class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Wontah</span>
+    </div>
+    <div class="scrollable">
+        <div class="scrollable-content section" ng-switch on="click">
+            <div class="animate-switch" ng-switch-default="">
+                <div class="animDelay04 animated fadeInUp">
+                    <h5 class="h5">We're glad you're here, {{luname}}</h5>
+                    <hr/>
+                    <p class="text-muted">
+                        Wontah is a constantly updating stream of the coolest,
+                        most important news, media, sports, TV, conversations and
+                        more... all curated into a list of what matters best in your world.
+                    </p>
+                    <p class="text-muted">
+                        Fill out the rest of the steps and we'll help you set up.
+                    </p>
+                    <p>
+                        <a ng-click="clickme()" class="md-button md-raised mob-primary">Let's do this!</a>
+                    </p>
+                </div>
+
+                <div class="animDelay08 animated fadeInUp">
+                    <div>
+                        <carousel interval="myInterval">
+                            <slide ng-repeat="slide in slides" active="slide.active">
+                                <img ng-src="/img/{{slide.image}}.jpg">
+                            </slide>
+                        </carousel>
+                    </div>
+                </div>
+            </div>
+            <div class="animate-switch" ng-switch-when="steps" id='comp' ng-show="isLoggedIn()">
+                <div class="row">
+                    <div class="wt-cprofile-container">
+                        <div class="wt-cprofile-grid">
+                            <li class="wt-tab" ng-class="{'wt-tab-active': $state.includes('comprofile.pInfo')}"><a></a></li>
+                        </div>
+                        <div class="wt-cprofile-grid">
+                            <li class="wt-tab" ng-class="{'wt-tab-active': $state.includes('comprofile.schInfo')}"><a></a></li>
+                        </div>
+                        <div class="wt-cprofile-grid">
+                            <li class="wt-tab"  ng-class="{'wt-tab-active': $state.includes('comprofile.frndSug')}"><a></a></li>
+                        </div>
+                        <div class="wt-cprofile-grid">
+                            <li class="wt-tab" ng-class="{'wt-tab-active': $state.includes('comprofile.avatar')}"><a></a></li>
+                        </div>
+                        <div class="wt-cprofile-grid">
+                            <li class="wt-tab" ng-class="{'wt-tab-active': $state.includes('comprofile.invite')}"><a></a></li>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="wt-animate-nested-view" ui-view></div>
+                </div>
+            </div>
+            <div  class="animate-switch wt-middle wt-mobile" ng-switch-when="complete">
+                <h3>Congratulations {{ currentUser().username }}</h3>
+                <span ng-show="processing" class="animate-show">
+                    <h4>Your Information is being processed</h4>
+                    <i class="fa fa-4x ion ion-load-d  fa-spin wt-spin"></i>
+                </span>
+                <span ng-hide="processing" class="animate-show">
+                    <h4 class="h4">Everything is now setup</h4>
+                    <span><md-button class="md-button md-raised mob-primary" ng-click="completeHome()" ui-sref="homepage">Proceed</md-button></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</span>

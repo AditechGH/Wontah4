@@ -1,0 +1,221 @@
+<span class="wt-web">
+    <div class="row wt-row">
+        <div class="col-md-12">
+            <div class="col-md-5">
+                <span ng-include="'partials/templates/sub.tpl.html'"></span>
+            </div>
+            <div class="col-md-4">
+                <span ng-include="'partials/templates/middle.tpl.html'"></span>
+            </div>
+            <div class="col-md-3 well" ng-controller="makePostController">
+                <form>
+                    <input type="text" ng-model="selectedTaah" class="form-control" placeholder="What are you interested in?"  typeahead="t as t.name for t in alltaahs | filter:$viewValue | limitTo:10" typeahead-min-length='1' typeahead-on-select='onSelectPart($item, $model, $label)' typeahead-template-url="partials/templates/gettaah.tpl.html" />
+                </form>
+                <div class="btn btn-default wt-indi-sub" data-reveal-id="MakeTaahSubmission">
+                    Make a Submission on the {{name}} community
+                </div>
+                <div class="wt-top-margin">
+                    <div>
+                        <h3 class="h3">{{name}}</h3>
+                        <span class="text-muted" ng-if="type !== 'c'">Created on {{date}} </span>
+                    </div>
+                <span>
+                    <button class="btn-sm btn-success" ng-hide="member" ng-click="subscribeTaah()">subscribe</button>
+                    <button class="btn-sm btn-danger" ng-show="member" ng-click="unsubscribeTaah()">unsubscribe</button>
+                    <span ng-if="numOfUsers > 1" class="text-muted">{{numOfUsers}} readers</span>
+                    <span ng-if="numOfUsers === 1" class="text-muted">{{numOfUsers}} reader</span>
+                </span>
+                    <div ng-if="member && type !== 'pr' && !admin ">
+                        <button class="btn-sm btn-success" data-reveal-id="InviteFriends"  ng-click="InviteFriends()">Invite Friends</button>
+                    </div>
+                    <div ng-if="creator !== ''">
+                        <span ng-if="creator.length === '1'">Moderator: </span>
+                        <span ng-if="creator.length > '1'">Moderators: </span>
+                                <span ng-repeat="c in creator">
+                                    <span><a href="/u/{{c}}">{{c}}</a></span>
+                                    <span ng-if="!$last">,</span>
+                                </span>
+                    <span ng-if="admin">
+                        <button class="btn-sm btn-primary" data-reveal-id="EditTaah">Edit</button>
+                        <button class="btn-sm btn-success" data-reveal-id="InviteFriends"  ng-click="InviteFriends()">Invite Friends</button>
+                        <div ng-if="restricted && resInfo.size > 0">
+                            <a data-reveal-id="pendingApp"  ng-if="resInfo.size === 1">{{resInfo.size}} subscriber is pending approval</a>
+                            <a data-reveal-id="pendingApp" ng-if="resInfo.size > 1">{{resInfo.size}} subscribers are pending approval</a>
+                            <a ng-if="resInfo.size < 1">no subscriber is pending approval</a>
+                        </div>
+                    </span>
+                    </div>
+                    <div class="wt-top-margin">
+                        <div class="lead" ng-if="title !== ''">
+                            {{title}}
+                        </div>
+                        <div class="text-muted" ng-if="description !== ''">
+                            <b class="lead">About:</b><br/>
+                            {{description}}
+                        </div>
+                    </div>
+                    <div id="EditTaah" class="medium reveal-modal makepost" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+                        <div class="row" ng-include="'partials/templates/editTaah.tpl.html'"></div>
+                        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                    </div>
+                    <div id="MakeTaahSubmission" class="medium reveal-modal makepost" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+                        <div class="row" ng-include="'partials/templates/makeIndSub.tpl.html'"></div>
+                        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                    </div>
+                    <div ng-controller="InviteController" id="InviteFriends" class="small reveal-modal wt-small-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+                        <div ng-show="inviteLoading" class="text-muted">
+                            <span>Loading...</span>
+                        </div>
+                        <div style="background:#fff;padding:5px;">
+                            <p>
+                                <button class="btn-sm btn-success" ng-click="InviteNow();">Invite</button>
+                            <form>
+                                <input name="filterFriends" placeholder="search friends" type="text" class="form-control" ng-model="filterFriends" />
+                            </form>
+                            <!--<span class="lead wt-check-list pull-right">
+                                <label for="selectAll" class="real">Select All</label>
+                                <label class="myCheckbox">
+                                    <input id="selectAll" type="checkbox" value="selectAll"
+                                           ng-click="toggleSelectAll();"/>
+                                    <span></span>
+                                </label>
+                              </span>-->
+                            </p>
+                            <hr/>
+                        </div>
+                        <div ng-if='friends.length > 0'>
+                            <div class="media" ng-repeat-start ="f in friends.frnds| filter:filterFriends">
+                                <a class="media-left" href="/u/{{f.username}}"><img class="img-circle" height="40" width="40" ng-src='/user/{{f.username}}/{{f.avatar}}' alt='{{f.username}}' /></a>
+                                <div class="media-body">
+                                    <b class="media-heading"><a href="/u/{{f.username}}">{{f.username}}</a></b>
+                                    <span class="text-muted">{{f.firstname}} {{f.lastname}}</span>
+                                </div>
+                            <span class="media-right">
+                                <label class="myCheckbox">
+                                    <input id="{{f}}" class="frndbox" type="checkbox" value="{{f.username}}"
+                                           ng-checked="selection.indexOf(f.username) > -1"
+                                           ng-click="toggleSelection(f.username)"/>
+
+                                    <span></span>
+                                </label>
+                            </span>
+                            </div>
+                            <hr ng-repeat-end/>
+                        </div>
+                        <div class="col-sm-12" ng-if='friends.length > 0'>
+                        <span ng-click="loadMorefriends();" class="loadmore">
+                            <span ng-show="load" class="ion ion-load-c wt-spin fa fa-spin"></span>
+                            <span ng-hide="load">Load more</span>
+                        </span>
+                        </div>
+                        <div ng-if="friends.length === 0">
+                            <span class="text-info">You have no friends to invite</span>
+                        </div>
+                    </div>
+
+                    <div ng-controller="InviteController" id="pendingApp" class="small reveal-modal wt-small-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+                        <div ng-show="inviteLoading" class="text-muted">
+                            <span>Loading...</span>
+                        </div>
+                        <div ng-if="resInfo.members.length > 0" class="media" ng-repeat-start="per in resInfo.members">
+                           <span id="{{per.username}}_d">
+                            <a href="/u/{{per.username}}" class="media-left">
+                                <img class="img-circle" ng-src="user/{{per.username}}/{{per.avatar}}"  tooltip="{{per.username}}" tooltip-placement="bottom" width="40px" height="40px" />
+                            </a>
+                            <div class="media-body wt-media">
+                               <span class="media-heading">
+                                  <b class="h4">{{per.firstname}} {{per.lastname}}</b> <span class="text-muted"><a href="/u/{{per.username}}">({{per.username}})</a></span>
+                               </span>
+                                <span id="{{per.username}}_btns">
+                                    <button id="{{per.username}}_sbtn" class="btn btn-success wt-btn" type="button" ng-click="AcceptSub(per.username)">Accept</button>
+                                    <button id="{{per.username}}_dbtn" class="btn btn-danger wt-btn" type="button" ng-click="IgnoreSub(per.username)">Reject</button>
+                                </span>
+                                <div id="{{per.username}}_load" style="display: none;"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></div>
+                            </div>
+                           </span>
+                            <span style="display: none;" id="{{per.username}}_acpt">You have accepted {{per.username}} to be part of this community</span>
+                            <span style="display: none;" id="{{per.username}}_rjct">You rejected {{per.username}} being part of this community</span>
+                        </div>
+                        <hr ng-repeat-end/>
+                        <div ng-if="resInfo.members.length === 0">
+                            <span class="text-info">no pending request</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</span>
+<span class="wt-mobile">
+    <md-button class="md-fab md-mini md-fab-bottom-right" ng-hide="isOpenRight()" ng-click="toggleRight()" aria-label="more" >
+        <i class="ion ion-android-more-horizontal"></i>
+    </md-button>
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">{{name}}</span>
+    </div>
+    <div class="scrollable">
+        <div class="inbox scrollable-content section">
+            <span ng-include="'partials/templates/mobile/sub.mob.html'"></span>
+        </div>
+    </div>
+    <md-sidenav  class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+        <md-toolbar class="md-theme-light mob-primary">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" ng-click="close()">
+                    <md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>
+                </md-button>
+                <span flex></span>
+                <h4>{{name}}</h4>
+                <span flex></span>
+                <md-button class="md-icon-button">
+                    <!--<md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>-->
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-content ng-controller="makePostController" layout-padding>
+            <md-list>
+                <md-list-item class="md-3-line">
+                    <div class="md-list-item-text">
+                        <div>
+                            <div>
+                                <small class="text-muted" ng-if="type !== 'c'">Created on {{date}} </small>
+                            </div>
+                            <div>
+                                <md-button class="md-button md-raised mob-primary" ng-hide="member" ng-click="subscribeTaah()">subscribe</md-button>
+                                <md-button class="md-button md-raised md-warn" ng-show="member" ng-click="unsubscribeTaah()">unsubscribe</md-button>
+                                <span ng-if="numOfUsers > 1" class="text-muted">{{numOfUsers}} readers</span>
+                                <span ng-if="numOfUsers === 1" class="text-muted">{{numOfUsers}} reader</span>
+                            </div>
+                            <div ng-if="member && type !== 'pr' && !admin ">
+                                <md-button class="md-button md-raised mob-primary mob-btn-block" ng-click="showInvites($event);">Invite Friends</md-button>
+                            </div>
+                            <div ng-if="creator !== ''">
+                                <span ng-if="creator.length === '1'">Moderator: </span>
+                                <span ng-if="creator.length > '1'">Moderators: </span>
+                                <span ng-repeat="c in creator">
+                                    <span><a href="/u/{{c}}">{{c}}</a></span>
+                                    <span ng-if="!$last">,</span>
+                                </span>
+                                <span ng-if="admin">
+                                    <md-button class="md-raised mob-btn-block" ng-click="ShowEditTaah($event);">Edit</md-button>
+                                    <md-button class="md-raised mob-primary mob-btn-block" ng-click="showInvites($event);">Invite Friends</md-button>
+                                    <div ng-if="restricted && resInfo.size > 0">
+                                        <a ng-click="showSubscribers($event);"  ng-if="resInfo.size === 1">{{resInfo.size}} subscriber is pending approval</a>
+                                        <a ng-click="showSubscribers($event);" ng-if="resInfo.size > 1">{{resInfo.size}} subscribers are pending approval</a>
+                                        <a ng-if="resInfo.size < 1">no subscriber is pending approval</a>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                        <br/>
+                        <p ng-if="title !== ''">{{title}}</p>
+                        <small ng-if="description !== ''">
+                            <h5>About</h5>
+                            {{description}}
+                        </small>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-sidenav>
+</span>

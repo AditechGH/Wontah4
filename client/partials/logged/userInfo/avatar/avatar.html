@@ -1,0 +1,71 @@
+<span class="wt-web">
+    <div class="row" ng-controller="AppCtrl1" >
+        <div class="col-md-12" ng-controller="AdvancedMarkupCtrl1">
+            <h2 class="h2">Customize your profile   <button ui-sref="comprofile.invite" class="btn-sm btn-primary">Skip</button></h2>
+            <p class="lead text-muted">
+                Add profile picture
+            </p>
+            <div class="" id="crop-section" style="display:none;">
+                <div ng-jcrop="obj.src" ng-jcrop-config-name="upload" selection="obj.selection" thumbnail="obj.thumbnail"></div>
+                <button class="btn btn-success" ng-click="SaveCropImage();">save picture</button>
+                <div style="display:none;">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td><strong>x</strong>: <span ng-bind="obj.selection[0]"></span></td>
+                            <td><strong>y</strong>: <span ng-bind="obj.selection[1]"></span></td>
+                            <td><strong>x2</strong>: <span ng-bind="obj.selection[2]"></span></td>
+                            <td><strong>y2</strong>: <span ng-bind="obj.selection[3]"></span></td>
+                            <td><strong>w</strong>: <span ng-bind="obj.selection[4]"></span></td>
+                            <td><strong>h</strong>: <span ng-bind="obj.selection[5]"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <label><input type="checkbox" checked ng-model="obj.thumbnail" /> Thumbnail</label>
+                </div>
+            </div>
+            <div id="uploader-section" class="col-sm-12">
+                <div class="col-sm-7">
+                    <div class="wt-image-container">
+                        <img src="user/{{luname}}/{{lavatar}}" height="200px" width="200px" class="thumbnails" />
+                    </div>
+                    <div class="wt-upload-btn">
+                        <upload-button
+                                class="btn btn-primary fileinput-button wt-avatar-upload-btn upload-avatar"
+                                url="/uploadApi/upload?type=profile"
+                                param="file"
+                                accept="acceptTypes"
+                                force-iframe-upload="forceIframeUpload"
+                                data="uploadData"
+                                on-upload="onUpload(files)"
+                                on-success="onGlobalSuccess(response)"
+                                on-error="onError(response)"
+                                on-complete="onComplete(response)"
+                        >Upload</upload-button>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                </div>
+            </div>
+        </div>
+    </div>
+</span>
+<span class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Profile picture ( step 4/5 )</span>
+    </div>
+    <div class="scrollable" ng-controller="AppCtrl1">
+        <div class="scrollable-content section">
+            <div class="scrollable-header">
+                <button ui-sref="comprofile.invite" class="btn-sm btn btn-primary">Skip</button>
+            </div>
+            <div class="row" >
+                <div class="col-md-12" ng-controller="AdvancedMarkupCtrl1" ng-include="'partials/logged/userInfo/avatar/avatar.mobile.html'"></div>
+            </div>
+        </div>
+    </div>
+</span>
+<style>
+    .ng-jcrop-image-wrapper { display: inline-block; }
+    .ng-jcrop-thumbnail-wrapper { display: inline-block; }
+</style>

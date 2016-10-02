@@ -1,0 +1,54 @@
+<div class="navbar top-navbar-app navbar-app navbar-absolute-top wt-topbar md-whiteframe-glow-z1">
+
+    <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
+        <a ng-show="isLoggedIn()" ui-sref="homepage" class="wt-mob-logo-name"><span class="logo-name">Wontah</span></a>
+        <a ng-hide="isLoggedIn()" ui-sref="home" class="wt-mob-logo-name"><span class="logo-name">Wontah</span></a>
+    </div>
+
+    <div ng-hide="completeprocess" class="btn-group pull-left">
+        <div ng-show="isLoggedIn()" ng-click="hideRight();" ui-toggle="uiSidebarLeft" class="btn btn1 sidebar-toggle wt-mob-logo-name">
+            <md-icon md-menu-origin style="color:white;"  class="ion ion-android-menu"></md-icon>
+        </div>
+        <div ng-hide="isLoggedIn()" class="btn btn-navbar wt-mob-logo-name"><a ui-sref="register">Sign Up</a></div>
+    </div>
+
+    <div ng-hide="completeprocess" class="btn-group pull-right" ui-yield-to="navbarAction">
+        <div ng-hide="isLoggedIn()" class="wt-mob-logo-name btn btn-navbar"><a class="wt-mob-logo-name" ui-sref="login">Sign In</a></div>
+
+        <div ng-show="isLoggedIn()" ng-click="hideLeft();" ui-toggle="uiSidebarRight" class="btn btn1 sidebar-toggle" layout="row" flex>
+            <img src="/user/{{ currentUser().username }}/{{ currentUser().avatar }}" class="avatar" width="30px" height="30px">
+            <md-icon flex md-menu-align-target class="ion ion-android-arrow-dropright"></md-icon>
+        </div>
+    </div>
+</div>
+
+
+<div class="navbar navbar-app navbar-absolute-bottom md-whiteframe-glow-z1 site-content-toolbar _md">
+    <div class="btn-group" style="width:100%">
+        <a ui-sref="home" style="width: 33.3333%" ng-hide="isLoggedIn()" class="btn btn2 btn-navbar"><i class="fa fa-home fa-navbar"></i></a>
+        <a ng-hide="isLoggedIn()" style="width:33.3333%" ng-click="getSources()" class="btn btn2 btn-navbar"><i class="ion ion-information-circled fa-navbar"></i></a>
+        <a ng-hide="isLoggedIn()" style="width:33.3333%" ng-click="getStarted();" class="btn btn2 btn-navbar"><i class="ion ion-arrow-right-c fa-navbar"></i></a>
+    </div>
+
+    <div class="btn-group wt-cprofile-container" ng-show="isLoggedIn()" ng-hide="completeprocess">
+        <div class="wt-cprofile-grid" ng-class="{'wt-four-grid' : !lug}">
+            <a ui-sref="homepage" ng-show="isLoggedIn()" class="btn btn1 btn-navbar"><i class="fa fa-home fa-navbar"></i></a>
+        </div>
+        <div class="wt-cprofile-grid">
+            <span ng-show="lug">
+                <a class="btn btn1 btn-navbar" ui-sref="wontahdict" ng-show="isLoggedIn()"><i class="ion ion-ios-book"></i></a>
+            </span>
+        </div>
+        <span ng-show="isLoggedIn()" ng-controller="requestsController">
+            <div class="wt-cprofile-grid" ng-class="{'wt-four-grid' : !lug}">
+                <a ng-click="showRequests($event);" class="btn btn1 btn-navbar"><i class="ion ion-android-person-add"><i ng-show="rcount > 0" class="badge">{{rcount}}</i></i></a>
+            </div>
+            <div class="wt-cprofile-grid" ng-class="{'wt-four-grid' : !lug}">
+                <a ng-click="showNotification($event);openNotifications();" class="btn btn1 btn-navbar"><i class="ion ion-ios-bell"><i ng-cloak ng-show="ncount > '0'" class="badge">{{ncount}}</i></i></a>
+            </div>
+            <div class="wt-cprofile-grid" ng-class="{'wt-four-grid' : !lug}">
+                <a  ui-sref="pm.received" class="btn btn1 btn-navbar"><i class="ion ion-ios-chatboxes"><i ng-cloak ng-show="unreadCnt > '0'" class="badge">{{unreadCnt}}</i></i></a>
+            </div>
+        </span>
+    </div>
+</div>

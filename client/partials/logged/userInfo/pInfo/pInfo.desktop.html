@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="alert alert-success" ng-show="insertionSucess">
+
+        </div>
+        <div class="alert alert-danger" ng-show="insertionFailure">
+            sorry, try again
+        </div>
+        <div class="col-sm-6 col-sm-offset-3 wt-center-content">
+            <div class="container">
+                <h2 class="h2">Let's get your basic information</h2>
+                <hr/>
+                <form role="form" name="pForm" class="pForm"  novalidate>
+                    <div class="form-group" ng-class="{error: pForm.firstname.$invalid}">
+                        <div ng-show="pForm.firstname.$focused" class="suggest ">Required field</div>
+                        <div ng-show="pForm.firstname.$dirty && pForm.firstname.$invalid && !pForm.firstname.$focused" class="suggest sug-danger">You must enter your first name</div>
+                        <input class="form-control" ng-model="user.firstname" name="firstname" placeholder="First name (required)" required cu-focus/>
+                    </div>
+                    <div class="form-group">
+                        <div ng-show="pForm.lastname.$focused" class="suggest ">Required field</div>
+                        <div ng-show="pForm.lastname.$dirty && pForm.lastname.$invalid && !pForm.lastname.$focused" class="suggest sug-danger">You must enter your last name</div>
+                        <input class="form-control" ng-model="user.lastname" name="lastname" placeholder="Last name (required)" required cu-focus/>
+                    </div>
+                    <div class="form-group">
+                        <div ng-show="pForm.contact.$focused" class="suggest ">Let your friends contact you (eg:020051####)</div>
+                        <input cu-focus class="form-control" ng-model="user.contact" name="contact" placeholder="Contact (optional)"/>
+                    </div>
+                    <div class="form-group">
+                        <div ng-show="pForm.website.$focused" class="suggest">Example: http://www.facebook.com/lane.jennifer </div>
+                        <input cu-focus class="form-control" ng-model="user.website" name="website" placeholder="Website (optional)"/>
+                    </div>
+                    <div class="form-group">
+                        <div ng-show="pForm.bio.$focused" class="suggest ">A brief description about yourself</div>
+                        <textarea cu-focus class="form-control" ng-model="user.bio" name="bio" placeholder="who is {{ luname }} (optional)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" id="gender1" class="form-inline" name="gender" ng-model="user.gender" ng-required="!user.gender" value="m"/>
+                        <label  for="gender1" ><span></span>Male</label>
+                        <input type="radio" id="gender2" class="form-inline" name="gender" ng-model="user.gender" ng-required="!user.gender" value="f"/>
+                        <label  for="gender2" ><span></span>Female</label>
+                    </div>
+                    <div class="form-group">
+                        <button ng-click="SubmitPform(user)" type="submit" ng-disabled="pForm.$invalid">
+                            <span ng-show="loading"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                            <span ng-hide="loading">Let's proceed</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

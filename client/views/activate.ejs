@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <link rel="shortcut icon" type="image/x-icon" href="../img/wontah1.png" />
+        <link rel="icon" type="image/x-icon" href="../img/wontah1.png" />
+        <link rel="stylesheet" type="text/css" href="../libs/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="../custom/css/main.min.css"/>
+        <title><%= title %></title>
+    </head>
+    <body>
+       <div class="row">
+           <div class="col-md-12 wt-middle">
+               <% if (errorMsg.length > 0) { %>
+               <h1 class="wt-oops">OOPS!</h1><h1 class="h1"><%= errorMsg %></h1>
+               <a style="font-size: large" href="http://localhost:8080">wontah</a>
+               <% } %>
+               <% if (successMsg.length > 0) { %>
+               <h1 class="wt-great">GREAT!</h1><h1 class="h1"><%= successMsg %></h1>
+               <a style="font-size: large" href="http://localhost:8080/#/login">click here to login</a>
+               <% } %>
+
+           </div>
+       </div>
+    </body>
+
+</html>

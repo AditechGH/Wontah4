@@ -1,0 +1,78 @@
+<div class="scrollable-content section">
+    <div ng-hide="isStudent" class="wt-center-content">
+        <p>
+            Are you a student of the University of Ghana?
+            <md-button ng-click="StudentofUg()" class="md-button md-raised mob-primary mob-btn-block">Yes</md-button>
+            <md-button ng-click="NotStudentofUg();" class="md-button md-raised md-warn mob-btn-block">No</md-button>
+        </p>
+        <div class="wt-center-content">
+            <md-button ng-click="NotStudent();" class="md-accent md-raised mob-btn-block">I'm not a student</md-button>
+        </div>
+    </div>
+    <div ng-show="isStudent && !isStudentOfUg" class="animate-show wt-center-content">
+        <div class="wt-not-ug-student">
+            <div>
+                <form name="pForm" class="farm">
+                    <md-input-container class="md-block">
+                        <label>Specify institution (optional)</label>
+                        <input type="text" cu-focus ng-model="schoolname" name="schoolname"/>
+                        <div ng-messages="pForm.email.$error" role="alert">
+                            <div ng-show="pForm.schoolname.$focused" class="wt-mob-error-msg wt-mob-suc-msg">Enter the name of your noble institution</div>
+                        </div>
+                    </md-input-container>
+                </form>
+            </div>
+        </div>
+        <div class="container">
+            <p>
+                <md-button ng-click="SubmitNotUgStudent(schoolname)" class="md-raised mob-primary mob-btn-block">proceed</md-button>
+            </p>
+            <p>
+                <md-button ng-click="StudentofUg()" class="md-raised mob-btn-block" >I'm  a student of UG.</md-button>
+            </p>
+            <p>
+                <md-button ng-click="NotStudent();" class="md-raised md-warn mob-btn-block">I'm not a student</md-button>
+            </p>
+        </div>
+    </div>
+    <div ng-show="isStudent && isStudentOfUg" class="animate-show">
+        <div class="wt-chose-dept-mobile">
+            <h4 class="h4">Which department(s) do you belong to?</h4>
+            <!--<a href="" ui-turn-on="modalDept">Choose one or more of the departments</a>-->
+            <a ng-click="showDeptDialog($event)">Choose one or more of the departments</a>
+            <span ng-if="selection.length > 0">(<span ng-repeat="name in selection">{{name.name}}<span ng-if="!$last"> ,</span></span>)</span>
+        </div>
+        <div class="wt-chose-hall-mobile wt-center-content">
+            <div class="row">
+                <h3 class="h3 wt-hall-h3-mobile">
+                    Choose your level and hall of residence
+                </h3>
+                <form class="farm container" name="schForm">
+                    <md-input-container class="md-block">
+                        <label>Residential Status (hall)</label>
+                        <md-select ng-model="sub.hall">
+                            <md-option ng-repeat="h in halls" value="{{h}}">
+                                {{h.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <div class="row wt-row">
+                        <label class="text-muted">Select Level</label><br/>
+                        <md-radio-group ng-model="sub.level">
+                            <md-radio-button style="display: inline" value="100" class="md-primary">100</md-radio-button>
+                            <md-radio-button style="display: inline" value="200" class="md-primary"> 200 </md-radio-button>
+                            <md-radio-button style="display: inline" value="300" class="md-primary"> 300 </md-radio-button>
+                            <md-radio-button style="display: inline" value="400" class="md-primary"> 400 </md-radio-button>
+                            <md-radio-button style="display: inline" value="600" class="md-primary"> 600 </md-radio-button>
+                        </md-radio-group>
+                    </div>
+                    <div class="form-group wt-center-content">
+                        <p><md-button type="submit" ng-click="SubmitUgStudent(sub,'mobile');" class="md-raised mob-primary mob-btn-block">Next</md-button></p>
+                        <p><md-button ng-click="NotStudentofUg();" class="md-button md-raised mob-btn-block">I'm not a student of a Ug</md-button></p>
+                        <p><md-button ng-click="NotStudent();" class="md-button md-raised md-accent mob-btn-block">I'm not a student</md-button></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

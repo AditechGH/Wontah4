@@ -1,0 +1,30 @@
+<span ng-if="desktop" class="wt-web">
+    <div class="row wt-row" ng-class="{completed:wt-div-row}">
+        <div class="col-md-12">
+            <div class="col-md-5">
+                <span ng-if="desktop"  ng-include="'partials/templates/sub.tpl.html'"></span>
+            </div>
+            <div class="col-md-4">
+                <span ng-if="desktop"  ng-include="'partials/templates/middle.tpl.html'"></span>
+            </div>
+            <div class="col-md-3 well">
+                <span ng-if="desktop"  ng-include="'partials/templates/msub.tpl.html'"></span>
+            </div>
+        </div>
+    </div>
+    <!--<script ng-if="desktop">$(document).foundation();</script>-->
+</span>
+<span ng-if="mobile" class="wt-mobile">
+    <md-button ng-click="makeSubmission($event);" class="md-fab md-mini md-fab-bottom-right"  aria-label="make a submission" >
+        <md-tooltip md-direction="top" md-visible="tooltipVisible">make a submission</md-tooltip>
+        <i class="ion ion-compose"></i>
+    </md-button>
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Wontah</span>
+    </div>
+    <div class="scrollable">
+        <div class="scrollable-content section">
+            <span ng-include="'partials/templates/mobile/sub.mob.html'"></span>
+        </div>
+    </div>
+</span>

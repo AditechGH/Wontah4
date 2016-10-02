@@ -1,0 +1,19 @@
+<div ng-show="nfications.length > '0'" class="wt-content wt-dpt-container">
+    <div style="border-bottom: 0.1rem solid #d0e9c6;;padding: 5px;">
+        <a class="btn-primary btn-sm" ng-click="MarkAsRead()">mark all as read</a>
+    </div>
+    <div class="media" style="border-bottom: 0.1rem solid #d0e9c6;padding: 2px;" ng-repeat="n in nfications">
+          <span class="media-left">
+              <img class="img-circle" ng-src="user/{{n.initiator}}/{{n.avatar}}" alt="{{n.initiator}}" width="30px" height="30px" />
+          </span>
+        <div class="media-body" style="padding-bottom: 8px;">
+            <b class="media-heading">{{n.app}}</b><span ng-if="n.type === 's'"> on <a href="/t/{{n.name}}">{{n.name}}</a></span><br/>
+            <span ng-show="n.type === 's'"><a href="/u/{{n.initiator}}/room">{{n.note}}</a></span>
+            <span ng-hide="n.type === 's'">{{n.note}}</span>|<span>{{n.date_time}}</span>
+            <button class="btn-primary btn-sm" ng-click="markAsReadd(n.nofeid , $index)">seen</button>
+        </div>
+    </div>
+</div>
+<div class="wt-content wt-center-content wt-dpt-container" ng-show="nfications.length === 0">
+    <span class="text-info">You have no notifications at the moment</span>
+</div>

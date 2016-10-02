@@ -1,0 +1,100 @@
+<div class="fixed" ng-controller="navController">
+    <nav class="top-bar" data-topbar role="navigation">
+        <ul ng-class="{'wt-center-title': completeprocess && isLoggedIn()}" class="title-area animate-show">
+            <li class="name">
+                <h1>
+                    <a ng-if="isLoggedIn()" ng-hide="completeprocess" ui-sref="homepage" tooltip="Home" tooltip-placement='bottom'>
+                        <span class="logo-name"><img width="40px" src="/img/wontah.png"/>Wontah</span>
+                    </a>
+                    <a ng-if="!isLoggedIn()" ui-sref="home" tooltip="Home" tooltip-placement='bottom'>
+                        <span class="logo-name"><img width="40px" src="/img/wontah.png"/>Wontah</span>
+                    </a>
+                    <a ng-show="completeprocess && isLoggedIn()">
+                        <span class="logo-name"><img width="40px" src="/img/wontah.png"/>Wontah</span>
+                    </a>
+                </h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a><span>Menu</span></a></li>
+        </ul>
+        <section ng-hide="completeprocess && isLoggedIn()" class="top-bar-section animate-show">
+            <ul class="left">
+                <!--taah dropdown-->
+                <li ng-show="isLoggedIn()" id="mytaahs" class="active has-dropdown">
+                    <a>My taahs</a>
+                    <ul class="dropdown">
+                        <li ng-if="taahs.length > 0">
+                            <a href="/u/{{ currentUser().username }}">all</a>
+                        </li>
+                        <li ng-if="taahs.length > 0" ng-show="isLoggedIn()" ng-repeat="ta in taahs | limitTo:10">
+                            <a href="/t/{{ta.name}}">{{ta.name}}</a>
+                        </li>
+                        <li ng-if="taahs.length === 0">
+                            <a>No taah available</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-show="isLoggedIn()" class="has-form active">
+                <div class="row">
+                <div class="small-12 columns wt-search-users">
+                <input type="text" ng-model="selectedUsers" placeholder="Search people." typeahead="u as u.user for c in users | filter:$viewValue | limitTo:10" typeahead-min-length='1' typeahead-on-select='onSelectPart($item, $model, $label)' typeahead-template-url="partials/templates/getusers.tpl.html">
+                </div>
+                </div>
+                </li>
+            </ul>
+            <ul class="right">
+                <!--dictionary-->
+                <span ng-show="lug"><!-- ng-show="isStudent" -->
+                    <li ng-show="isLoggedIn()" class="active"><a ui-sref="wontahdict" tooltip="Wontah Dictionary" tooltip-placement='bottom'><i class="ion ion-ios-book"></i></a></li>
+                </span>
+
+                <span ng-controller="requestsController">
+                    <!--request-->
+                    <li ng-show="isLoggedIn()" class="active">
+                        <a data-dropdown="Requestdrop" aria-controls="Requestdrop" data-options="align:left" aria-expanded="false" tooltip="Friend Requests" tooltip-placement='bottom'>
+                            <i class="ion ion-android-person-add"><i ng-show="rcount > 0" class="badge">{{rcount}}</i></i>
+                        </a>
+                    </li>
+                    <div id="Requestdrop" data-dropdown-content class="f-dropdown content medium wt-f-dropdown" aria-autoclose="false" aria-hidden="true" tabindex="-1" ng-include="'partials/templates/request.tpl.html'"></div>
+                    <!--notification-->
+                    <li ng-show="isLoggedIn()" class="active" ng-click="openNotifications()">
+                        <a data-dropdown="Notificationdrop" aria-controls="Notificationdrop" data-options="align:left" aria-expanded="false" tooltip="Notifications" tooltip-placement='bottom'>
+                            <i class="ion ion-ios-bell"><i ng-cloak ng-show="ncount > '0'" class="badge">{{ncount}}</i></i>
+                        </a>
+                    </li>
+                    <div id="Notificationdrop" data-dropdown-content class="f-dropdown content medium" aria-autoclose="false" aria-hidden="true" tabindex="-1" ng-include="'partials/templates/notification.tpl.html'"></div>
+                    <!--inbox-->
+                    <li ng-show="isLoggedIn()" class="active">
+                        <a ui-sref="pm.received" tooltip="Messages" tooltip-placement='bottom'>
+                            <i class="ion ion-ios-chatboxes"><i ng-cloak ng-show="unreadCnt > '0'" class="badge">{{unreadCnt}}</i></i>
+                        </a>
+                    </li>
+                </span>
+                <!--userprofile-->
+                <li ng-show="isLoggedIn()" class="active"><a href="/u/{{ currentUser().username }}">{{ currentUser().username }}</a></li>
+                <!--dropdown-->
+                <li ng-show="isLoggedIn()" class="active has-dropdown">
+                    <a><img src="/user/{{ currentUser().username }}/{{ currentUser().avatar }}" class="avatar" width="40px" height="40px"></a>
+                    <ul class="dropdown">
+                        <li ng-show="isLoggedIn()"><a data-reveal-id="CreateTaah"><i class="fa fa-plus"></i> Create Taah</a></li>
+                        <li ng-show="isLoggedIn()"><a ui-sref='settings.pass'><i class="ion ion-gear-a"></i> Settings</a></li>
+                        <li ng-show="isLoggedIn() && admin"><a ui-sref='admin' ><i class="fa fa-power-off"></i>Admin</a></li>
+                        <li ng-show="isLoggedIn()"><a ng-click="logout()"><i class="fa fa-power-off"></i> Log Out</a></li>
+                    </ul>
+                </li>
+                <!--logout userprofile-->
+                <li ng-hide="isLoggedIn()" class="active"><a ui-sref="login">Sign In</a></li>
+                <li ng-hide="isLoggedIn()" class="active"><a ui-sref="register">Sign Up</a></li>
+            </ul>
+        </section>
+
+    </nav>
+</div>
+<create-taah></create-taah>
+<script>
+    $(document).foundation();
+    $('.dropdown-menu').enscroll({
+        verticalTrackClass: 'track',
+        verticalHandleClass: 'handle',
+        minScrollbarLength: 28
+    });
+</script>

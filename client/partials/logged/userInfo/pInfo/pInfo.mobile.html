@@ -1,0 +1,56 @@
+<div ui-content-for="title">
+    <span class="wt-mob-logo-name">Personal information ( step 1/5 )</span>
+</div>
+<div class="scrollable">
+    <div class="scrollable-content section">
+        <form role="form" name="pForm" class="farm"  novalidate>
+            <fieldset>
+                <legend class="wt-center-content">Let's get your basic info</legend>
+                <md-input-container class="md-block">
+                    <label>First name (required)</label>
+                    <input type="text" ng-model="user.firstname" name="firstname" required />
+                    <div ng-messages="pForm.firstname.$error" role="alert">
+                        <div ng-show="pForm.firstname.$dirty && pForm.firstname.$invalid" class="wt-mob-error-msg">You must enter your first name</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Last name (required)</label>
+                    <input type="text" ng-model="user.lastname" name="lastname" required/>
+                    <div ng-messages="pForm.lastname.$error" role="alert">
+                        <div ng-show="pForm.lastname.$dirty && pForm.lastname.$invalid && !pForm.lastname.$focused" class="wt-mob-error-msg">You must enter your last name</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Contact (optional)</label>
+                    <input cu-focus type="text" ng-model="user.contact" name="contact"/>
+                    <div ng-messages="pForm.contact.$error" role="alert">
+                        <div ng-show="pForm.contact.$focused" class="wt-mob-error-msg wt-mob-suc-msg">Let your friends contact you (eg:020051####)</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Website (optional)</label>
+                    <input cu-focus type="text" ng-model="user.website" name="website"/>
+                    <div ng-messages="pForm.website.$error" role="alert">
+                        <div ng-show="pForm.website.$focused" class="wt-mob-error-msg wt-mob-suc-msg">Example: http://www.facebook.com/lane.jennifer </div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Biography (optional)</label>
+                    <textarea cu-focus ng-model="user.bio" name="bio" placeholder="who is {{ luname }}"></textarea>
+                    <div ng-messages="pForm.bio.$error" role="alert">
+                        <div ng-show="pForm.bio.$focused" class="wt-mob-error-msg wt-mob-suc-msg">A brief description about yourself</div>
+                    </div>
+                </md-input-container>
+                <md-radio-group ng-model="user.gender">
+                    <md-radio-button style="display: inline" value="m" class="md-primary">Male</md-radio-button>
+                    <md-radio-button style="display: inline" value="f" class="md-primary"> Female </md-radio-button>
+                </md-radio-group>
+            </fieldset>
+            <hr>
+            <md-button class="md-button md-raised mob-primary mob-btn-block" ng-click="SubmitPform(user)" ng-disabled="pForm.$invalid">
+                <span ng-show="loading"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                <span ng-hide="loading">Let's proceed</span>
+            </md-button>
+        </form>
+    </div>
+</div>

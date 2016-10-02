@@ -1,0 +1,83 @@
+<tabset>
+    <tab heading="Text" ng-if="coption === 'a' || coption === 't'">
+        <div class="col-md-6">
+            <div class="wt-post-alert">
+                You are submitting a text-based post. Speak your mind. A title is required,
+                but expanding further in the text field is not.
+            </div>
+            <form name="postForm" class="makepost" role="form"  novalidate ng-submit="SubmitPost(makepost,name)">
+                <div ng-class="{error: makepost.title.$invalid}" class="form-group">
+                    <label for="ptitle">Title</label><br/>
+                    <div ng-show="postForm.title.$focused" class="suggest">A good title attracts more readers</div>
+                    <textarea cu-focus id="ptitle" name="title" class="form-control" ng-model="makepost.title" required="required" placeholder="" ></textarea>
+                </div>
+                <div ng-class="{error: makepost.textinput.$invalid}" class="form-group">
+                    <label for="textinput">Text <span class="text-muted">(optional)</span></label><br/>
+                    <div ng-show="postForm.textinput.$focused" class="suggest">Add content</div>
+                    <textarea cu-focus id="textinput" name="textinput" class="form-control" ng-model="makepost.textinput" placeholder="" ></textarea>
+                </div>
+                <div ng-class="{error: makepost.tahinput.$invalid}" class="form-group">
+                    <label for="tahinput">Taah</label><span class="text-muted">({{name}} Community)</span><br/>
+                    <div ng-show="postForm.tahinput.$focused" class="suggest">Make sure your submission is placed in the correct taah</div>
+                    <input cu-focus id="tahinput" disabled name="tahinput" ng-model="name"  class="form-control" />
+                </div>
+                <div ng-class="{error: makepost.anonymous.$invalid}" class="form-group">
+                    <label class="myCheckbox">
+                        <input type="checkbox" ng-model="makepost.anonymous" name="anonymous" class="anonymous" data-html="true" checked="checked"/>
+                        <span></span>
+                    </label>
+                    <label for="anonymous">Anonymous </label>
+                </div>
+                <button type="submit" class="btn btn-primary" id="newProductBtn" ng-disabled="makepost.$invalid || isProcessing">
+                    <span ng-show="ploading"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                    <span ng-hide="ploading">Drop it</span>
+                </button>
+            </form>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </tab>
+    <tab heading="Link" ng-if="coption === 'a' || coption === 'l'">
+        <div class="col-md-6">
+            <div class="wt-post-alert">
+                You are submitting a link. The key to a successful submission is
+                interesting content and a descriptive title.
+            </div>
+            <form name="linkForm" class="makelink" role="form"  novalidate ng-submit="SubmitLink(makelink,name)">
+                <div ng-class="{error: makelink.title.$invalid}" class="form-group">
+                    <label for="ltitle">Title</label><br/>
+                    <div ng-show="linkForm.title.$focused" class="suggest">A good title attracts more readers</div>
+                    <textarea cu-focus id="ltitle" name="title" class="form-control" ng-model="makelink.title" required="required" placeholder="Enter title(required)" ></textarea>
+                </div>
+                <div ng-class="{error: makelink.linkinput.$invalid}" class="form-group">
+                    <label for="linkinput">Link <span class="text-muted">(required)</span></label><br/>
+                    <div ng-show="linkForm.linkinput.$focused" class="suggest">Copy and paste links</div>
+                    <input cu-focus type="url" id='linkinput' name="linkinput" class="form-control" ng-model="makelink.linkinput" placeholder="starts with http:// or https://" required="required"/>
+                </div>
+                <div ng-class="{error: makelink.linktah.$invalid}" class="form-group">
+                    <label for="linktah">Taah </label><span class="text-muted">({{name}} Community)</span><br/>
+                    <div ng-show="linkForm.linktah.$focused" class="suggest">Make sure your submission is placed in the correct taah</div>
+                    <input cu-focus id="linktah" disabled name="linktah" ng-model="name" class="form-control" />
+                </div>
+                <div ng-class="{error: makelink.anonymous.$invalid}" class="form-group">
+                    <label class="myCheckbox">
+                        <input type="checkbox" id="anonymous" ng-model="makelink.anonymous" name="anonymous" class="anonymous" data-html="true"/>
+                        <span></span>
+                    </label>
+                    <label for="anonymous">Anonymous </label>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary" id="newProductBtn1" ng-disabled="makelink.$invalid || isProcessing">
+                        <span ng-show="lloading"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                        <span ng-hide="lloading">Drop it</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </tab>
+</tabset>
+

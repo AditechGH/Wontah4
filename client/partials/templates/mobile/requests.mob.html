@@ -1,0 +1,66 @@
+<md-dialog aria-label="Requests"  ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools mob-primary">
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>
+                </md-button>
+                <span flex></span>
+                <h4>Requests <span ng-show="rcount > 0">({{rcount}})</span></h4>
+                <span flex></span>
+                <md-button class="md-icon-button">
+                    <!--<md-icon class="ion ion-android-more-vertical" aria-label="Close dialog"></md-icon>-->
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div layout="row" layout-wrap>
+                    <div flex="100" layout="column">
+                        <div ng-show="thereIsRequest">
+                            <md-list class="md-dense" flex>
+                                <md-list-item id="{{per.uname}}_d1" ng-if="frndReq != []" class="md-3-line" ng-repeat="per in frndReq">
+                                    <a href="/user/{{per.uname}}"><img ng-src="user/{{per.uname}}/{{per.avatar}}" class="md-avatar" alt="{{per.uname}}" /></a>
+                                    <div class="md-list-item-text" layout="column">
+                                        <p>{{per.fname}} {{per.lname}} Request friendship ({{per.datemade}}) </p>
+                                        <div id="{{per.uname}}_btns1">
+                                            <md-button id="{{per.uname}}_sbtn1" class="md-raised md-primary mob-primary" ng-click="Accept(per.uname)">Accept</md-button>
+                                            <md-button id="{{per.uname}}_dbtn1" class="md-raised md-warn" ng-click="Ignore(per.uname)">Ignore</md-button>
+                                        </div>
+                                        <div id="{{per.uname}}_load1" style="display: none;"><md-progress-circular md-mode="indeterminate"></md-progress-circular></div>
+                                        <span style="display: none;" id="{{per.uname}}_acpt1">You have accepted to be friends with {{per.uname}}</span>
+                                        <span style="display: none;" id="{{per.uname}}_rjct1">You rejected being friends with {{per.uname}}</span>
+                                    </div>
+                                    <md-divider ></md-divider>
+                                </md-list-item>
+                                <md-list-item id="{{per.taah}}{{per.uname}}_d1" ng-if="invTaah != []" class="md-3-line" ng-repeat="per in invTaah">
+                                    <a href="/u/{{per.uname}}">
+                                        <img ng-src="user/{{per.uname}}/{{per.avatar}}" class="md-avatar" alt="{{per.uname}}" />
+                                    </a>
+                                    <div class="md-list-item-text" layout="column">
+                                        <p>{{per.fname}} {{per.lname}} Invites you to join <a href="/t/{{per.taah}}">{{per.taah}}</a> ({{per.datemade}})</p>
+                                        <div id="{{per.taah}}{{per.uname}}_btns1">
+                                            <md-button id="{{per.taah}}{{per.uname}}_sbtn1" class="md-raised md-primary mob-primary" ng-click="Subscribe(per.taah,per.uname)">Subscribe</md-button>
+                                            <md-button id="{{per.taah}}{{per.uname}}_dbtn1" class="md-raised md-warn" ng-click="IgnoreNow(per.taah,per.uname)">Ignore</md-button>
+                                        </div>
+                                        <div id="{{per.taah}}{{per.uname}}_load1" style="display: none;"><md-progress-circular md-mode="indeterminate"></md-progress-circular></div>
+                                        <span style="display: none;" id="{{per.taah}}{{per.uname}}_acpt1">You have subscribed to {{per.taah}} successfully</span>
+                                        <span style="display: none;" id="{{per.taah}}{{per.uname}}_rjct1">You have rejected the invitation</span>
+                                    </div>
+                                    <md-divider ></md-divider>
+                                </md-list-item>
+                            </md-list>
+                        </div>
+                        <div ng-hide="thereIsRequest">
+                            <span class="text-center">You have no requests at the moment</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+

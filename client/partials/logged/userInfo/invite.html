@@ -1,0 +1,72 @@
+<span ng-if="desktop" class="wt-web">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-8">
+                <h2 class="h2">Tell a friend about Wontah</h2>
+                <p class="lead text-muted">
+                    Share with friends on other social medias
+                </p>
+            </div>
+            <div class="col-sm-4">
+                <!--twitter-->
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wontah.com" data-text="WONTAH ... the gateway to awesome interneting" data-via="wontahBantah" data-related="Aditech">Tweet</a>
+                <!--facebook-->
+                <hr/>
+                <div id="fb-root"></div>
+                <div class="fb-share-button" data-href="http://wontah.com" data-layout="button" data-mobile-iframe="false"></div>
+                <!--google plus-->
+                <hr/>
+                <div class="g-plus" data-action="share" data-height="24" data-href="http://wontah.com"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 wt-center-content">
+                <h2 class="h2">You're almost there</h2>
+                <a ng-if="desktop" class="btn btn-default" ng-click="Finish('web')" >Done</a>
+            </div>
+        </div>
+    </div>
+</span>
+<span ng-if="mobile" class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Tell a friend ( step 5/5 )</span>
+    </div>
+    <div class="scrollable">
+        <div class="scrollable-content section" style="overflow-x: hidden;">
+            <h5 class="h5 wt-center-content">Tell a friend about Wontah</h5>
+            <p class="text-muted wt-center-content">
+                Share with friends on other social medias
+            </p>
+            <div>
+                <!--twitter-->
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wontah.com" data-text="WONTAH ... the gateway to awesome interneting" data-via="wontahBantah" data-related="Aditech">Tweet</a>
+                <!--facebook-->
+                <hr/>
+                <div id="fb-root"></div>
+                <div class="fb-share-button" data-href="http://wontah.com" data-layout="button" data-mobile-iframe="false"></div>
+                <!--google plus-->
+                <hr/>
+                <div class="g-plus" data-action="share" data-height="24" data-href="http://wontah.com"></div>
+            </div>
+            <div class="wt-center-content">
+                <h5 class="h5">You're almost there</h5>
+                <md-button ng-if="mobile" class="md-button md-raised mob-btn-block mob-primary" ng-click="Finish('mobile')" >Done</i></md-button>
+            </div>
+        </div>
+    </div>
+</span>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=1019363308101780";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript">
+    (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/platform.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+</script>

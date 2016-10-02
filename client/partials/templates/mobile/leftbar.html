@@ -1,0 +1,38 @@
+<div class="scrollable">
+    <div class="scrollable-content">
+        <md-toolbar layout="row" class="mob-primary" ng-controller="makePostController" >
+            <div class="md-toolbar-tools">
+                <md-button ng-click="createATaah($event);"  class="md-fab md-mini"  aria-label="create taah" >
+                    <i class="ion ion-android-add"></i>
+                </md-button>
+                <md-content style="width:90%">
+                    <form ng-submit="$event.preventDefault()">
+                        <md-autocomplete
+                                md-selected-item="selectedItem"
+                                md-search-text-change="searchTextChange(searchText)"
+                                md-search-text="searchText"
+                                md-selected-item-change="selectedItemChange(item)"
+                                md-items="item in alltaahs | filter:searchText"
+                                md-item-text="item.name"
+                                md-min-length="1"
+                                placeholder="What are you interested in?">
+                            <md-item-template>
+                                <a href="/t/{{item.name}}" md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</a>
+                            </md-item-template>
+                        </md-autocomplete>
+                    </form>
+                </md-content>
+            </div>
+        </md-toolbar>
+        <md-content>
+            <md-list>
+                <md-list-item ng-if="taahs.length > 0" ui-turn-off='uiSidebarLeft' ng-show="isLoggedIn()" ui-sref="t({name: '{{ta.name}}'})" ng-repeat="ta in taahs">
+                    <div class="md-list-item-text">
+                        <h5>{{ta.name}}</h5>
+                    </div>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </div>
+</div>

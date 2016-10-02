@@ -1,0 +1,17 @@
+<span class="wt-web">
+    <div ng-if="success">
+        <div ng-if="sugFrnds.length > 0">
+            <div class="row">
+                <div class="col-sm-12" ng-include="'partials/logged/userInfo/frndSug/frndSug.desktop.html'"></div>
+            </div>
+        </div>
+    </div>
+</span>
+<span class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Suggested friends ( step 3/5 )</span>
+    </div>
+    <div class="scrollable" ng-if="success">
+        <div class="scrollable-content" ng-if="sugFrnds.length > 0" ng-include="'partials/logged/userInfo/frndSug/frndSug.mobile.html'"></div>
+    </div>
+</span>

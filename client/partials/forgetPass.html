@@ -1,0 +1,102 @@
+<span class="wt-web">
+   <br/><br/><br/>
+<div id="reset-password-page" class="main">
+    <section class="content">
+        <div class="reset-password-content">
+            <div class="row" id="reset-password-form" ng-hide="isLoggedIn()">
+                <div class="alert alert-danger wt-alert" ng-show="resetunsuccessful">
+                    Password reset unsuccessful, try againF
+                </div>
+                <div class="col-sm-12">
+                    <div class="login-content">
+                        <div class="login-form" ng-switch on="click">
+                            <div id="login-form-content" class="animate-switch" ng-switch-default>
+                                <h2>Reset your password</h2>
+                                <hr />
+                                <p>
+                                    Use the form below to reset your password if you forgot it. You should receive an email very soon after requesting the password reset link.
+                                </p>
+                                <form role="form" name='resetForm' id="resetForm" class="form resetForm" novalidate ng-submit="ResetPassword(reset)">
+                                    <div class="{error: resetForm.email.$invalid}">
+                                        <input type="text" name="email" ng-model="reset.email" valid-credential remove-unwanted cu-focus id="email" placeholder="Email address" required popover="Enter Email" popover-trigger="mouseenter"/>
+                                        <span ng-show="resetForm.email.$dirty && resetForm.email.$invalid && !resetForm.email.$focused" class="help-inline">Enter an email address</span>
+                                        <span ng-show="resetForm.email.$error.validCredential && !resetForm.email.$pristine && !resetForm.email.$focused" class="help-inline">'{{reset.email}}' is not in our system</span>
+                                    </div>
+                                    <button type="submit" id="btnResetPassword" ng-disabled="resetForm.$invalid || isProcessing">
+                                        <span ng-show="loading"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+                                        <span ng-hide="loading">Reset Password</span>
+                                    </button>
+                                </form>
+                            </div>
+                            <div id="passwordReset" class="animate-switch" ng-switch-when="message">
+                                <div class="resend-message">
+                                    <h2 class="green">Password sent</h2>
+                                    <hr />
+                                    <p>You will receive an email with your new password any second now.</p>
+                                    <p>Click the link in the email to reset your password.</p>
+                                </div>
+                                <hr />
+                                <div class="resend">
+                                    <p>Still didn't receive the email?</p>
+                                    <p><a ui-sref="forgetpass" ng-click="Goback()" class="resendActivationLnk">Reset the password again</a></p>
+                                </div>
+                                <p class="tip">
+                                    Tip: check your spam folder
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</span>
+<span class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Reset password</span>
+    </div>
+    <div class="scrollable">
+        <div class="scrollable-content section" ng-switch on="click">
+            <form role="form" novalidate id="FBMobilePage" name='MobileFBForm' class="farm animate-switch" ng-submit="ResetPassword(reset)" ng-switch-default>
+                <fieldset>
+                    <legend class="wt-center-content">Reset password</legend>
+                    <p class="wt-center-content">
+                        Use the form below to reset your password if you forgot it. You should receive an email very soon after requesting the password reset link.
+                    </p>
+                    <md-input-container class="md-block">
+                        <label>Email Address</label>
+                        <input type="text" name="email" ng-model="reset.email" valid-credential remove-unwanted required cu-focus id="email"/>
+                        <div ng-messages="MobileLoginForm.email.$error" role="alert">
+                            <div ng-show="MobileFBForm.email.$error.validCredential && !MobileFBForm.email.$pristine && !MobileFBForm.email.$focused" class="wt-mob-error-msg">'{{reset.email}}' is not in our system</div>
+                        </div>
+                    </md-input-container>
+                </fieldset>
+                <md-button class="md-button md-raised mob-primary mob-btn-block" type="submit" id="btnResetPassword" ng-disabled="resetForm.$invalid || isProcessing">
+                    <span ng-show="loading"><md-progress-circular md-mode="indeterminate"></md-progress-circular></span>
+                    <span ng-hide="loading">Reset Password</span>
+                </md-button>
+                <p class="wt-mob-login-forgot-activation wt-center-content">
+                    <a ui-sref="resend_activation">Didn't receive activation email?</a>
+                </p>
+            </form>
+            <div id="passwordReset" class="animate-switch" ng-switch-when="message">
+                <div class="resend-message wt-center-content">
+                    <h2 class="green">Password sent</h2>
+                    <hr />
+                    <p>You will receive an email with your new password any second now.</p>
+                    <p>Click the link in the email to reset your password.</p>
+                </div>
+                <hr />
+                <div class="resend wt-center-content">
+                    <p>Still didn't receive the email?</p>
+                    <p><a ui-sref="forgetpass" ng-click="Goback()" class="resendActivationLnk">Reset the password again</a></p>
+                </div>
+                <p class="tip wt-center-content">
+                    Tip: check your spam folder
+                </p>
+            </div>
+        </div>
+    </div>
+</span>

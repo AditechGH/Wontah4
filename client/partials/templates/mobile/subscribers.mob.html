@@ -1,0 +1,50 @@
+<md-dialog ng-controller="InviteController"  aria-label="invite"  ng-cloak>
+    <form>
+        <md-toolbar ng-show="!showSearch">
+            <div class="md-toolbar-tools mob-primary">
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>
+                </md-button>
+                <span flex></span>
+                <h4>Pending Approval</h4>
+                <span flex></span>
+                <md-button ng-click="showSearch = !showSearch" class="md-icon-button">
+                    <md-icon class="ion ion-android-search" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content >
+            <div class="md-dialog-content">
+                <div ng-show="inviteLoading" class="text-muted">
+                    <span>Loading...</span>
+                </div>
+                <md-list ng-if="resInfo.members.length > 0">
+                    <md-list-item class="md-3-line" ng-repeat="per in resInfo.members">
+                        <img ng-src='/user/{{per.username}}/{{per.avatar}}' alt='{{per.username}}' class="md-avatar" />
+                        <div class="md-list-item-text" layout="column">
+                            <h4>{{per.firstname}} {{per.lastname}}</h4>
+                            <div>
+                                <span id="{{per.username}}_btns">
+                                    <md-button id="{{per.username}}_sbtn" class="md-raised mob-primary md-icon-button" ng-click="AcceptSub(per.username)">
+                                        <i class="ion ion-checkmark-round"></i>
+                                    </md-button>
+                                    <md-button id="{{per.username}}_dbtn" class="md-raised md-warn md-icon-button" ng-click="IgnoreSub(per.username)">
+                                        <i class="ion ion-close"></i>
+                                    </md-button>
+                                </span>
+                                <div id="{{per.username}}_load" style="display: none;"><i class="ion ion-load-c wt-spin fa fa-spin"></i></div>
+                            </div>
+                        </div>
+                    </md-list-item>
+                </md-list>
+                <div ng-if="resInfo.members.length === 0">
+                    <span class="text-info">no pending request</span>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+

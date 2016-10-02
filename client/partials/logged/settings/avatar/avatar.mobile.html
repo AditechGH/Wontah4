@@ -1,0 +1,54 @@
+<h5 class="h5">Customize your profile</h5>
+<p class="lead text-muted">
+    Add a photo to show your unique personality and style.
+</p>
+<div class="" id="crop-section" ng-show="uploaded">
+    <md-button class="md-button md-raised mob-btn-block mob-primary" ng-click="SaveCrop();" ng-disabled="isProcessing">
+        <span ng-show="loading"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></span>
+        <span ng-hide="loading">save thumbnail</span>
+    </md-button>
+    <div class="wt-upload-btn" ng-include="'uploadBtn'"></div>
+    <div ng-jcrop="obj.src" ng-jcrop-config-name="upload" selection="obj.selection" thumbnail="obj.thumbnail"></div>
+    <div style="display:none;">
+        <table>
+            <tbody>
+            <tr>
+                <td><strong>x</strong>: <span ng-bind="obj.selection[0]"></span></td>
+                <td><strong>y</strong>: <span ng-bind="obj.selection[1]"></span></td>
+                <td><strong>x2</strong>: <span ng-bind="obj.selection[2]"></span></td>
+                <td><strong>y2</strong>: <span ng-bind="obj.selection[3]"></span></td>
+                <td><strong>w</strong>: <span ng-bind="obj.selection[4]"></span></td>
+                <td><strong>h</strong>: <span ng-bind="obj.selection[5]"></span></td>
+            </tr>
+            </tbody>
+        </table>
+        <label><input type="checkbox" checked ng-model="obj.thumbnail" /> Thumbnail</label>
+    </div>
+</div>
+<div ng-show="!uploaded" id="uploader-section" class="col-sm-12">
+    <div class="col-sm-7">
+        <div class="wt-image-container">
+            <img src="user/{{luname}}/{{lavatar}}" height="200px" width="200px" class="thumbnails" />
+        </div>
+        <div class="wt-upload-btn" ng-include="'uploadBtn'"></div>
+    </div>
+    <div class="col-sm-5">
+    </div>
+</div>
+<script type="text/ng-template" id="uploadBtn">
+    <upload-button ng-disabled="isProcessing"
+                   class="md-fab md-button fileinput-button wt-avatar-upload-btn upload-avatar"
+                   url="/uploadApi/upload?type=profile"
+                   param="file"
+                   accept="acceptTypes"
+                   force-iframe-upload="forceIframeUpload"
+                   data="uploadData"
+                   on-upload="onUpload(files)"
+                   on-success="onGlobalSuccess(response)"
+                   on-error="onError(response)"
+                   on-complete="onComplete(response)"
+    >
+        <span ng-show="load"><md-progress-circular md-mode="indeterminate"></md-progress-circular></span>
+        <span ng-show="!load"><i class="ion ion-upload"></i></span>
+    </upload-button>
+</script>

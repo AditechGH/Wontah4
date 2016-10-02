@@ -1,0 +1,226 @@
+<span class="wt-web">
+    <div class="row">
+        <div class="col-md-12" ng-controller="filterController">
+            <div ng-hide="filters" class="animate-show wt-center-content">
+                <h2 class="h2 text-muted">Wontah Dictionary</h2>
+                <button class="btn-sm btn-default" ng-click="showFilters()">Start Filtering</button>
+            </div>
+            <div ng-show="filters" class="animate-show row">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <h2 class="h2 text-muted">Wontah Dictionary</h2>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="col-md-12">
+                            <form>
+                                <div class="col-sm-3">
+                                    <select class="wt-sort-select wt-filter-select" name="selectA" ng-model="form.selectA" ng-options="p.name for p in options" ng-change="SelectOption(form.selectA ,'selectA')">
+                                        <option value="" ng-if="false"></option>
+                                    </select>
+                                    <span id="select1"></span>
+                                    <select id="selectA1" class="wt-sort-select wt-filter-select" ng-model="form.selectA1" name="selectA1" ng-options="p.name for p in optionsA" ng-change="SelectA(form.selectA1);">
+                                        <option value="" ng-if="false"></option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select id="selectB" class="wt-sort-select wt-filter-select" ng-model="form.selectB" name="selectB" ng-options="p.name for p in options1" ng-change="SelectOption(form.selectB,'selectB')">
+                                        <option value="" ng-if="false"></option>
+                                    </select>
+                                    <span id="select2"></span>
+                                    <select id="selectB1" class="wt-sort-select wt-filter-select" ng-model="form.selectB1" name="selectB1" ng-options="p.name for p in optionsB" ng-change="SelectB(form.selectB1);">
+                                        <option value="" ng-if="false"></option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select id="selectC" class="wt-sort-select wt-filter-select" ng-model="form.selectC" name="selectC" ng-options="p.name for p in options2" ng-change="SelectOption(form.selectC,'selectC')">
+                                        <option value="" ng-if="false"></option>
+                                    </select>
+                                    <span id="select3"></span>
+                                    <select id="selectC1" class="wt-sort-select wt-filter-select" ng-model="form.selectC1" name="selectC1" ng-options="p.name for p in optionsC"  ng-change="SelectC(form.selectC1);">
+                                        <option value="" ng-if="false"></option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select id="selectD" class="wt-sort-select wt-filter-select" ng-model="form.selectD" name="selectD" ng-options="p.name for p in options3" ng-change="SelectOption(form.selectD,'selectD')">
+                                        <option value="" ng-if="false"></option>
+                                    </select>
+                                    <span id="select4"></span>
+                                    <select id="selectD1" class="wt-sort-select wt-filter-select" ng-model="form.selectD1" name="selectD1" ng-options="p.name for p in optionsD"  ng-change="SelectD(form.selectD1);">
+                                        <option value="" ng-if="false"></option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div ng-show="dictloading">
+                <span class="text-muted">Loading...</span>
+            </div>
+            <div ng-if="SchUsers.isStudent">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2 animate-show" ng-repeat="su in SchUsers.data">
+                            <div style="cursor:pointer" ui-sref="u({username: '{{su.username}}'})" class="thumbnail" popover="{{su.bio}}." popover-title="{{su.firstname + '-' + su.lastname}}"
+                                 popover-trigger="mouseenter">
+                                <img src="/user/{{su.username}}/{{su.avatar}}" alt="{{su.username}}" height="156px" width="156px" class="wt-dic-img"/>
+                                <div class="caption wt-center-content">
+                                    <strong><a href="/u/{{su.username}}">{{su.username}}</a></strong>
+                                    <p>
+                                        <span>{{su.firstname + " - " + su.lastname| cut:true:15:' ...'}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <span ng-click="loadmore();" class="loadmore">
+                        <span ng-show="mload" class="ion ion-load-c wt-spin fa fa-spin"></span>
+                        <span ng-hide="mload">load more</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="wt-center-content" ng-if="!SchUsers.isStudent">
+            <span class="text-muted">There seems to be no students in this category at the moment</span>
+        </div>
+    </div>
+</span>
+<div class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Wontah Dictionary</span>
+    </div>
+    <div class="scrollable">
+        <div class="scrollable-content section">
+                <div>
+                    <div flex-gt-sm="100" flex>
+                        <md-toolbar layout="row" class="">
+                            <div class="md-toolbar-tools" style="background-color:white;">
+                                <button class="md-button md-raised mob-btn-block" ng-hide="isOpenRight()" ng-click="toggleRight()">Start Filtering</button>
+                            </div>
+                        </md-toolbar>
+                        <md-content>
+                            <md-list flex>
+                                <md-subheader class="md-no-sticky">
+                                    <div ng-show="dictloading">
+                                        <span class="text-muted">Loading...</span>
+                                    </div>
+                                </md-subheader>
+                                <md-list-item ng-if="SchUsers.isStudent" class="md-2-line" ng-repeat="su in SchUsers.data" ui-sref="u({username: '{{su.username}}'})" ng-click="null">
+                                    <img ng-src="/user/{{su.username}}/{{su.avatar}}" alt="{{su.username}}" class="md-avatar" />
+                                    <div class="md-list-item-text" layout="column">
+                                        <h3>{{su.username}}</h3>
+                                        <h4>{{su.firstname}} {{su.lastname}}</h4>
+                                        <p>{{su.bio}}</p>
+                                    </div>
+                                </md-list-item>
+                            </md-list>
+                            <div class="wt-center-content" ng-if="!SchUsers.isStudent">
+                                <span class="text-muted">There seems to be no students in this category at the moment</span>
+                            </div>
+                        </md-content>
+                    </div>
+                </div>
+            <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+                <md-toolbar class="md-theme-light mob-primary">
+                    <div class="md-toolbar-tools">
+                        <md-button class="md-icon-button" ng-click="close()">
+                            <md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>
+                        </md-button>
+                        <span flex></span>
+                        <h4>Filter</h4>
+                        <span flex></span>
+                        <md-button class="md-icon-button">
+                            <!--<md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>-->
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <md-content  ng-controller="filterController" layout-padding>
+                    <form>
+                        <div class="mdl-cell flex-xs-100 flex-sm-100 flex-100 shadow" flex="100" flex-xs="100" flex-xs="100" style="background: white">
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Type</label>
+                                    <md-select name="selectA" ng-model="form.selectA" ng-change="SelectOption(form.selectA ,'selectA')">
+                                        <md-option ng-repeat="p in options" ng-value="p">
+                                            {{p.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <span id="select1"></span>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Select {{form.selectA.name}}</label>
+                                    <md-select id="selectA1"  ng-model="form.selectA1" name="selectA1" ng-change="SelectA(form.selectA1);">
+                                        <md-option ng-repeat="p in optionsA" ng-value="p">
+                                            {{p.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Type</label>
+                                    <md-select id="selectB" ng-model="form.selectB" name="selectB" ng-change="SelectOption(form.selectB,'selectB')">
+                                        <md-option ng-repeat="p in options1" ng-value="p">
+                                            {{p.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <span id="select2"></span>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Select {{form.selectB.name}}</label>
+                                    <md-select id="selectB1"  ng-model="form.selectB1" name="selectB1" ng-change="SelectB(form.selectB1);">
+                                        <md-option ng-repeat="p in optionsB" ng-value="p">
+                                            {{p.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Type</label>
+                                    <md-select id="selectC" ng-model="form.selectC" name="selectC" ng-change="SelectOption(form.selectC,'selectC')">
+                                        <md-option ng-repeat="p in options2" ng-value="p">
+                                            {{p.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <span id="select3"></span>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Select {{form.selectC.name}}</label>
+                                    <md-select id="selectC1"  ng-model="form.selectC1" name="selectC1" ng-change="SelectC(form.selectC1);">
+                                        <md-option ng-repeat="p in optionsC" ng-value="p">
+                                            {{p.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Type</label>
+                                    <md-select id="selectD" ng-model="form.selectD" name="selectD" ng-change="SelectOption(form.selectD,'selectD')">
+                                        <md-option ng-repeat="p in options3" ng-value="p">
+                                            {{p.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <span id="select4"></span>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Select {{form.selectD.name}}</label>
+                                    <md-select id="selectD1"  ng-model="form.selectD1" name="selectD1" ng-change="SelectD(form.selectD1);">
+                                        <md-option ng-repeat="p in optionsD" ng-value="p">
+                                            {{p.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        </div>
+                    </form>
+                </md-content>
+            </md-sidenav>
+        </div>
+    </div>
+</div>

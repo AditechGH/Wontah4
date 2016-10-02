@@ -1,0 +1,250 @@
+<span class="wt-web">
+    <div ng-show="isLoggedIn()">
+        <div class="row" ng-if="!u.activated && u.username === luname">
+            <div class="col-md-12 wt-post-alert wt-normal-font wt-center-content">
+                <span>
+                    <i class="fa fa-warning">
+                        You have not activated your account, go to your email <a target="_blank" href="http://{{u.email}}">({{u.email}})</a> to activate your account
+                    </i>
+                </span>
+            </div>
+        </div>
+        <div class="row wt-row">
+            <div class="col-md-12">
+                <div class="col-md-5 wt-col-primary">
+                    <section>
+                        <div class="row">
+                            <div class="wt-cover-photo">
+                                <span class="wt-cover-title">{{u.username}} cover photos</span>
+                                <img id="d2" ng-repeat="item in model.images"
+                                     ng-src="/user/{{u.username}}/cover/{{item}}"
+                                     class="animated {{model.move}}" />
+                                <div ng-show="u.username === luname" class="contenthover wt-hover">
+                                    <a data-reveal-id="myModal">Cover photos settings</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-4">
+                                    <div class="wt-profile-image" style="z-index:11">
+                                        <img id="d1" class="profileImage" src="/user/{{u.username}}/{{u.avatar}}" alt="{{u.username}} avatar" width="150px" height="150px"/>
+                                        <div ng-show="u.username === luname" class="contenthover wt-hover">
+                                            <a ui-sref='settings.avatar' style="z-index:12">Change profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <span ng-controller="requestController">
+                                <div class="col-sm-4">
+                                    <div class="wt-fb-btn" ng-hide="u.username === luname">
+                                            <span ng-hide="u.isFriend || isFriend"><button ng-disabled="isLoadingFrnd" type="button" class="btn btn-primary btn-sm" ng-click="addFriend();">
+                                                <span ng-show="isLoadingFrnd"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i> loading</span>
+                                                <span ng-hide="isLoadingFrnd">Request <i class="fa fa-user-plus"></i></span>
+                                            </button></span>
+                                            <span ng-show="u.isFriend || isFriend"><button ng-disabled="isLoadingFrnd" type="button" class="btn btn-primary btn-sm" ng-click="unFriend();">
+                                                <span ng-show="isLoadingFrnd"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i> loading</span>
+                                                <span ng-hide="isLoadingFrnd">Unfriend {{u.username}}</span>
+                                            </button></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="wt-fb-btn" ng-hide="u.username === luname">
+                                        <span ng-hide="u.isBlocked || isBlocked"><button ng-disabled="isLoadingBlked" type="button" class="btn btn-primary btn-sm" ng-click="blockUser();">
+                                            <span ng-show="isLoadingBlked"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i> loading</span>
+                                            <span ng-hide="isLoadingBlked">Block {{u.username}}</span>
+                                        </button></span>
+                                        <span ng-show="u.isBlocked || isBlocked"><button ng-disabled="isLoadingBlked" type="button" class="btn btn-primary btn-sm" ng-click="unblockUser();">
+                                            <span ng-show="isLoadingBlked"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i> loading</span>
+                                            <span ng-hide="isLoadingBlked">Unblock {{u.username}}</span>
+                                        </button></span>
+                                    </div>
+                                </div>
+                            </span>
+                            </div>
+                        </div>
+                    </section>
+                    <hr ng-class="{'wt-user-hr': u.username === luname}"/>
+                    <section>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <ul class="nav nav-tabs nav-justified">
+                                    <li ng-class="{'active': $state.includes('u.room')}"><a href="/u/{{username}}/room"> Room</a></li>
+                                    <li ng-class="{'active': $state.includes('u.about')}"><a href="/u/{{username}}/about"> About</a></li>
+                                    <li ng-class="{'active': $state.includes('u.friends')}"><a href="/u/{{username}}/friends"> Friends({{fcount}})</a></li>
+                                    <!--<li ng-class="{'active': $state.includes('u.more')}"><a href="/u/{{username}}/more"> more</a></li>-->
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="wt-animate-nested-profile-view" ui-view></div>
+                            </div>
+                        </div>
+                    </section>
+                    <!--cover image modal-->
+                    <div ng-controller="coverController" id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-9">
+                                    <div class="row" style="padding-bottom: 5px; box-shadow: 0 1px #666">
+                                        <b class="h2">Upload Your Cover Images</b>
+                                        <button type="button" class="btn btn-primary btn-sm" ng-click="saveCoverImgs()">
+                                            <span class="glyphicon glyphicon-ok"></span> Save
+                                        </button>
+                                    </div>
+                                    <br/>
+                                    <div class="wt-dpt-container">
+                                        <div class="simple-cropper-images">
+                                            <div id="cover1" class="cropme" style="width: 557px; height: 250px;"></div>
+                                            <div id="cover2" class="cropme" style="width: 557px; height: 250px;"></div>
+                                            <div id="cover3" class="cropme" style="width: 557px; height: 250px;"></div>
+                                            <div id="cover4" class="cropme" style="width: 557px; height: 250px;"></div>
+                                            <div class="clear"></div>
+                                            <script>
+                                                $('.cropme').simpleCropper();
+                                                $('.wt-dpt-container').enscroll({
+                                                    verticalTrackClass: 'track',
+                                                    verticalHandleClass: 'handle',
+                                                    minScrollbarLength: 28
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <b class="text-muted">Choose a transition</b>
+                                    <select ng-model="model.move" class="wt-select" ng-change="saveTrans(model.move)"
+                                            ng-options="item.name for item in model.transitions">
+                                    </select>
+                                    <div ng-repeat="cimg in cimages">
+                                        <img ng-src="/user/{{u.username}}/cover/{{cimg}}" class="wt-canvass" alt="{{cimg}}" height="100px"/>
+                                        <a aria-label="Remove" ng-click="removeImage(cimg)" tooltip="remove image" tooltip-placement="right" class="wt-delete">&#215;</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <span ng-include="'partials/templates/middle.tpl.html'"></span>
+                </div>
+                <div class="col-md-3 well">
+                    <span ng-include="'partials/templates/msub.tpl.html'"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#d2').contenthover({
+                overlay_background: '#000',
+                overlay_opacity: 0.5
+            });
+            $('#d1').contenthover({
+                overlay_background: '#000',
+                overlay_opacity:0.5
+            });
+        });
+    </script>
+</span>
+<span ng-if="mobile" class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">{{u.username}}</span>
+    </div>
+    <div class="scrollable">
+        <div class="scrollable-content">
+            <div ng-if="!u.activated && u.username === luname">
+                <div class="col-md-12 wt-post-alert wt-normal-font wt-center-content">
+                <span>
+                    <i class="fa fa-warning">
+                        You have not activated your account, go to your email <a target="_blank" href="http://{{u.email}}">({{u.email}})</a> to activate your account
+                    </i>
+                </span>
+                </div>
+            </div>
+            <section>
+                <div class="row">
+                    <div id="wt-cover-container" class="wt-cover-photo-mobile">
+                        <img ng-repeat="item in model.images" ng-src="/user/{{u.username}}/cover/{{item}}" class="wt-cover-photo-mobile-img animated {{model.move}}" />
+                        <a ng-show="u.username === luname" class="change-covers-mobile" ng-click="changeCovers($event);"><i class="ion ion-camera"></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="col-xs-4">
+                            <div style="z-index: 99999999" class="wt-profile-image-mobile">
+                                <img class="profileImage" src="/user/{{u.username}}/{{u.avatar}}" alt="{{u.username}} avatar"/>
+                                <a ng-show="u.username === luname" class="change-avatar-mobile" ui-sref="settings.avatar"><i class="ion ion-camera"></i></a>
+                            </div>
+                        </div>
+                        <div style="margin-top:4%;" class="col-xs-8">
+                            <h4 class="h4">{{u.firstname}} {{u.lastname}}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12" ng-controller="requestController">
+                        <div class="col-xs-6">
+                            <div class="wt-fb-btn" ng-hide="u.username === luname">
+                                <span ng-hide="u.isFriend || isFriend">
+                                    <md-button ng-disabled="isLoadingFrnd" class="md-raised mob-primary mob-btn-block" ng-click="addFriend();">
+                                        <span ng-show="isLoadingFrnd"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i> loading</span>
+                                        <span ng-hide="isLoadingFrnd">Request <i class="fa fa-user-plus"></i></span>
+                                    </md-button>
+                                </span>
+                                <span ng-show="u.isFriend || isFriend">
+                                    <md-button ng-disabled="isLoadingFrnd" class="md-raised md-warn mob-btn-block" ng-click="unFriend();">
+                                        <span ng-show="isLoadingFrnd"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i> loading</span>
+                                        <span ng-hide="isLoadingFrnd">Unfriend {{u.username}}</span>
+                                    </md-button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="wt-fb-btn" ng-hide="u.username === luname">
+                                <span ng-hide="u.isBlocked || isBlocked">
+                                    <md-button ng-disabled="isLoadingBlked" type="button" class="md-raised md-warn mob-btn-block" ng-click="blockUser();">
+                                        <span ng-show="isLoadingBlked"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i> loading</span>
+                                        <span ng-hide="isLoadingBlked">Block {{u.username}}</span>
+                                    </md-button>
+                                </span>
+                                <span ng-show="u.isBlocked || isBlocked">
+                                    <md-button ng-disabled="isLoadingBlked" type="button" class="md-raised mob-primary mob-btn-block" ng-click="unblockUser();">
+                                        <span ng-show="isLoadingBlked"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i> loading</span>
+                                        <span ng-hide="isLoadingBlked">Unblock {{u.username}}</span>
+                                    </md-button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <md-content style="padding:1%;">
+                    <md-tabs md-dynamic-height md-border-bottom>
+                        <md-tab label="Room" ui-sref="u.room">
+                            <md-content>
+                                <div ui-view></div>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="About" ui-sref="u.about">
+                            <md-content>
+                                <div ui-view></div>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="Friends({{fcount}})" ui-sref="u.friends">
+                            <md-content>
+                                <div ui-view></div>
+                            </md-content>
+                        </md-tab>
+                    </md-tabs>
+                </md-content>
+            </section>
+        </div>
+    </div>
+    <script>
+        var conW = window.innerWidth;
+        $('.wt-cover-photo-mobile').css("height",(30.97893432 * conW) / 69.02106568);
+    </script>
+</span>

@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="col-sm-12">
+            <b>Username</b><br/>
+            {{username}}
+        </div><hr/>
+        <div class="col-sm-12">
+            <b>Full name</b><br/>
+            {{firstname}} {{lastname}}
+        </div><hr/>
+        <div class="col-sm-12">
+            <b>Email</b><br/>
+            {{email}}
+        </div><hr/>
+        <span ng-hide="website === ''">
+            <div class="col-sm-12">
+                <b>Website</b><br/>
+                <a target="_blank" href="http://{{website}}">{{website}}</a>
+            </div><hr/>
+        </span>
+        <span ng-hide="contact === ''">
+            <div class="col-sm-12">
+                <b>Contact</b><br/>
+                {{contact}}
+            </div><hr/>
+        </span>
+        <span ng-hide="bio === ''">
+            <div class="col-sm-12">
+                <b>Biography</b><br/>
+                {{bio}}
+            </div><hr/>
+        </span>
+        <div class="col-sm-12">
+            <b>Sign Up</b><br/>
+            {{signup}}
+        </div><hr/>
+        <div class="col-sm-12">
+            <b>Last login</b><br/>
+            {{lastlogin}}
+        </div><hr/>
+        <div class="col-sm-12">
+            <b>Gender</b><br/>
+            {{gen}}
+        </div><hr/>
+        <span ng-if="status">
+            <div class="col-sm-12">
+                <b>Institution</b><br/>
+                {{school.name}}
+            </div><hr/>
+        </span>
+        <span ng-if="lstatus && status">
+            <span ng-if="lug && school.ug">
+                <div class="col-sm-12">
+                    <b>Level</b><br/>
+                    {{school.level}}
+                </div><hr/>
+                <div class="col-sm-12">
+                    <b>Hall</b><br/>
+                    {{school.hall}}
+                </div><hr/>
+                <div class="col-sm-12">
+                    <b>Department(s)</b><br/>
+                    <span ng-repeat="dept in school.department">
+                        {{dept}} <span ng-if="!$last">,</span>
+                    </span>
+                </div><hr/>
+            </span>
+        </span>
+    </div>
+</div>

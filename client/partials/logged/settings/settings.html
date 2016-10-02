@@ -1,0 +1,96 @@
+<span class="wt-web">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div>
+                    <h3 class="h2 text-muted">Settings</h3>
+                </div>
+                <div ng-class="{'wt-inbox-active': $state.includes('settings.pass')}" class="wt-clickable" ui-sref="settings.pass">
+                    <b>Change password</b>
+                </div>
+                <div ng-class="{'wt-inbox-active': $state.includes('settings.avatar')}" class="wt-clickable" ui-sref="settings.avatar">
+                    <b>Change avatar</b>
+                </div>
+                <div ng-class="{'wt-inbox-active': $state.includes('settings.basic')}" class="wt-clickable" ui-sref="settings.basic">
+                    <b>Change basic info</b>
+                </div>
+                <div ng-class="{'wt-inbox-active': $state.includes('settings.sch')}" class="wt-clickable" ui-sref="settings.sch">
+                    <b>Change school info</b>
+                </div>
+            </div>
+            <div class="col-md-10 wt-vr">
+                <div class="wt-animate-nested-inbox-view" ui-view></div>
+            </div>
+        </div>
+    </div>
+</span>
+<span class="wt-mobile">
+    <div ui-content-for="title">
+        <span class="wt-mob-logo-name">Settings</span>
+    </div>
+    <div class="scrollable">
+        <div class="inbox scrollable-content section">
+            <div class="lists">
+                <ul class="tabs">
+                    <li>
+                        <div class="col-xs-12">
+                            <!--<div class="col-xs-6">-->
+                                <!--<md-button ng-click="messageModal($event);" class="md-button md-raised mob-primary mob-btn-block">compose</md-button>-->
+                            <!--</div>-->
+                            <div class="col-xs-6">
+                                <md-button ng-hide="isOpenRight()" ng-click="toggleRight()" class="md-button md-raised mob-btn-block"><i class="ion ion-android-more-horizontal"></i></md-button>
+                            </div>
+                        </div>
+                    </li>
+                    <hr id="newhr"/>
+                </ul>
+                <div class="wt-animate-nested-inbox-view" ui-view></div>
+            </div>
+            <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+                <md-toolbar class="md-theme-light mob-primary">
+                    <div class="md-toolbar-tools">
+                        <md-button class="md-icon-button" ng-click="close()">
+                            <md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>
+                        </md-button>
+                        <span flex></span>
+                        <h4>Settings</h4>
+                        <span flex></span>
+                        <md-button class="md-icon-button">
+                            <!--<md-icon class="ion ion-android-arrow-back" aria-label="Close dialog"></md-icon>-->
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <md-content  ng-controller="filterController" layout-padding>
+                    <form>
+                        <div class="mdl-cell flex-xs-100 flex-sm-100 flex-100 shadow" flex="100" flex-xs="100" flex-xs="100" style="background: white">
+                            <div class="lists">
+                                <ul class="tabs">
+                                    <li>
+                                        <a ng-click="close()" class="md-button md-ink-ripple" ui-sref="settings.pass">
+                                            <span> Change Password</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="close()" class="md-button md-ink-ripple" ui-sref="settings.avatar">
+                                            <span> Change Avatar</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="close()" class="md-button md-ink-ripple" ui-sref="settings.basic">
+                                            <span> Change Basic Info.</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="close()" class="md-button md-ink-ripple" ui-sref="settings.sch">
+                                            <span> Change School Info.</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </md-content>
+            </md-sidenav>
+        </div>
+    </div>
+</span>

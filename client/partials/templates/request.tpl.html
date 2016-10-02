@@ -1,0 +1,50 @@
+<div ng-show="thereIsRequest" class="wt-content wt-dpt-container">
+    <div ng-if="frndReq != []" class="media" style="border-bottom:1px solid #d0e9c6" ng-repeat="per in frndReq">
+       <span id="{{per.uname}}_d1">
+        <a href="/u/{{per.uname}}" class="media-left">
+            <img class="img-circle" ng-src="user/{{per.uname}}/{{per.avatar}}"  tooltip="{{per.uname}}" tooltip-placement="bottom" width="40px" height="40px" />
+        </a>
+        <div class="media-body wt-media">
+           <span class="media-heading">
+              <b class="h4">{{per.fname}} {{per.lname}}</b> <span class="text-muted">Request friendship ({{per.datemade}})</span>
+           </span>
+           <div id="{{per.uname}}_btns1">
+                <button id="{{per.uname}}_sbtn1" class="btn-sm btn-success wt-btn" type="button" ng-click="Accept(per.uname)">Accept</button>
+                <button id="{{per.uname}}_dbtn1" class="btn-sm btn-danger wt-btn" type="button" ng-click="Ignore(per.uname)">Ignore</button>
+           </div>
+            <div id="{{per.uname}}_load1" style="display: none;"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></div>
+        </div>
+       </span>
+        <span style="display: none;" id="{{per.uname}}_acpt1">You have accepted to be friends with {{per.uname}}</span>
+        <span style="display: none;" id="{{per.uname}}_rjct1">You rejected being friends with {{per.uname}}</span>
+    </div>
+    <div ng-if="invTaah != []" class="media" style="border-bottom:1px solid #d0e9c6" ng-repeat="per in invTaah">
+    <span id="{{per.taah}}{{per.uname}}_d1">
+        <a href="/user/{{per.uname}}" class="media-left">
+            <img class="img-circle" ng-src="user/{{per.uname}}/{{per.avatar}}" popover="{{per.uname}}" popover-trigger="mouseenter" popover-placement="left" width="40px" height="40px" />
+        </a>
+        <div class="media-body wt-media">
+           <span class="media-heading">
+               <b class="h4">{{per.fname}} {{per.lname}}</b> <span class="text-muted">Invites you to join <a href="/t/{{per.taah}}">{{per.taah}}</a> ({{per.datemade}})</span>
+           </span>
+           <div id="{{per.taah}}{{per.uname}}_btns1">
+                <button id="{{per.taah}}{{per.uname}}_sbtn1" class="btn-sm btn-success wt-btn" type="button" ng-click="Subscribe(per.taah,per.uname)">Subscribe</button>
+                <button id="{{per.taah}}{{per.uname}}_dbtn1" class="btn-sm btn-danger wt-btn" type="button" ng-click="IgnoreNow(per.taah,per.uname)">Ignore</button>
+           </div>
+            <div id="{{per.taah}}{{per.uname}}_load1" style="display: none;"><i class="fa fa-spinner fa-2x fa-spin wt-spin"></i></div>
+        </div>
+    </span>
+        <span style="display: none;" id="{{per.taah}}{{per.uname}}_acpt1">You have subscribed to {{per.taah}} successfully</span>
+        <span style="display: none;" id="{{per.taah}}{{per.uname}}_rjct1">You have rejected the invitation</span>
+    </div>
+</div>
+<div class="wt-content wt-center-content wt-dpt-container" ng-hide="thereIsRequest">
+    <span class="text-info text-center">You have no requests at the moment</span>
+</div>
+<script>
+    $('.wt-dpt-container').enscroll({
+        verticalTrackClass: 'track',
+        verticalHandleClass: 'handle',
+        minScrollbarLength: 28
+    });
+</script>

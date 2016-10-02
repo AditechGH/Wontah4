@@ -1,0 +1,42 @@
+<div class="" ng-controller="mainMiddleCtrl">
+    <div ng-if='friends.length > 0' class="wt-grey-background sugFriends">
+        <div style="border-bottom:1px solid #CCCCCC">
+            <button class="btn-sm btn-default" style="cursor:default;">People you may know</button>
+        </div>
+        <span ng-if='friends.length > 0'>
+            <div class="media" ng-repeat="f in friends.frnds" style="border-bottom:1px solid #CCCCCC">
+                <a class="media-left" href="/u/{{f.username}}"><img class="img-circle" height="40" width="40" ng-src='/user/{{f.username}}/{{f.avatar}}' alt='{{f.username}}' /></a>
+                <div class="media-body">
+                    <span class="media-heading"><a href="/u/{{f.username}}">{{f.username}}</a></span>
+                    <p>{{f.firstname}} {{f.lastname}} </p>
+                </div>
+            </div>
+        </span>
+    </div>
+    <hr/>
+    <div class="wt-grey-background sugFriends">
+        <div style="border-bottom:1px solid #CCCCCC">
+            <button class="btn-sm btn-default" style="cursor:default;">Friends online</button>
+        </div>
+        <span ng-if="onlfriends.length > '0'">
+            <div class="media" ng-repeat="f in onlfriends.frnds" style="border-bottom:1px solid #CCCCCC">
+                <a class="media-left" href="/u/{{f.username}}"><img class="img-circle" height="40" width="40" ng-src='/user/{{f.username}}/{{f.avatar}}' alt='{{f.username}}' /></a>
+                <div class="media-body">
+                    <span class="media-heading"><a href="/u/{{f.username}}">{{f.username}}</a></span>
+                    <p>{{f.firstname}} {{f.lastname}} </p>
+                </div>
+            </div>
+        </span>
+        <div ng-if="onlfriends.length === '0'">
+            <span class="text-muted">There seems to be no friend online</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.sugFriends').enscroll({
+        verticalTrackClass: 'track',
+        verticalHandleClass: 'handle',
+        minScrollbarLength: 28
+    });
+</script>
