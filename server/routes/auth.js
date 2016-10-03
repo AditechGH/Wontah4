@@ -135,7 +135,7 @@ module.exports = function(router, passport){
                                                         + ' background:#0f7c67; font-size:24px; color:#FFF;"><a href="http://www.wontah.com">'
                                                         + '</a>Wontah Account Activation</div><div style="padding:24px; font-size:17px;">Hello '+req.body.username+',<br />'
                                                         + '<br />Click the link below to activate your account when ready:<br />'
-                                                        + '<br /><a target="_blank" href="http://localhost:8080/mail/activate?username='+req.body.username+'&email='+req.body.email+'&pass='+user.password+'">'
+                                                        + '<br /><a target="_blank" href="http://wontah.com/mail/activate?username='+req.body.username+'&email='+req.body.email+'&pass='+user.password+'">'
                                                         + 'Click here to activate your account now</a><br /><br />Login after successful activation using your:'
                                                         + '<br />* E-mail Address: <b>'+req.body.email+'</b></div></body></html>'
                                                     };
@@ -185,7 +185,7 @@ module.exports = function(router, passport){
                         subject: 'Wontah Temporary Password',
                         html: '<h2>Hello '+user.username+'</h2><p>WONTAH PASSWORD REQUEST RESET'
                         + '</p><p>Note: Password could be modified once logged in.</p>'
-                        + '<p>Your temporal password:<br /><b>'+temppass+'</b></p><p><a target="_blank" href="http://localhost:8080/mail/forgotpas?username='+user.username+'&pass='+hashtemppass+'">'
+                        + '<p>Your temporal password:<br /><b>'+temppass+'</b></p><p><a target="_blank" href="http://wontah.com/mail/forgotpas?username='+user.username+'&pass='+hashtemppass+'">'
                         + 'Click on this link to apply the temporary password shown above to your account.</a></p>'
                         + '<p>If you did not initiate this, please disregard this email. </p>'
                     };
@@ -221,7 +221,7 @@ module.exports = function(router, passport){
                     + ' background:#0f7c67; font-size:24px; color:#FFF;"><a href="http://www.wontah.com">'
                     + '</a>Wontah Account Activation</div><div style="padding:24px; font-size:17px;">Hello '+user.username+',<br />'
                     + '<br />Click the link below to activate your account when ready:<br />'
-                    + '<br /><a target="_blank" href="http://localhost:8080/mail/activate?username='+user.username+'&email='+user.email+'&pass='+user.password+'">'
+                    + '<br /><a target="_blank" href="http://wontah.com/mail/activate?username='+user.username+'&email='+user.email+'&pass='+user.password+'">'
                     + 'Click here to activate your account now</a><br /><br />Login after successful activation using your:'
                     + '<br />* E-mail Address: <b>'+user.email+'</b></div></body></html>'
                 };
