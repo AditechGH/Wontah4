@@ -14,6 +14,7 @@
             'ngRoute',
             'ngResource',
             'ngSanitize',
+            "ngTouch",
             'ui.bootstrap',
             'ngProgress',
             'ngJcrop',
@@ -91,6 +92,8 @@
         }])
         .controller('mainController',['$scope','auth',function ($scope,auth) {
             $scope.isLoggedIn = auth.isLoggedIn;
+            $scope.isProcessing=false;
+            $scope.loading=false;
             var a = document.getElementById('sheet');
             function layoutHandler() {
                 if (window.innerWidth < 1024) {
@@ -141,6 +144,8 @@
             $scope.Suname = "";
             $scope.Smessage = "";
             $scope.SaveSuggestion = function (uname,msg) {
+                $scope.isProcessing=true;
+                $scope.loading=true;
                 if(auth.isLoggedIn()){
                     $scope.u = auth.currentUser().username;
                 }else{
@@ -150,8 +155,12 @@
                     swal("Thank you "+$scope.Suname,"We appreciate your contribution","success");
                     $scope.Suname = "";
                     $scope.Smessage = "";
+                    $scope.isProcessing=false;
+                    $scope.loading=false;
                 }).error(function (data) {
                     swal("",data.message,"error");
+                    $scope.isProcessing=false;
+                    $scope.loading=false;
                 });
             };
         }]);
@@ -4666,7 +4675,7 @@
             "                   </div> " +
             "                   <input class='form-control' name='uname' ng-model='Suname' placeholder='Enter full name'/> " +
             "                   <textarea class='form-control' name='body' ng-model='Smessage' placeholder='Your contribution (Your contribution is very important to us)'></textarea> " +
-            "                   <button ng-click='SaveSuggestion();' class='btn btn-primary'>Drop it!</button>" +
+            "                   <button ng-click='SaveSuggestion();' ng-disabled='isProcessing' class='btn btn-primary'><span ng-show='loading'>loading..</span><span ng-hide='loading'>Drop it!</span></button>" +
             "                </div> " +
             "           </div>"
         }
