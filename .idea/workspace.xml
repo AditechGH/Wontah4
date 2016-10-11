@@ -31,16 +31,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Gruntfile.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Gruntfile.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -51,21 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.min.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.min.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/custom/scripts/main.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="30920" selection-start-line="0" selection-start-column="30920" selection-end-line="0" selection-end-column="30920" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="vendor.min.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/libs/scripts/vendor.min.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.83306056">
+              <caret line="2" column="23994" selection-start-line="2" selection-start-column="23994" selection-end-line="2" selection-end-column="23994" />
               <folding />
             </state>
           </provider>
@@ -81,10 +61,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="database.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="database.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/config/database.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.1391162">
+            <state vertical-scroll-proportion="0.0">
               <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
               <folding />
             </state>
@@ -115,11 +95,33 @@
         <entry file="file://$PROJECT_DIR$/client/custom/scripts/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="162" column="41" selection-start-line="162" selection-start-column="41" selection-end-line="162" selection-end-column="41" />
+              <caret line="4972" column="33" selection-start-line="4972" selection-start-column="33" selection-end-line="4972" selection-end-column="33" />
               <folding>
-                <marker date="1476049052177" expanded="true" signature="6936:6949" placeholder="..." />
-                <marker date="1476049052177" expanded="true" signature="179394:179407" placeholder="..." />
+                <marker date="1476152667627" expanded="true" signature="6936:6949" placeholder="..." />
+                <marker date="1476152667627" expanded="true" signature="179394:179407" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="register.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/partials/register.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.8076923">
+              <caret line="69" column="25" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
+              <folding>
+                <element signature="n#span#0;n#!!top" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vendor-mobile.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/libs/css/vendor-mobile.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.115385">
+              <caret line="9253" column="38" selection-start-line="9253" selection-start-column="38" selection-end-line="9253" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -189,9 +191,9 @@
         <option value="$PROJECT_DIR$/client/libs/scripts/vendor.js" />
         <option value="$PROJECT_DIR$/client/custom/scripts/main.min.js" />
         <option value="$PROJECT_DIR$/client/partials/templates/home/home-desktop.html" />
-        <option value="$PROJECT_DIR$/client/custom/scripts/main.js" />
         <option value="$PROJECT_DIR$/Gruntfile.js" />
         <option value="$PROJECT_DIR$/server/config/database.js" />
+        <option value="$PROJECT_DIR$/client/custom/scripts/main.js" />
       </list>
     </option>
   </component>
@@ -583,20 +585,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/partials/logged/comprofile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/partials/logged/subs/comments.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36515912">
-          <caret line="175" column="73" selection-start-line="175" selection-start-column="73" selection-end-line="175" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/partials/logged/settings/settings.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5272727">
@@ -940,13 +928,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/server/config/database.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/partials/register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.8076923">
+          <caret line="69" column="25" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
+          <folding>
+            <element signature="n#span#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/libs/css/vendor-mobile.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.115385">
+          <caret line="9253" column="38" selection-start-line="9253" selection-start-column="38" selection-end-line="9253" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/custom/scripts/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="162" column="41" selection-start-line="162" selection-start-column="41" selection-end-line="162" selection-end-column="41" />
+          <caret line="4972" column="33" selection-start-line="4972" selection-start-column="33" selection-end-line="4972" selection-end-column="33" />
           <folding>
-            <marker date="1476049052177" expanded="true" signature="6936:6949" placeholder="..." />
-            <marker date="1476049052177" expanded="true" signature="179394:179407" placeholder="..." />
+            <marker date="1476152667627" expanded="true" signature="6936:6949" placeholder="..." />
+            <marker date="1476152667627" expanded="true" signature="179394:179407" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -961,16 +975,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/custom/scripts/main.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="30920" selection-start-line="0" selection-start-column="30920" selection-end-line="0" selection-end-column="30920" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/config/database.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1391162">
-          <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
+        <state vertical-scroll-proportion="0.83306056">
+          <caret line="2" column="23994" selection-start-line="2" selection-start-column="23994" selection-end-line="2" selection-end-column="23994" />
           <folding />
         </state>
       </provider>
