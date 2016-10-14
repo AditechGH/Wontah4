@@ -106,21 +106,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vendor-mobile.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="vendor-mobile.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/libs/css/vendor-mobile.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.5">
-              <caret line="9249" column="1" selection-start-line="9249" selection-start-column="1" selection-end-line="9249" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.3551089">
+              <caret line="9250" column="16" selection-start-line="9250" selection-start-column="16" selection-end-line="9250" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vendor-mobile.min.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="vendor-mobile.min.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/libs/css/vendor-mobile.min.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33274648">
-              <caret line="3" column="112875" selection-start-line="3" selection-start-column="112875" selection-end-line="3" selection-end-column="112875" />
+            <state vertical-scroll-proportion="308.74545">
+              <caret line="3" column="112873" selection-start-line="3" selection-start-column="112869" selection-end-line="3" selection-end-column="112873" />
               <folding />
             </state>
           </provider>
@@ -192,8 +192,8 @@
         <option value="$PROJECT_DIR$/Gruntfile.js" />
         <option value="$PROJECT_DIR$/server/config/database.js" />
         <option value="$PROJECT_DIR$/client/custom/scripts/main.js" />
-        <option value="$PROJECT_DIR$/client/libs/css/vendor-mobile.css" />
         <option value="$PROJECT_DIR$/client/libs/css/vendor-mobile.min.css" />
+        <option value="$PROJECT_DIR$/client/libs/css/vendor-mobile.css" />
       </list>
     </option>
   </component>
@@ -896,18 +896,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/libs/css/vendor-mobile.css">
+    <entry file="file://$PROJECT_DIR$/client/libs/css/vendor-mobile.min.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.5">
-          <caret line="9249" column="1" selection-start-line="9249" selection-start-column="1" selection-end-line="9249" selection-end-column="19" />
+        <state vertical-scroll-proportion="308.74545">
+          <caret line="3" column="112873" selection-start-line="3" selection-start-column="112869" selection-end-line="3" selection-end-column="112873" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/libs/css/vendor-mobile.min.css">
+    <entry file="file://$PROJECT_DIR$/client/libs/css/vendor-mobile.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33274648">
-          <caret line="3" column="112875" selection-start-line="3" selection-start-column="112875" selection-end-line="3" selection-end-column="112875" />
+        <state vertical-scroll-proportion="0.3551089">
+          <caret line="9250" column="16" selection-start-line="9250" selection-start-column="16" selection-end-line="9250" selection-end-column="16" />
           <folding />
         </state>
       </provider>
