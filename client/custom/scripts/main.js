@@ -14,7 +14,6 @@
             'ngRoute',
             'ngResource',
             'ngSanitize',
-            "ngTouch",
             'ui.bootstrap',
             'ngProgress',
             'ngJcrop',
@@ -4954,35 +4953,4 @@
                 return data.slice(start);
             };
         });
-})();
-(function(){
-    function isTouchDevice(){
-        try{
-            document.createEvent("TouchEvent");
-            return true;
-        }catch(e){
-            return false;
-        }
-    }
-
-    function touchScroll(id){
-        if(isTouchDevice()){ //if touch events exist...
-            var el= $('.'+id);
-            var scrollStartPos=0;
-
-            el.addEventListener("touchstart", function(event) {
-                scrollStartPos=this.scrollTop+event.touches[0].pageY;
-                event.stopPropagation();
-            },false);
-
-            el.addEventListener("touchmove", function(event) {
-                this.scrollTop=scrollStartPos-event.touches[0].pageY;
-                event.preventDefault();
-            },false);
-        }
-    }
-
-    //On page load
-    touchScroll('scrollable-content')
-
 })();
