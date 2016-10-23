@@ -16,6 +16,7 @@ var express = require('express'),
     passport = require('passport'),
     flash = require('connect-flash'),
     configDB = require('./server/config/database.js');
+    mongoose.Promise = global.Promise;
     mongoose.connect(configDB.url);
     require('./server/config/passport')(passport);
 
