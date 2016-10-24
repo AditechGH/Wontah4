@@ -9,7 +9,7 @@ var
     path = require('path'),
     easyimg = require('easyimage');
 var maxFileSize = 10000000; // in bytes
-var uploadPath = path.resolve(__dirname + '/../../static/uploads/');
+var uploadPath = path.resolve("/home/ubuntu/wontah4/static/uploads/');
 module.exports = function(router){
     //GET
 
