@@ -867,8 +867,8 @@ module.exports = function(router){
             if(_.size(_.union(imgs,arr)) > 4){
                 return res.status(400).json({message: "Images has exceeded the limit required"});
             }
-            if(!fs.existsSync(__dirname+"../../../static/user/"+req.body.user+"/cover/")){
-                fs.mkdirSync(__dirname+"../../../static/user/"+req.body.user+"/cover/", 766, function(err){
+            if(!fs.existsSync("/home/ubuntu/wontah4/static/user/"+req.body.user+"/cover/")){
+                fs.mkdirSync("/home/ubuntu/wontah4/static/user/"+req.body.user+"/cover/", 766, function(err){
                     if(err){
                         return res.status(400).json({message: err});
                     }
@@ -879,7 +879,7 @@ module.exports = function(router){
                     var date = new Date;
                     b = /[' "():+]/gi;
                     var n = date.toString().replace(b, "").substring(0, 18)+""+Math.random().toString(36).substr(2, 10);
-                    fs.writeFile(__dirname+"../../../static/user/"+req.body.user+"/cover/"+n+".png", item.replace(/^data:image\/png;base64,/, ""), 'base64' , function (err) {
+                    fs.writeFile("/home/ubuntu/wontah4/static/user/"+req.body.user+"/cover/"+n+".png", item.replace(/^data:image\/png;base64,/, ""), 'base64' , function (err) {
                         console.log(err);
                     });
                 imgArr.push(n+".png");
@@ -1060,7 +1060,7 @@ module.exports = function(router){
     function cropImage(selection,image,user,res){
         //[x, y, x2, y2, w, h]
         easyimg.crop({
-            src:uploadPath+'/'+image, dst:__dirname+"../../../static/user/"+user+"/"+image,
+            src:uploadPath+'/'+image, dst:"/home/ubuntu/wontah4/static/user/"+user+"/"+image,
             x:selection[0], y:selection[1],
             cropwidth:selection[4], cropheight:selection[5],
             gravity:'NorthWest',
@@ -1068,7 +1068,7 @@ module.exports = function(router){
         }).then(
             function() {
                 easyimg.resize({
-                    src:__dirname+"../../../static/user/"+user+"/"+image, dst:__dirname+"../../../static/user/"+user+"/"+image,
+                    src:"/home/ubuntu/wontah4/static/user/"+user+"/"+image, dst:"/home/ubuntu/wontah4/static/user/"+user+"/"+image,
                     width:156,height:156
                 }).then(
                     function () {
