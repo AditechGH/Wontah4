@@ -108,21 +108,21 @@ module.exports = function(router, passport){
                                                 pm.save(function (err) {
                                                     if(err)
                                                         return res.status(400).json({message: err});
-                                                    if(!fs.existsSync(__dirname+"../../../static/user/"+req.body.username+"/")){
-                                                        fs.mkdirSync(__dirname+"../../../static/user/"+req.body.username+"/", 766, function(err){
+                                                    if(!fs.existsSync("/home/ubuntu/wontah4/static/user/"+req.body.username+"/")){
+                                                        fs.mkdirSync("/home/ubuntu/wontah4/static/user/"+req.body.username+"/", 766, function(err){
                                                             if(err){
                                                                 return res.status(400).json({message: err});
                                                             }
                                                         });
                                                     }
-                                                    if(!fs.existsSync(__dirname+"../../../static/user/"+req.body.username+"/cover/")){
-                                                        fs.mkdirSync(__dirname+"../../../static/user/"+req.body.username+"/cover/", 766, function(err){
+                                                    if(!fs.existsSync("/home/ubuntu/wontah4/static/user/"+req.body.username+"/cover/")){
+                                                        fs.mkdirSync("/home/ubuntu/wontah4/static/user/"+req.body.username+"/cover/", 766, function(err){
                                                             if(err){
                                                                 return res.status(400).json({message: err});
                                                             }
                                                         });
                                                     }
-                                                    fs.copy(__dirname+"../../../static/img/avatardefault.jpg", __dirname+"../../../static/user/"+req.body.username+"/avatardefault.jpg", function (err) {
+                                                    fs.copy("/home/ubuntu/wontah4/static/img/avatardefault.jpg", "/home/ubuntu/wontah4/static/user/"+req.body.username+"/avatardefault.jpg", function (err) {
                                                         if (err)
                                                             return res.status(400).json({message: err});
                                                     });
