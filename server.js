@@ -65,7 +65,7 @@ require('./server/routes/auth')(auth,passport);
 app.use('/auth', auth);
 app.use('/validate', validate);
 app.use('/uploadApi',ensureAuthorized, uploadApi);
-app.use('/api',ensureAuthorized, api);
+app.use('/api', api);
 app.use('/subApi',ensureAuthorized, subApi);
 app.use('/taahApi',ensureAuthorized, taahApi);
 app.use('/dictApi',ensureAuthorized, dictApi);
